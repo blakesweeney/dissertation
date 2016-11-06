@@ -1,5 +1,5 @@
-\chapter{Overview of the RNA.BGSU.EDU data pipeline, database and supported
-On-line resources}
+\chapter{OVERVIEW OF THE RNA.BGSU.EDU DATA PIPELINE, DATABASE AND SUPPORTED
+ON-LINE RESOURCES}
 
 In this chapter I will discuss the \href{http://rna.bgsu.edu}{RNA.BGSU.EDU}
 pipeline and database. The aim is provide the reader with an overview of the
@@ -216,7 +216,7 @@ having to know all the details of how the pipeline works, confident that they do
 not have to deal with ensuring the validity of the database and the stability of
 the pipeline in order to make improvements and additions of new functionality.
 
-\section{Design of the BGSU RNA data pipeline }
+\section{Design of the BGSU RNA data pipeline}
 
 In this section I discuss the improvements to the pipeline that enable it to
 fulfill the design requirements outlined above. These improvements required
@@ -341,6 +341,7 @@ them in for a given application.
 
 
 \begin{figure}
+\includegraphics{chapter-2/figs/deps}
 \caption{An example of an unsorted dependendency graph (top) and a topological
   sorted dependency graph (bottom). Each stage is represented by an oval with
   the name of the stage in the oval. In this case the user has requested that
@@ -497,7 +498,7 @@ complete references will be provided to direct readers to the relevant sections 
 documentation. We begin with an overview of the structure of the code and of the application,
 followed by configuration options, and end with directions for running the pipeline.
 
-\section{Overview of the organization}
+\section{Implementation of the pipeline}
 
 The pipeline is a Python and matlab application that is publically accessible at
 \href{https://github.com/BGSU-RNA/RNA-3D-Hub-core}. Detailed documentation is
@@ -509,9 +510,10 @@ Figure~\ref{fig:pipeline-organization}. This figure displays the key directories
 and explains their contents.
 
 \begin{figure}
-\caption{Directory structure of the RNA BGSU pipeline. This figure shows the
-top level and important directories in the pipeline. The directories are indicated by ending with a
-'/', while files do not end with a '/'.}
+\includegraphics{chapter-2/figs/directories}
+\caption{Directory structure of the RNA BGSU pipeline. This figure shows the top
+level and important directories in the pipeline. The directories are indicated
+by ending with a '/', while files do not end with a '/'.}
 \label{fig:pipeline-organization}
 \end{figure}
 
@@ -675,62 +677,62 @@ stage to run as input to the pipeline. This provides the user precise control
 over what is run. By default the pipeline will run all dependencies of the stage
 as well the stage itself. This ensures that the required data are available for
 the requested stage. When the user is sure that no dependencies need to be run,
-I have added options to skip all dependencies (\tt{--skip-dependencies} ) or skip
-specific stages (\tt{--skip-stage stage}).
+I have added options to skip all dependencies ({\tt --skip-dependencies} ) or skip
+specific stages ({\tt --skip-stage stage}).
 
 Another goal is to avoid recomputing data already computed.where it is necessary
-to over this default setting, the \tt{--recalculate stage} option can be used.
+to over this default setting, the {\tt --recalculate stage} option can be used.
 This option will force the pipeline to recompute all data for the given stage.
-The \tt{.} stage name refers to the stage given so: \tt{pipeline.py run
+The {\tt .} stage name refers to the stage given so: {\tt pipeline.py run
 --recalculate '.' --all units.info} will force a recompute for the units.info
 stage, but not it's dependencies. To force all stages that are run to recompute,
-the user can use the \tt{*} argument. For example \tt{pipeline.py run --all
+the user can use the {\tt *} argument. For example {\tt pipeline.py run --all
 --recalculate '*' units.info} will recompute all stages that are run for all
 structures.
 
 Examples that show how to use the described options and arguments will clarify
 the usage. Below we list a series of tasks and the corresponding command
-(displayed as \tt{monospaced font}).
+(displayed as {\tt monospaced font}).
 
 \begin{description}
         \item [Run an update on all structures]
-                \tt{pipeline.py run --all update}
+                {\tt pipeline.py run --all update}
 
         \item [Import pairwise interactions for 1FJG]
-                \tt{pipeline.py run interactions.pairwise 1FJG}
+                {\tt pipeline.py run interactions.pairwise 1FJG}
 
         \item [Import all unit annotations for all structures]
-                \tt{pipeline.py run --all units.loader}
+                {\tt pipeline.py run --all units.loader}
 
         \item [Import all unit annotations for all structures skipping structure 2AW7]
-                \tt{pipeline.py run --all --skip-pdb 2AW7 units.loader}
+                {\tt pipeline.py run --all --skip-pdb 2AW7 units.loader}
 
         \item [Create an NR group for 1FJG, 1J5E, 1S72]
-                \tt{pipeline.py run nr.loader 1FJG 1J5E 1S72}
+                {\tt pipeline.py run nr.loader 1FJG 1J5E 1S72}
 
         \item [Compute all interaction annotations for all structures while skipping all dependencies]
-                \tt{pipeline.py run --skip-dependencies --all interactions.loader}
+                {\tt pipeline.py run --skip-dependencies --all interactions.loader}
 
         \item [Import loops in all structures]
-                \tt{pipeline.py run --skip-stage loops.quality --all loops.loader}
+                {\tt pipeline.py run --skip-stage loops.quality --all loops.loader}
 
                 This command runs all loop level annotations, while skipping the loop quality stage,
                 which is generally only needed before doing a motif atlas import, and simply is not
                 needed importing loops, thus the reason it is skipped.
 
         \item [Recalculate all pairwise interactions]
-                \tt{pipeline.py run --recalculate . --recalculate mat\_files interactions.pairwise}
+                {\tt pipeline.py run --recalculate . --recalculate mat\_files interactions.pairwise}
 
                 Note that for this command we have to recalculate all
-                \tt{mat\_file}' as well as the interaction import. This is
-                because the \tt{mat\_files} stage controls the creation of the
+                {\tt mat\_file}' as well as the interaction import. This is
+                because the {\tt mat\_files} stage controls the creation of the
                 precomputed data that the matlab programs use. If we do not
                 specify recomputing the mat files the process will simply
                 reimport the already existing annotations.
 
 
         \item [Build a motif atlas using structures in the 'structures' file]
-                \tt{cat structures | xargs pipeline.py run motifs.loader}
+                {\tt cat structures | xargs pipeline.py run motifs.loader}
 
                 The structures file should contain only the ids to use, with one
                 per line. The 'xargs' command is required because the pipeline
@@ -750,7 +752,7 @@ chosen because they have caused crashes or errors in the past. In the future as
 more problematic structures are found they should be added to the set of
 structures used in testing.
 
-The bootstrap script can be run using the command \tt{bin/pipeline.py bootstrap}.
+The bootstrap script can be run using the command {\tt bin/pipeline.py bootstrap}.
 Bootstrapping requires a special configuration file in conf/bootstrap.json. It
 does not use the standard configuration file because it is important to have a
 separate testing and development database. Otherwise it is possible to
