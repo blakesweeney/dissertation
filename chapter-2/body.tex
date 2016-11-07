@@ -112,7 +112,7 @@ usability of the pipeline.
 Finally, the previous version did not centralize the core logic of the pipeline
 in a module making the pipeline harder to maintain. To explain, all parts of the
 pipeline have the same core logic as detailed in a later section. Each part of
-the pipeline that computes data is referred to as a 'stage'. The stage is
+the pipeline that computes data is referred to as a ``stage''. The stage is
 primarily responsible for computing data, while the core manages ensuring that
 the overall pipeline behaves correctly.
 
@@ -235,8 +235,8 @@ because the database was not configured to allow them.
 
 A uniqueness constraint ensures that no two rows in the same table may have the
 same data values in any column. Uniqueness constraints may span more than one
-column. For example, I have added a uniqueness constraint on the 'pdb\_id' and
-"chain\_name" column in the 'chain\_info" table. This table stores information
+column. For example, I have added a uniqueness constraint on the ``pdb\_id'' and
+``chain\_name'' column in the ``chain\_info" table. This table stores information
 about all chains and by placing the uniqueness constraint on these two columns I
 ensure that there can be no two chains in the same structure with the same
 combination of PDB id and chain name. This constraint reflects the logical
@@ -247,20 +247,20 @@ The second type of constraint I introduced is the consistent implementation of
 foreign keys wherever required to allow the many tables in our database to work
 together properly. These ensure that entries in one column of one table exist in
 another column of another table. These safeguard data completeness. The use of
-foreign keys allows the expression of the requirement of 'interactions must be
+foreign keys allows the expression of the requirement of ``interactions must be
 built from known residues'. To describe a specific example, we have a table
-called 'unit\_info' which contains data for all residues, RNA, DNA, protein,
+called ``unit\_info'' which contains data for all residues, RNA, DNA, protein,
 ligands, etc, known in the database. In the unit\_info table there is a
-'unit\_id' column that provides a unique identifier for all units (i.e.
-residues, whether RNA, DNA or protein). The 'unit\_pairs\_interactions' table
+``unit\_id'' column that provides a unique identifier for all units (i.e.
+residues, whether RNA, DNA or protein). The ``unit\_pairs\_interactions'' table
 contains all pairwise interactions between RNA residues, such as base pair and
-base stacking interactions. It contains a 'unit\_id\_1' and 'unit\_id\_2' column
+base stacking interactions. It contains a ``unit\_id\_1'' and ``unit\_id\_2'' column
 which specify the first and second units forming the interaction. For an
-interaction represented by a row in the unit\_pairs\_interacitons table to be
-valid, the entries in the 'unit\_id\_1' and 'unit\_id\_2' must exist  in the
-'unit\_id' column of the 'unit\_info' table. I have enforced this logical
-requirement by declaring that 'unit\_id\_1' and 'unit\_id\_2' are foreign keys
-link to 'unit\_id' in the unit\_info table.
+interaction represented by a row in the unit\_pairs\_interactions table to be
+valid, the entries in the ``unit\_id\_1'' and ``unit\_id\_2'' must exist  in the
+``unit\_id'' column of the ``unit\_info'' table. I have enforced this logical
+requirement by declaring that ``unit\_id\_1'' and ``unit\_id\_2'' are foreign keys
+link to ``unit\_id'' in the unit\_info table.
 
 At the level of the pipeline application, I ensure data validity by implementing
 procedures to automatically rollback failed imports. Because we have foreign key
@@ -298,7 +298,7 @@ the face of existing data. I have centralized the logic for recomputing and
 deleting old data.
 
 \begin{figure}
-\includegraphics{chapter-2/figs/overall-flow}
+  \includegraphics[height=8in]{chapter-2/figs/stage-flow}
 \caption{Figure summarizing the logical flow for each stage. This figure shows
 the general scheme of all stages.}
 \label{fig:stage-flow}
@@ -321,10 +321,10 @@ annotations it is desirable to select a few test structures on which to run only
 the new annotations, and then examine the results.
 
 To make this possible, I have restructured the pipeline to provide a single
-unifed point of entry that takes as input the name of the part to run and the
+unified point of entry that takes as input the name of the part to run and the
 particular structures to analyze, or an option to include all available
 structures. In the previous version of the pipeline there were several possible
-entry points. The primary entry point was the 'update' component. This part
+entry points. The primary entry point was the ``update'' component. This part
 would run everything required for a weekly update in the correct order. The
 other entry points were specific to individual components such as loading
 interactions. This was an issue because parts of the pipeline have dependencies
@@ -336,26 +336,26 @@ potential confusion.
 These dependencies are now encoded into the pipeline using a dependency graph as
 shown in Figure~\ref{fig:stage-deps}. This graph can be sorted using a topological
 sort to produce a linear ordering. I have implemented this logic as part of the
-'dispatcher' which determines which modules to run and in which order to run
+``dispatcher'' which determines which modules to run and in which order to run
 them in for a given application.
 
 
 \begin{figure}
-\includegraphics{chapter-2/figs/deps}
-\caption{An example of an unsorted dependendency graph (top) and a topological
-  sorted dependency graph (bottom). Each stage is represented by an oval with
-  the name of the stage in the oval. In this case the user has requested that
-  the 'interactions.pairwise' stage is run. This stage depends on two other
-stages, 'mat\_files' and 'units.info' as shown by the connections to those
-stages. Those stages have further dependencies. Shown in the bottom is the
-result of topological sorting the stages.}
+  \includegraphics[width=\linewidth]{chapter-2/figs/deps}
+  \caption{An example of an unsorted dependency graph (top) and a topological
+    sorted dependency graph (bottom). Each stage is represented by an oval with
+    the name of the stage in the oval. In this case the user has requested that
+    the ``interactions.pairwise'' stage is run. This stage depends on two other
+    stages, ``mat\_files'' and ``units.info'' as shown by the connections to those
+    stages. Those stages have further dependencies. Shown in the bottom is the
+    result of topological sorting the stages.}
 \label{fig:stage-deps}
 \end{figure}
 
 With dependencies encoded in the pipeline, operators of the pipeline can request
 the pipeline run a set of stages at once. In addition, part of the input to the
 pipeline may optionally specify which dependencies do not need to be run. This
-allows for the expression of complex requirements like, 'rerun all unit level
+allows for the expression of complex requirements like, ``rerun all unit level
 annotations except the distance and coordinate computation'. This is often
 useful when testing out new parts or after fixing failed runs. When running all
 structures, simply checking which input needs to be processed can take several
@@ -375,7 +375,7 @@ to what to run we avoid this problem entirely.
 
 In addition, the main entry point now accepts either a list of PDB structures to
 process or options to fetch the structures to run. The options and their usage
-is explained in more detail in the 'Operation of the pipeline' section. The
+is explained in more detail in the ``Operation of the pipeline'' section. The
 previous version always used all structures by default. While this is typically
 the case, there are many situations where the operator wants to alter the
 operation of the pipeline. For example, if one structure was not correctly
@@ -467,11 +467,11 @@ of python. None of the advanced features, metaclasses for example, are used. I
 will attempt to explain some fundamentals of python and object-oriented
 programming here.
 
-Classes can 'inherit' behaviors from other classes. This is commonly done
-through 'inheritance'. Inheritance is a common feature of object oriented
+Classes can ``inherit'' behaviors from other classes. This is commonly done
+through ``inheritance'. Inheritance is a common feature of object oriented
 programming where in there is a base class or parent which defines some
-functionality. From there one or more classes 'inherit' the functionality and
-are called 'child' classes. This relationship forms a hierarchy of classes. The
+functionality. From there one or more classes ``inherit'' the functionality and
+are called ``child'' classes. This relationship forms a hierarchy of classes. The
 behavior of any class is defined by the code in the class and all parent
 classes. The child class can then extend the parent class functionality by
 adding new behaviors. In addition, the child may override the parent class
@@ -480,7 +480,7 @@ implementation of any behavior is always prefered over the parent behavior.
 
 In the pipeline there is a parent class that defines the overall stage flow
 shown in Figure~\ref{fig:stage-flow}. Users can add a  new stages, called the
-'child' class, which 'inherit' from this parent class and receives all the
+``child'' class, which ``inherit'' from this parent class and receives all the
 standard behaviors such as deleting failed imports and only recomputing when
 needed. A user may decide that some stage should never delete data in the case
 of a failed import. For example, our loop ids are meant to never change and
@@ -510,10 +510,10 @@ Figure~\ref{fig:pipeline-organization}. This figure displays the key directories
 and explains their contents.
 
 \begin{figure}
-\includegraphics{chapter-2/figs/directories}
+  \includegraphics[width=\linewidth]{chapter-2/figs/directories}
 \caption{Directory structure of the RNA BGSU pipeline. This figure shows the top
 level and important directories in the pipeline. The directories are indicated
-by ending with a '/', while files do not end with a '/'.}
+by ending with a ``/', while files do not end with a ``/'.}
 \label{fig:pipeline-organization}
 \end{figure}
 
@@ -521,21 +521,21 @@ by ending with a '/', while files do not end with a '/'.}
 
 Several important values, such as the database to use are configured in an
 external file. The pipeline is configured through a JSON file that defaults to
-'conf/motifatlas.json'. There are many possible configuration values, as
+``conf/motifatlas.json'. There are many possible configuration values, as
 discussed in the detailed documentation. Table~\ref{tab:pipeline-config}
 contains the key options. An example configuration file is included at
-'conf/motifatlas.json.txt' that can be modified to a simple working file. The
-most important configuration value is the 'db.uri' value which configures the
+``conf/motifatlas.json.txt'' that can be modified to a simple working file. The
+most important configuration value is the ``db.uri'' value which configures the
 SQLAlchemy URI for the database connection. This specifies the database which to
 connect to as well as the username and password. The user must be able to modify
 the database, as well as add, delete and modify rows.
 
 In addition, there are three file and directory paths which must be specified.
 The first is the path to the matlab script that can execute matlab on the
-command line. On linux systems this can be found using 'which matlab' at the
-command line and defaults to '/usr/local/bin/matlab'. On OSX this will be in the
-'bin/matlab' directory below the matlab application. This means the default
-location is '/Applications/MATLAB\_R2013a.app/bin/matlab', for Matlab 2013a. The
+command line. On linux systems this can be found using ``which matlab'' at the
+command line and defaults to ``/usr/local/bin/matlab'. On OSX this will be in the
+``bin/matlab'' directory below the matlab application. This means the default
+location is ``/Applications/MATLAB\_R2013a.app/bin/matlab', for Matlab 2013a. The
 second is where to write the loop export files. Part of the pipeline is an
 export of all loops along with motif assignments. The file to write to must be
 specified. Finally, the path to write interaction exports to must be specified
@@ -544,12 +544,12 @@ directory for the use the pipeline runs as.
 
 Finally, the release\_mode section configures how the version numbers for motif
 atlas, non- redundant and loops will be bumped. All releases follow the same
-naming scheme of 'major.minor'. For example the NR release '2.0' has major
-version '2' and minor '0'. The minor can increments as much as needed and does
+naming scheme of ``major.minor'. For example the NR release ``2.0'' has major
+version ``2'' and minor ``0'. The minor can increments as much as needed and does
 not influence the major version. When the major increments the minor is reset to
-0. When the release\_mode is set to 'minor' this will increment the minor part
-of the version number, while 'major' will cause the major to be bumped.
-Generally, the release\_mode should be set to 'minor'. The only time 'major'
+0. When the release\_mode is set to ``minor'' this will increment the minor part
+of the version number, while ``major'' will cause the major to be bumped.
+Generally, the release\_mode should be set to ``minor'. The only time ``major'
 should be used is when there are large changes to the algorithm used for the
 underlying algorithm.
 
@@ -561,37 +561,37 @@ Variable & Purpose \\
 
 db.uri & SQLAlchemly uri string to specify the database to connect to \\
 
-release\_mode.loops & A string, either 'major' or 'minor' to indicate
+release\_mode.loops & A string, either ``major'' or ``minor'' to indicate
                         incrementing the major or minor version for loop releases \\
 
-release\_mode.motifs & A string, either 'major' or 'minor' to indicate bumping
+release\_mode.motifs & A string, either ``major'' or ``minor'' to indicate bumping
                         the major or minor version for motif releases \\
 
-release\_mode.nr & A string, either 'major' or 'minor' to indicate bumping the
+release\_mode.nr & A string, either ``major'' or ``minor'' to indicate bumping the
                    major or minor version for non- redundant releases \\
 
-locations.mlab\_app & Path to matlab executable. Must be provided  \\
+locations.mlab\_app & Path to matlab executable. \\
 
 locations.interactions\_gz & Path to where the interactions export file is
-                             written. Must be provided. \\
+                   written. \\
 
-locations.loops\_gz & Path to where the loops export is written. Must be
-                      provided \\
+locations.loops\_gz & Path to where the loops export is written. \\
 
 \bottomrule
 \end{tabulary}
-\caption{Main configuration options for the pipeline}
+\caption{Main configuration options for the pipeline. All options show here must
+  be provided.}
 \label{tab:pipeline-config}
 \end{table}
 
 \subsection{Executing the pipeline}
 
-The main entry point of the pipeline is the 'bin/pipeline.py' python script. For
-this discussion the script will be written as 'pipeline.py'. This script uses a
-common 'subcommand' 'options' 'arguments' design that will be familiar to anyone
+The main entry point of the pipeline is the ``bin/pipeline.py'' python script. For
+this discussion the script will be written as ``pipeline.py'. This script uses a
+common ``subcommand'' ``options'' ``arguments'' design that will be familiar to anyone
 who has used command line tools such as git. The top level command has a
-'--help' option which provides help information about the entire pipeline. In
-addition, each subcommand also has a '--help' option to provide help information
+``--help'' option which provides help information about the entire pipeline. In
+addition, each subcommand also has a ``--help'' option to provide help information
 about that command. Users should use this functionality extensively when
 becoming familiar with the pipeline. In general a command to run the pipeline
 looks like:
@@ -627,7 +627,7 @@ transfer & Export/Import data from versions of this database \\
 \end{table}
 
 For the purposes of this section I will only discuss the import/export
-functionality in the 'run' subcommand. The main inputs to this command are the
+functionality in the ``run'' subcommand. The main inputs to this command are the
 stage to run and the structures to run it on. It takes a variety of options as
 well. These options control the behavior of the pipeline. A summary of the
 command is shown in Figure~\ref{fig:running-options}. Here we will discuss how
@@ -659,7 +659,7 @@ Options:
   --ignore-time        Ignore time for rerunning
   -h, --help           Show this message and exit.
 \end{alltt}
-\caption{A summary of the options and arguments for the 'run' subcommand.}
+\caption{A summary of the options and arguments for the ``run'' subcommand.}
 \label{fig:running-options}
 \end{figure}
 
@@ -684,10 +684,10 @@ Another goal is to avoid recomputing data already computed.where it is necessary
 to over this default setting, the {\tt --recalculate stage} option can be used.
 This option will force the pipeline to recompute all data for the given stage.
 The {\tt .} stage name refers to the stage given so: {\tt pipeline.py run
---recalculate '.' --all units.info} will force a recompute for the units.info
+--recalculate ``.'' --all units.info} will force a recompute for the units.info
 stage, but not it's dependencies. To force all stages that are run to recompute,
 the user can use the {\tt *} argument. For example {\tt pipeline.py run --all
---recalculate '*' units.info} will recompute all stages that are run for all
+--recalculate ``*'' units.info} will recompute all stages that are run for all
 structures.
 
 Examples that show how to use the described options and arguments will clarify
@@ -724,18 +724,18 @@ the usage. Below we list a series of tasks and the corresponding command
                 {\tt pipeline.py run --recalculate . --recalculate mat\_files interactions.pairwise}
 
                 Note that for this command we have to recalculate all
-                {\tt mat\_file}' as well as the interaction import. This is
+                {\tt mat\_file}'' as well as the interaction import. This is
                 because the {\tt mat\_files} stage controls the creation of the
                 precomputed data that the matlab programs use. If we do not
                 specify recomputing the mat files the process will simply
                 reimport the already existing annotations.
 
 
-        \item [Build a motif atlas using structures in the 'structures' file]
+        \item [Build a motif atlas using structures in the ``structures'' file]
                 {\tt cat structures | xargs pipeline.py run motifs.loader}
 
                 The structures file should contain only the ids to use, with one
-                per line. The 'xargs' command is required because the pipeline
+                per line. The ``xargs'' command is required because the pipeline
                 does not read from standard input and so xargs transforms the
                 call to include the ids as part of the call. Note that there is
                 a system dependent limit for the number of arguments allowed to
@@ -746,8 +746,8 @@ the usage. Below we list a series of tasks and the corresponding command
 
 The pipeline is tested through two related methods. First, there is a script
 that will run the pipeline on 70 structures to populate a test database. The
-process of creating a database to work with is called "bootstrapping". The
-structures to use are stored in "pymotifs.constants.BOOTSTRAPPING" and have been
+process of creating a database to work with is called ``bootstrapping''. The
+structures to use are stored in ``pymotifs.constants.BOOTSTRAPPING'' and have been
 chosen because they have caused crashes or errors in the past. In the future as
 more problematic structures are found they should be added to the set of
 structures used in testing.
@@ -771,32 +771,35 @@ constraint violation may appear here as well. This serves as a good initial
 method to test the overall functionality of the pipeline and is recommended
 before deploying a new stage.
 
-The second way the pipeline is tested by "unit testing" components of the
+The second way the pipeline is tested by ``unit testing'' components of the
 pipeline. We test individual methods of classes using the py.test library. This
 is a very traditional method of testing python applications. The tests are
 stored in test/ and are organized into a hierarchy that parallels that of the
 main program, making it simple to determine which module is being tested for
-each test file. Test file names must end with '\_test.py'. For example, the
-tests for the units.info stage are in 'test/units/info\_test.py'.  There is very
+each test file. Test file names must end with ``\_test.py''. For example, the
+tests for the units.info stage are in ``test/units/info\_test.py''.  There is very
 extensive documentation on writing tests and readers are strongly encouraged to
 read documentation on writing unit tests in python and using py.test. Examples
-of such links are:
-\url{https://stackoverflow.com/questions/3371255/writing-unit-tests-in-python-how-do-i-start},
-\url{http://docs.pytest.org/en/latest/},
-\url{https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/},
-and \url{https://docs.python.org/2/library/unittest.html}. Here we give a quick
-overview of testing in python, as well as information on the parts that are
-unique to this pipeline.
+of such links are: 
+\begin{itemize}
+  \item \url{https://stackoverflow.com/questions/3371255/writing-unit-tests-in-python-how-do-i-start}
+  \item \url{http://docs.pytest.org/en/latest/}
+  \item \url{https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/}
+  \item \url{https://docs.python.org/2/library/unittest.html}.
+\end{itemize}
+
+Here we give a quick overview of testing in python, as well as information on
+the parts that are unique to this pipeline.
 
 In python, tests are often organized into classes. We use this approach
 extensively in the tests. It is important to know that it is not needed, as
 py.test will use simple functions as tests as well. Readers interested in that
 approach should read py.test's documentation on this. We use classes because of
-the organization advantages it provides. For test classes, if there is a 'setUp'
+the organization advantages it provides. For test classes, if there is a ``setUp''
 method that takes no arguments it is run prior to any tests. This method is used
 to setup any data or objects that are needed for testing. As discussed below
 this is used to setup stages for testing correctly. Each test method must start
-with the string 'test\_'. Within them there should be an assertion about the
+with the string ``test\_'. Within them there should be an assertion about the
 computed and expected value. Ideally tests are as simple as possible and contain
 only 1 statement to compute the value to test, 1 statement to define the answer
 and 1 statement to assert the computed value equals the expected value. This is
@@ -805,14 +808,14 @@ documentation and advice on this subject.
 
 The test classes that test a stage in the pipeline must inherit from the
 StageTest class from the test module. These classes should also have a
-'loader\_class' attribute which specifies the class of the stage to test. This
-stage will be initialized in the StageTest's 'setUp' method. The object will be
-built using the configuration specified in 'conf/bootstrap.json'. As with
+``loader\_class'' attribute which specifies the class of the stage to test. This
+stage will be initialized in the StageTest's ``setUp'' method. The object will be
+built using the configuration specified in ``conf/bootstrap.json''. As with
 standard python tests this method is run prior to all test methods. Classes
 which implement their own setUp method must have a call to the superclass's
 setUp method. Without this the stage will not be initialized correctly.
 
-Another useful functionality of the test suite is the 'skip\_without\_matlab'
+Another useful functionality of the test suite is the ``skip\_without\_matlab''
 annotation. This is to be used on any test that calls matlab. It allows the test
 suite to run without crashing on machines that do not have matlab, or the python
 to matlab connector, installed.
