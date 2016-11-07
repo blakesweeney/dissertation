@@ -6,7 +6,7 @@ EQUIVALENCE SETS}
 This chapter reports changes implemented to improve modules of the data pipeline
 that calculates Equivalence Classes of RNA entities of RNA 3D structures for the
 Nucleic Acids Database (NDB) and for RNA.BGSU.EDU. The 3D structures are
-provided by the Protein DataBank (PDB). 
+provided by the Protein DataBank (PDB).
 
 The PDB is an archival resource that serves as  the accumulated scientific
 investigation of the 3D structures of macromolecular entities of biological
@@ -37,7 +37,7 @@ extracted and clustered separately. Each chain was compared on the basis of
 sequence alignment, species and geometric discrepancy to all other chains. The
 previous method did not compute all possible sequence alignments or
 discrepancies due to runtime issues. The alignments and discrepancies were not
-stored for future studies. 
+stored for future studies.
 
 \section{Motivation for current work}
 
@@ -45,7 +45,7 @@ Motivation for current work
 We have one main motivation for updating our RNA chain grouping method. The
 first is to take advantage of technical changes data and secondly are to enhance
 the scientific utility of our resources by providing a more complete set of data
-that includes all chains found in RNA structures. 
+that includes all chains found in RNA structures.
 
 Recently,  PDB has migrated from “PDB” formatted structure files to the new
 macromolecular Chemical Information File format (mmCIF), which made it possible
@@ -61,7 +61,7 @@ groups.
 
 There are a number of scientific use cases for which our RNA structure classes
 and derived data will be  3D structures in the PDB/NDB and these are worth
-enumerating and discussing. 
+enumerating and discussing.
 
 \begin{enumerate}
   \item Determining the breadth and depth of solved structures, ie the number of
@@ -89,16 +89,16 @@ Thus, the change to mmCIF format required a complete rethinking of the
 procedures for extracting, naming, and clustering RNA entities and has enabled
 significant improvements in the results. This chapter describes those changes
 and the choices made to maximize the value of the data for diverse scientific
-users. 
+users.
 
 \section{Types of molecules and requirements}
 
 In this section we will highlight specific groups that pose special challenges
 for clustering to motivate the following sections were the methods developed are
 explained and their success in correctly clustering these special cases is
-assessed. 
+assessed.
 
-\subsection{Ribosomal RNA Subunits}
+\subsection{Ribosomal RNA subunits}
 
 The largest entities are ribosomal RNAs (rRNA), which comprises the large (LSU)
 and small (SSU) ribosomal subunits, the 5S rRNA, and the 5.8S rRNA in
@@ -123,14 +123,14 @@ ribosomal RNAs (26S or 28S, depending on the species), as they are homologous to
 the 5’-ends of bacterial 23S rRNAs. As such they form extensive Watson-Crick
 interactions with the larger rRNA of the LSU in which they occur and so,
 according to the criteria defined above, belong together in the same RNA entity
-, for the purposes of grouping. 
+, for the purposes of grouping.
 
-In addition, the ribosome has long been an molecule of study. Early structure
+In addition, the ribosome has long been an molecule of study. Early structures
 \cite{Mueller2000} often were resolved at very low resolution. These structures,
 while informative, are not as useful for current work as more recent high
 resolution structures. While we want to group all structures it is very useful
 to create groups of structures with similar resolution. In the past we have
-found using resolution cutoffs of 1.5Å, 2.0Å, 2.5Å, 3.0Å, 3.5Å, 4.0Å, 20.0Å, and
+found using resolution cutoffs of 1.5{\AA}, 2.0{\AA}, 2.5{\AA}, 3.0{\AA}, 3.5{\AA}, 4.0{\AA}, 20.0{\AA}, and
 ‘all’ a group of all structures regardless of resolution create useful groups.
 Here we continue this practice.
 
@@ -141,7 +141,7 @@ that the groups should only contain molecules from the same species. In the case
 of large molecules this can be determined through sequence alignments alone.
 In addition, all members of a group should fall within a resolution cutoff.
 
-\subsection{tRNA and mRNA Complexes}
+\subsection{tRNA and mRNA complexes}
 
 tRNA molecules are commonly solved in the context of their binding to a
 ribosome. In these cases they are often also bound to an mRNA fragment. These
@@ -184,13 +184,13 @@ a small helix with loops. For example studies of the isolated sarcin-ricin motif
 structures the unit we should cluster is the duplex. Like the LSU and 5.8S each
 strand interact extensively through Watson-Crick base pairs. However, these
 strands have no internal structure. There are also model compounds, such as the
-nano square that are composed of 8 chains \cite{Dibrov2011a}. 
+nano square that are composed of 8 chains \cite{Dibrov2011a}.
 
 From these examples we can see that we should be able to join any number of
 unstructured chains together to form a single unit for grouping. This is
 different from the case of multiple tRNA's on a small mRNA fragment where the
 two tRNA's would not form a single unit. Here we want the chains, even if they
-are not directly interacting, to form a single unit. 
+are not directly interacting, to form a single unit.
 
 Many of these small model compounds differ from one another from due to single
 nucleotide changes. These changes are intentional and so we require that small
@@ -221,14 +221,14 @@ these entities as “RNA integrated functional elements” or “RNA IFEs.” We
 use the term “IFE” as a short-hand for this definition.  Most RNA IFEs consist
 of a single chain, but some do not. The simplest examples comprise two chain
 Watson-Crick paired chains forming a duplex structure: strictly, this comprises
-two molecules, but effectively it is a single entity or RNA IFE. 
+two molecules, but effectively it is a single entity or RNA IFE.
 
 From these examples we can see there are 3 requirements for each EC.
 \begin{enumerate}
   \item Two IFE’s included in the same Equivalence Class should come from the
     same biological source. The intention of this criterion is to separate
     homologous RNA molecules, for example SSU rRNAs from different organisms,
-    into distinct Equivalence Classes. 
+    into distinct Equivalence Classes.
 
   \item Two IFE’s included in the same IFE should have very similar, though not
     necessarily identical sequences. This criterion may seem redundant with the
@@ -248,7 +248,7 @@ From these examples we can see there are 3 requirements for each EC.
     IFE’s are structurally dissimilar and should not be in the same equivalence
     set, even though the sequence may be identical.
 
-  \item Two IFE’s included in the same EC should have similar resolution. 
+  \item Two IFE’s included in the same EC should have similar resolution.
 \end{enumerate}
 
 However, we decided to group structures together even though their sizes differ
@@ -265,9 +265,10 @@ when:
     completely resolved structures.
 
   \item The observed structure is a small part of the overall molecule. For
-    example, there are structures of a single domain of the ribosome (CITE).
-    These structures are best grouped with the other ribosomal structures as
-    that is the context they are just a small portion of the larger complex.
+    example, there are structures of a single domain of the ribosome
+    \cite{Nissen2000}. These structures are best grouped with the other
+    ribosomal structures as that is the context they are just a small portion of
+    the larger complex.
 \end{enumerate}
 
 In addition, there are several other cases where we assign IFE’s to the same
@@ -276,13 +277,13 @@ equivalence set:
 \begin{enumerate}
   \item We group IFE’s together EVEN WHEN their geometries differ significantly
     when the structures are too low resolution as the data are not adequate to
-    quantify the structural differences. 
+    quantify the structural differences.
 
   \item Structures belong together even when RNA is bound to different proteins
     or ligands but they have when they have very similar geometries. At present,
     it is not our intention to classify PDB structures at the level of
     RNA-protein complexes. For this study we focus on the RNA components of the
-    structure. 
+    structure.
 \end{enumerate}
 
 There are several important implications of these requirements. First it is
@@ -290,7 +291,7 @@ possible that the homologous RNA molecules (for example iso-accepting tRNAs)
 from different species have nearly identical sequences and structures.
 Nonetheless they will be placed in different groups In addition, it is possible
 that two groups will have similar sequence and species but differ only in
-geometry. 
+geometry.
 
 \section{Methodology for building Equivalence Sets}
 
@@ -327,10 +328,10 @@ Our algorithm operates as follows. We first mark all chains in a structure as
 ``structured'' or ``unstructured''. A ``structured' chain is defined by having at
 least 5 internal (within the same chain) cis Watson Crick/Watson Crick (cWW)
 basepairs. We then join chains based upon a few rules. A representation of these
-rules is shown in Figure~\ref{fig:build-ife}. 
+rules is shown in Figure~\ref{fig:build-ife}.
 
 \begin{figure}
-  \includegraphics[width=16cm,height=7cm]{chapter-3/figs/build-ifes}
+  \includegraphics[width=\linewidth]{chapter-3/figs/build-ifes}
   \caption{The rules for building connecting chains into IFE's. Each chain is
     represented by a circle. Unstructured chains are in blue with the letter
     ``U'', while structured chains are orange in ``S''. The left side indicates the
@@ -357,6 +358,7 @@ future. To examine if this cutoff is reasonable we produced the figures shown in
 Figure~\ref{fig:ext-vs-int}.
 
 \begin{figure}
+  \includegraphics[width=\linewidth]{chapter-3/figs/internal-external}
   \caption{Summary of the ratio of external to internal base pairs. The leftmost
     panel shows a histogram of the maximal ratio of external to internal pairs
   for all pairs of chains which have an interaction between them. }
@@ -368,8 +370,8 @@ Figure~\ref{fig:ext-vs-int}.
 To build equivalence sets we compare all pairs of IFE’s based upon their species
 assignments, their alignment, their discrepancy. Pairs of chains which have a
 valid alignment, are from similar species and have a discrepancy of less than
-0.4Å, if computed, are joined. We then build the EQ sets by placing all chains
-which are transitively connected into one set. 
+0.4{\AA}, if computed, are joined. We then build the EQ sets by placing all chains
+which are transitively connected into one set.
 
 The steps are:
 \begin{enumerate}
@@ -385,7 +387,7 @@ chain. However, not all chains are assigned to an organism, many are marked as
 ‘synthetic construct’ or not assigned any organism. In both of these cases we
 treat the organism as synthetic. In addition, a few chains (3) are assigned to a
 genus rather than a species or sub-species, in these cases we treat the chain as
-being synthetic as well. 
+being synthetic as well.
 
 In order to compute the alignments between all pairs of chains correctly and in
 a reasonable time frame we align experimental sequences. Experimental sequences
@@ -396,7 +398,7 @@ correctly we use the experimental sequence. If we did not we would have to
 ensure that the resulting alignments respected gaps in the both chains. The
 alignments would  have to have breaks where the observed chains have breaks.
 This is a difficult problem and it is simpler to use the experimental sequences
-where this is not a concern. 
+where this is not a concern.
 
 In addition, by using experimental sequences we reduce the number of required
 alignments. It is very common to use the same molecule in many experiments. For
@@ -418,14 +420,15 @@ as the chains having a similar species. This ensures that we are only comparing
 sequences which could be from the same source. We have observed that some
 experimental sequences are assigned ‘synthetic’ in one experiment are assigned a
 species such as E. coli in another experiment. Thus we allow the comparison of
-synthetic chains to any other chain, so long as it has similar size. 
-The last step is to compute the discrepancy. Discrepancy is a measure of
-geometric similarity like RMSD but it is sensitive to the base orientation and
-position. It has been used extensively in our lab for searching RNA 3D
-Structures (CITE), building NR sets in the past (CITE), as well as building
-motif groups (CITE). We only use the first structured chain in each IFE. While
-this is a simplification of the situation it has proven to work well and makes
-the problem simpler. For discrepancy we are only interested in chains that:
+synthetic chains to any other chain, so long as it has similar size. The last
+step is to compute the discrepancy. Discrepancy is a measure of geometric
+similarity like RMSD but it is sensitive to the base orientation and position.
+It has been used extensively in our lab for searching RNA 3D Structures
+\cite{Sarver2008a}, building NR sets in the past \cite{Leontis2012b}, as well as
+building motif groups \cite{Petrov2013}. We only use the first structured chain
+in each IFE. While this is a simplification of the situation it has proven to
+work well and makes the problem simpler. For discrepancy we are only interested
+in chains that:
 
 \begin{enumerate}
   \item Have a good alignment between them. As this discrepancy will be used to
@@ -434,8 +437,8 @@ the problem simpler. For discrepancy we are only interested in chains that:
     reduces the number of comparisons needed making the computations much
     quicker.
 
-  \item Have resolution less than 4.0Å or are solved using NMR. We do not
-    compute discrepancies for chains with poor resolution (greater than 4.0Å)
+  \item Have resolution less than 4.0{\AA} or are solved using NMR. We do not
+    compute discrepancies for chains with poor resolution (greater than 4.0{\AA})
     because doing so provides artificially inflated value. Many structures of
     low resolution are helices which have not been modeled with planar paired
     bases. This modeling is inaccurate and produces high discrepancy when
@@ -451,7 +454,7 @@ the problem simpler. For discrepancy we are only interested in chains that:
 
 With these rules we are able to efficiently compute all required discrepancies.
 By doing this as part of our pipeline we are able to store these values. This
-allows for comparison of grouping methodologies and constraints. 
+allows for comparison of grouping methodologies and constraints.
 
 We then connect all pairs of IFE’s which satisfy the alignment, species and
 discrepancy requirements. These connections are treated as a graph and used to
@@ -461,16 +464,17 @@ build equivalence classes through transitivity.
 
 We build EC through transitivity. This means that all connected IFE’s, even if
 the connections are indirect, are placed into a single group. An example of such
-a clustering is shown in Figure~\ref{fig:transitivity}. 
+a clustering is shown in Figure~\ref{fig:transitivity}.
 
 \begin{figure}{ht}
-  \caption{Figure Transitivity: Schema of Equivalence Classes built by
-    Transitivity. In this figure each IFE instance is represented by a
-    circle.Lines connecting circles indicate pairs of IFE's having similar
-    sequences, the same species and geometric discrepancy below the threshold
-    value of 0.4. Each Equivalence Class is represented by the grey background
-    around a set of circles. To in included in a class an instance need only be
-  connected to one other member of the class.}
+  \includegraphics[width=\linewidth]{chapter-3/figs/ife-transtivity}
+  \caption{Schema of Equivalence Classes built by transitivity. In this figure
+    each IFE instance is represented by a circle.Lines connecting circles
+    indicate pairs of IFE's having similar sequences, the same species and
+    geometric discrepancy below the threshold value of 0.4. Each Equivalence
+  Class is represented by the grey background around a set of circles. To in
+included in a class an instance need only be connected to one other member of
+the class.}
   \label{fig:transitivity}
 \end{figure}
 
@@ -486,12 +490,12 @@ remaining step is to name them
 \subsection{Naming equivalence sets}
 
 In previous work Dr. Anton Petrov created a naming scheme based upon the
-parentage of the equivalence class (CITE ML Atlas). I preserve the overall
+parentage of the equivalence class \cite{Petrov2013}. I preserve the overall
 scheme but have modified it in a significant way to make an easier to understand
 system, as described next.
 
 The naming scheme is as follows:
-‘NR\_{resolution\_cutoff}\_{unique\_handle}.{version}’. This scheme has 3
+``NR\_{resolution\_cutoff}\_{unique\_handle}.{version}''. This scheme has 3
 components, the resolution cutoff used, a unique randomly selected handle and
 the version number for this group. The resolution cutoff provides information on
 what the resolution is used to build the EQ set. The unique handle is a unique
@@ -499,13 +503,13 @@ randomly generated number that serves to make all ids unique.
 
 We have changed the naming scheme so that the unique handle is identical across
 all resolution cutoffs of the same set of structures. For example, an EQ set
-built of tRNA’s at the ‘all’ resolution cutoff may have the name:
-‘NR\_all\_00001.1’. At the 4.0Å resolution cutoff this now would have the name
-‘NR\_4.0\_00001.1’. This differs from the previous method where as different
-randomly generated handle was assigned to each resolution cutoffs of the same
-equivalence set. By making this change the random handle remains identical
-across resolution cutoffs making it much easier to which EQ sets have the same
-molecule.
+built of tRNA’s at the ``all'' resolution cutoff may have the name:
+``NR\_all\_00001.1''. At the 4.0{\AA} resolution cutoff this now would have the
+name ``NR\_4.0\_00001.1''. This differs from the previous method where as
+different randomly generated handle was assigned to each resolution cutoffs of
+the same equivalence set. By making this change the random handle remains
+identical across resolution cutoffs making it much easier to which EQ sets have
+the same molecule.
 
 \section{Results of Equivalence Set building}
 
@@ -513,9 +517,9 @@ For the purposes of this chapter we created an EQ grouping using all structures
 available as of July 25, 2016. This grouping was then analyzed to see how the
 resulting groups matched our objectives. I begin with a general description of
 the clustering and then discuss each previously mentioned case in detail,
-finally I examine the groupings of outliers. 
+finally I examine the groupings of outliers.
 
-\subsection{General Properties}
+\subsection{General properties}
 
 I built a grouping using all PDB available from July 28, 2016. The grouping used
 3213 PDB’s which contained 7015 IFE’s. These were grouped into 2168 EC’s. These
@@ -527,13 +531,13 @@ the member count distribution is shown in in Table~\ref{tab:eq-size-dist}.
     \toprule
     Number of instances & Number of Equivalence Classes (Percent of all classes) \\
     \midrule
-    1 & 1352 (62.4\%) \\
-    2-5 & 615 (28.3\%) \\
-    5-10 & 118 (5.4\%) \\
-    10-20 & 53 (2.4\%) \\
-    20-50 & 16 (0.7\%) \\
-    > 50 & 14 (0.6\%)\\
-    Total & 2168 (100\%) \\
+    1               & 1352 (62.4\%) \\
+    2-5             & 615 (28.3\%)  \\
+    5-10            & 118 (5.4\%)   \\
+    10-20           & 53 (2.4\%)    \\
+    20-50           & 16 (0.7\%)    \\
+    \textgreater 50 & 14 (0.6\%)    \\
+    Total           & 2168 (100\%)  \\
     \bottomrule
   \end{tabular}
   \caption{Counts of the number of classes for a range of sizes. This table
@@ -551,25 +555,25 @@ datasets contain the same experimental results, however there are fewer mmCIF
 files because many  of the PDB files have been merged into a single mmCIF file.
 This gives us an ideal set to compare the two methods. From the table we can see
 that the old and new method have similar performance, with the new one having
-fewer singleton groups. Thus 62% of our groups are singleton groups for the July
-28, 2016 data is not surprising when compared to the previous groupings. 
-
+fewer singleton groups. Thus 62\% of our groups are singleton groups for the July
+28, 2016 data is not surprising when compared to the previous groupings.
 
 \begin{table}
-  \begin{tabular}{lrr}
+  \begin{tabulary}{\linewidth}{LRR}
     \toprule
-    Number of instances & Number of Equivalence Classes in 2.0 & Number of
-    Equivalence Classes in 1.89 \\
+    Number of instances & 
+    Number of Equivalence Classes in 2.0 & 
+    Number of Equivalence Classes in 1.89 \\
     \midrule
-    1 & 1352 (62.4\%) \\
-    2-5 & 615 (28.3\%) \\
-    5-10 & 118 (5.4\%) \\
-    10-20 & 53 (2.4\%) \\
-    20-50 & 16 (0.7\%) \\
-    > 50 & 14 (0.6\%)\\
-    Total & 2168 (100\%) \\
+    1               & 1081 (61.0\%)  & 1112 (78\%) \\
+    2-5             & 527 (30.0\%)   & 234 (16\%)\\
+    5-10            & 88 (5.0\%)     & 31 (2\%)  \\
+    10-20           & 38 (2.0\%)     & 19 (1\%)  \\
+    20-50           & 20 (1.0\%)     & 8 (0.5\%) \\
+    \textgreater 50 & 11 (0.6\%)     & 5 (0.3\%) \\
+    Total           & 1765 (100\%)   & 1409 (100\%) \\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
   \caption{Comparison of new method to previous method. This table compares the
   performance of the previous and new method on the same data set of structures.
 The data are taken from
@@ -583,27 +587,29 @@ previously separate files were merged}
 \end{table}
 
 I next moved to examine results of groups of particular interest. I begin with
-the ribosomes, then tRNA’s, and then protein/RNA complexes. 
+the ribosomes, then tRNA’s, and then protein/RNA complexes.
 
-\subsection{Ribosomal Subunits}
+\subsection{Ribosomal subunits}
 
 As an example to evaluate the groupings of ribosomes, I examined the equivalence
 classes containing the Thermus thermophilus small ribosomal subunit (SSU). We
 constructed heatmaps of both the sequence similarity and the discrepancy between
 all chains as shown in Figure~\ref{fig:tt-ssu-align} and
-Figure~\ref{tt-ssu-disc}. The alignment heatmap indicates the high sequence
+Figure~\ref{fig:tt-ssu-disc}. The alignment heatmap indicates the high sequence
 similarity among all IFE’s. The geometric discrepancy heatmap shows that there
 may be two main structurally groups in the equivalence class. Currently we are
-exploring these groups to see if they correlate to biological states. 
+exploring these groups to see if they correlate to biological states.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/tt-ssu-align}
   \caption{A figure summarizing the sequences similarity for all IFE’s in the
     Thermus thermophilus small subunit. Color scale indicates discrepancy
   values, lighter colors being worse.}
   \label{fig:tt-ssu-align}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/tt-ssu-disc}
   \caption{Summary of the discrepancy for all pairs of IFE’s in the Thermus
     thermophilus small subunit. Grey squares indicate no data computed, because
     that structure has too low a resolution. Color scale indicates discrepancy
@@ -611,17 +617,18 @@ exploring these groups to see if they correlate to biological states.
   \label{fig:tt-ssu-disc}
 \end{figure}
 
-\subsection{tRNA and mRNA Complexes}
+\subsection{tRNA and mRNA complexes}
 
 We examined two classes that contained tRNA alone and tRNA/mRNA complexes. The
-tRNA only group is shown in Figure~\ref{trna-alone}. In it we can see that all
+tRNA only group is shown in Figure~\ref{fig:trna-alone}. In it we can see that all
 chains are geometrically similar and have identical sequences. However, within
 the group we can see that there are several subgroups, notably, 4WSM chains 2L
 and 2K are geometrically distinct from all other members and similar to each
-other. However, the differences are below our cutoff of 0.4 Å/nt leading to them
-being placed in the same group. 
+other. However, the differences are below our cutoff of 0.4 {\AA}/nt leading to them
+being placed in the same group.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/trna-alone}
   \caption{Example of a tRNA/mRNA complex forming an equivalence class. On the
     left is a heat map of the discrepancies for all IFE’s in the group. The
     right shows the heat map of sequence similarity for the group. Color scales
@@ -642,12 +649,13 @@ of such a clustering. It contains several subgroups that are only connected
 because we have not use discrepancy to split them. Upon using discrepancy this
 group is partitioned into 4 other groups, one of which is shown in
 Figure~\ref{fig:small-aa-disc}.  In this heatmap we can see that the group is
-much more homogeneous and all pairs have discrepancy less than 0.2Å/nt. In
+much more homogeneous and all pairs have discrepancy less than 0.2{\AA}/nt. In
 addition all members of this group form a similar structure and are bound to
 proteins, unlike the previous method where the group was a mix of single and
-double stranded molecules. 
+double stranded molecules.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/small-aa-no-disc}
   \caption{Discrepancy heatmap for an 11-nt poly-A class built without
     discrepancy: This shows the effect of clustering a model compound without
     using discrepancy. We are showing only the discrepancy heatmap here. We can
@@ -655,7 +663,8 @@ double stranded molecules.
   \label{fig:small-aa-no-disc}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/small-aa-disc}
   \caption{Discrepancy heatmap for a small 11-nt poly-A compound built using
     discrepancy. Mean values for each row are shown on the diagonal, and the
   color scale indicates discrepancy with lighter colors being worse}
@@ -667,37 +676,39 @@ double stranded molecules.
 After evaluating specific cases we searched for outliers in our dataset. We
 began by examining the distribution of maximum discrepancy and minimum sequence
 similarity for all pairs in all equivalence classes. This is shown in in
-Figure~\ref{eq-summary}. From this figure we can see that most groups have a low
+Figure~\ref{fig:eq-summary}. From this figure we can see that most groups have a low
 discrepancy and high sequence similarity. However, there is a very long tail of
-groups with high discrepancies, some even ranging up to 4Å/nt. This indicates
-that some groups contain pairs of IFE’s that are highly dissimilar. We call
+groups with high discrepancies, some even ranging up to 4{\AA}/nt. This indicates
+that some groups contain pairs of IFE's that are highly dissimilar. We call
 these pairs outliers. For the purpose of this analysis we will define groups
-with outliers as groups that contain pairs of IFE’s with discrepancies greater
-than 0.8Å/nt or any group that contains a pair of IFE’s that do not have a
+with outliers as groups that contain pairs of IFE's with discrepancies greater
+than 0.8{\AA}/nt or any group that contains a pair of IFE's that do not have a
 ‘good’ alignment. As discussed earlier, our criteria for chains to align well
 depends on the size of the chains. For this reason we cannot use a simple
-sequence similarity cutoff as with discrepancy. 
+sequence similarity cutoff as with discrepancy.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/eq-summary}
   \caption{A figure of the Maximum Pairwise Discrepancy and Minimum Sequence
-    Similarity for all pairs of IFE’s in all equivalence classes. The black
-    lines indicate the 0.8 discrepancy cutoff (left) and the 0.9 sequence
-  similarity cutoff (right) for each criteria.}
+    Similarity for all pairs of IFE's in all equivalence classes. The black
+    lines indicate the 0.8 discrepancy cutoff (left) used a criterion for
+  detecting groups with outlier pairs.}
   \label{fig:eq-summary}
 \end{figure}
 
 We then investigated the distribution of discrepancies and sequence similarities
 for all groups containing outliers. The figuring summarizing this is shown in
-Figure~\ref{fig:outlier-summary}. This graph shows that outliers appear in all regions of
+Figure~\ref{fig:eq-outlier-summary}. This graph shows that outliers appear in all regions of
 the graph. Some outliers have low discrepancy, indicating they must differ in
 sequence, while others have high sequence similarity indicating they must differ
 geometrically.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/outlier-summary}
   \caption{Discrepancy and Minimum Sequence Similarity of all groups with
-    outliers. This figure shows the same data as Figure~\ref{fig:eq-summary} but only for
-    groups that have a pair of IFE’s with discrepancy at least 0.8 or sequence
-  similarity less than or equal to 0.9.}
+  outliers. This figure shows the same data as Figure~\ref{fig:eq-summary} but
+only for groups that have a pair of IFE's with discrepancy at least 0.8 or
+sequence similarity less than or equal to 0.9.}
   \label{fig:eq-outlier-summary}
 \end{figure}
 
@@ -707,9 +718,10 @@ terms of nucleotides and members as shown in Figure~\ref{fig:outlier-detail}.
 This figure shows that the majority of the groups with outliers contain
 relatively few members and are relatively small. However, there are a few groups
 that contain many members and are large. The spike at \~80 nucleotides
-corresponds to 2 tRNA groups.  
+corresponds to 2 tRNA groups.
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\textwidth]{chapter-3/figs/outlier-details}
   \caption{This figure shows 4 different metrics for outliers within each group.
     Each point in all graphs represents a group that contains at least one pair
     of IFE’s that is an outlier (discrepancy greater than 0.8 or sequence
@@ -754,17 +766,18 @@ discrepancy. I explored these classes to determine how such groups were built.
 From the definition of our methodology, I know that all groups that contain
 pairs with low sequence similarity will do so because they are connected through
 a chain of high sequence similarity pairs. The NR\_all\_03381.1 group contains
-protein/stem loop constructs of length 22 nt and has 4 members, 1K8W|1|B,
-1ZL3|1|B, 1ZE2|1|D, and 1ZE. 
+protein/stem loop constructs of length 22 nt and has 4 members,
+\ife{1K8W}{1}{B}, \ife{1ZL3}{1}{B}, \ife{1ZE2}{1}{D} , and 1ZE.
 
 The other class of groups with outliers, those that contain a pair with high
 discrepancy, can be caused in two ways. First, the pairs may be connected
 through a chain of low discrepancies, similar to pairs with low sequence
 similarity being connected through a chain of high sequence similarity pairs.
 This is visible in Figure~\ref{fig:nr-all-75770.1-disc}. In this figure there are
-yellow bars that only cover part of the 
+yellow bars that only cover part of the
 
-\begin{figure}
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{chapter-3/figs/nr-all-75770-1-disc}
   \caption{Histogram of the of the discrepancies for EC NR\_all\_75770.1, an E.
     coli tRNA group. This group contains a few IFE's which are outliers in our
   analysis.}
@@ -776,7 +789,7 @@ not have discrepancy computed. An example of this is show in NR\_all\_18070.1
 DISC. In this figure we can see a yellow line in the upper right which covers
 the entire heatmap. This indicates that this IFE has high discrepancy to all
 other members of the group. This IFE is connected to all other members through
-the IFE’s that have no discrepancy shown (grey bars). 
+the IFE’s that have no discrepancy shown (grey bars).
 
 We examined the two groups, NR\_all\_18070.1 and NR\_all\_75770.1 manually and found
 that they are tRNA groups. We will look at NR\_all\_18070.1 first, which is a tRNA
@@ -787,7 +800,8 @@ members it is very similar in sequence. Because these molecules are uncommon and
 it is still similar enough to rest of the group to ‘belong’. It is connected to
 the rest of the chains through IFE’s which have no computed discrepancy.
 
-\begin{figure}
+\begin{figure}[h]
+        \includegraphics[width=\textwidth]{chapter-3/figs/nr-all-18070-1-disc}
   \caption{Figure summarizing the discrepancy heatmap for all IFE’s in
   NR\_all\_18070.1, a tRNA group with 233 members. }
   \label{fig:nr-all-18070.1-disc}
@@ -796,7 +810,7 @@ the rest of the chains through IFE’s which have no computed discrepancy.
 The second NR\_all\_75770.1 is the second highest point on these plots. It is an
 E. coli tRNA group with 170 members. There are a few IFE’s which are outliers
 relative to the rest of the group. These chains appear to be fragments of the
-larger tRNA. For example 1VY7 is a 5 nt fragment of the 76 nt tRNA. 
+larger tRNA. For example 1VY7 is a 5 nt fragment of the 76 nt tRNA.
 
 We manually investigated the other groups with outliers and found that the
 outliers are often placed into the same group because there is a structure that
@@ -808,7 +822,7 @@ types of chains, the duplex, hairpin and NMR structure contained the same
 sequence and thus were joined on the basis of sequence similarity. This was
 resolved for NMR structures with the usage of discrepancy for them as well.
 However, it remains an issue for low resolution X-ray and crystallography
-experiments. 
+experiments.
 
 \section{Conclusions and future extensions}
 
@@ -825,7 +839,7 @@ geometric similarity, discrepancy, is flawed for this task. It is too sensitive
 to poor modeling in structures. Often the issue is the bases in nucleotides have
 unusual orientations. If this was replaced with a different method that is less
 sensitive to base orientation it may be possible  to compute all geometric
-comparisons. 
+comparisons.
 
 In addition, while evaluating the methodology it has been very useful to compute
 a grouping using only sequences and then examine the changes when discrepancy is
@@ -837,7 +851,7 @@ our methodology as well as provide information about the linkages, if any
 between groups. For example, there are likely many small groups that differ
 structurally but have the same, or very similar sequences. Such groups may be
 interesting for researchers interested the range of structures a single sequence
-can form. A hierarchy of groupings could make this easier to determine. 
+can form. A hierarchy of groupings could make this easier to determine.
 
 Finally, small structures may well require a different set of rules for
 comparison grouping. The work here was guided strongly by our experience with
@@ -848,4 +862,4 @@ currently only use one chain when making geometric comparisons. This works well
 with large molecules buy may not be accurate for small synthetic compounds. In
 addition, it may be better to allow small chains to join through non-canonical
 pairs as well as canonical cWW pairs. Doing so could allow us to build better
-groups for the poly-A duplex or G-quadruplexes more accurately. 
+groups for the poly-A duplex or G-quadruplexes more accurately.
