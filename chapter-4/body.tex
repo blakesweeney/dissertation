@@ -18,21 +18,21 @@ summary of is shown in Table~\ref{tab:mol-dist}.
       Number of Integrated Functional Elements in the class &
       Percent of all RNA containing structures in PDB as of Sept 09, 2016 \\
     \midrule
-    \TT{} LSU            & 282  & 4.0 \\
-    \TT{} SSU            & 379  & 5.4 \\
-    \TT{} 5S             & 282  & 4.0 \\
-    \EC{} LSU            & 161  & 2.2 \\
-    \EC{} SSU            & 157  & 2.2 \\
-    \EC{} 5S             & 156  & 2.2 \\
-    \HM{} LSU            & 69   & 0.9 \\
-    \HM{} 5S             & 67   & 0.9 \\
-    \DR{} LSU            & 42   & 0.5 \\
-    \SC{} SSU            & 56   & 0.8 \\
-    \SC{} LSU            & 63   & 0.9 \\
-    Other Ribosomes      &      & \\
+    \TT{} LSU            & 282  & 4.0  \\
+    \TT{} SSU            & 379  & 5.4  \\
+    \TT{} 5S             & 282  & 4.0  \\
+    \EC{} LSU            & 161  & 2.2  \\
+    \EC{} SSU            & 157  & 2.2  \\
+    \EC{} 5S             & 156  & 2.2  \\
+    \HM{} LSU            & 69   & 0.9  \\
+    \HM{} 5S             & 67   & 0.9  \\
+    \DR{} LSU            & 42   & 0.5  \\
+    \SC{} SSU            & 56   & 0.8  \\
+    \SC{} LSU            & 63   & 0.9  \\
+    Other Ribosomes      &      &      \\
     Ribosomal Subtotal   & 1714 & 24.5 \\
     Remaining Structures & 5287 & 75.5 \\
-    Total                & 7001 & 100 \\
+    Total                & 7001 & 100  \\
     \bottomrule
   \end{tabulary}
   \caption{Proportion of solved structures that are from bacterial and yeast
@@ -189,20 +189,21 @@ different representatives were selected by the two methods. Shown in
 Figure~\ref{fig:hm-lsu-rep} is a summary of the representative selection for the
 three methods discussed here. The upper panel shows the previous method where we
 can see the structure that is at the top of stack of very similar structures is
-selected as the representative. This contrasts with our 1% increase method which
+selected as the representative. This contrasts with our 1\% increase method which
 selects a example with more nucleotides and basepairs but a worse ratio of the
 two. This selection is our desired result.
 
 \begin{figure}
+  % \includegraphics[width=\textwidth]{chapter-4/figs/hm-lsu-rep}
   \caption{Scatter plot of representative selection across three possible
-    methodologies. Shown here is a summary of which IFE’s are selected as the
-    representative for the 3 method discussed here. Each panel indicates a
-    different method, in order from top to bottom, the previous method, a 1%
-    increase method and the any increase method. Cyro-em structures are shown as
-    circles, while X-ray are shown as triangles.  The representative IFE is
-    colored in blue, while the other members of the set are colored red. The
-    upper panel shows the previous method. It is difficult to see but the IFE
-    selected as the representative is the IFE at the top of the stack of IFE’s
+    methodologies for the \HM{} Large Ribosomal Subunit. Shown here is a summary
+    of which IFE’s are selected as the representative for the 3 method discussed
+    here. Each panel indicates a different method, in order from top to bottom,
+    the previous method, the Dual 1\% increase method and the any increase
+    method. The representative IFE is colored in blue, while the other members
+    of the set are colored red. The upper panel shows the previous method. It is
+    difficult to see but the IFE selected as the representative is the IFE at
+    the top of the stack of IFE’s
   in the upper right.}
   \label{fig:hm-lsu-rep}
 \end{figure}
@@ -214,10 +215,12 @@ see that all three methods select an IFE with resolution 2.4{\AA}. This is
 consistent with our goals for the methods.
 
 \begin{figure}
-  \caption{Distribution of resolutions for IFE’s in NR\_all\_65634.1 with the
-    resolution of the representative indicated. This histogram shows the
-    resolution distribution of all IFE’s in the class. The red line indicates
-  the resolution of the representative chosen by all 3 methods.}
+  % \includegraphics[width=\linewidth]{chapter-4/figs/hml-lsu-res}
+  \caption{Distribution of resolutions for \HM{} Large Ribosomal subunit IFE’s
+    in NR\_all\_65634.1 with the resolution of the representative indicated.
+    This histogram shows the resolution distribution of all IFE’s in the
+    class. The red line indicates the resolution of the representative chosen by
+  all 3 methods.}
   \label{fig:hm-rep-res-dist}
 \end{figure}
 
@@ -282,7 +285,7 @@ summary of this data is shown in Table~\ref{tab:res-diff-summary}.
   \begin{tabulary}{\linewidth}{LRRR}
     \toprule
     Method &  Representatives with lowest resolution &  Representatives with
-    resolution within 1{\AA}  & Representatives with resolution > 1{\AA} \\
+    resolution within 1{\AA}  & Representatives with resolution \textgreater 1{\AA} \\
     \midrule
     Previous          & 1506 (93\%) & 86 (5.3\%) & 14 (0.8\%) \\
     Dual Increase     & 1494 (93\%) & 97 (6.0\%) & 15 (0.9\%) \\
@@ -323,57 +326,83 @@ difference of 14\AA. Examining this data shows that there are 19 groups with
 resolution differences. Shown in Table~\ref{rep-res-diff-details} are the
 summary of those groups.
 
-\begin{table}
+\begin{landscape}
+  \begin{table}
   \begin{tabular}{llrrr}
     \toprule
-    Group &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase &  Dual 1\% Increase \\
+               % &                             & \multicolumn{3}{c}{Method} \\
+    % \cmidrule(r){3-5}
+    Group Name &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase &  Dual 1\% Increase \\
     \midrule
-    NR\_all\_00304.1 &  9.0  & \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  &
-                               \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  &
-                               \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  \\
-    NR\_all\_13601.2 &  5.0  & \ife{4KZZ}{1}{j} (7.03{\AA}) [2.03{\AA}] &
-                               \ife{4KZZ}{1}{j$ (7.03{\AA}) [2.03{\AA}] \\
-    NR\_all\_14586.1 &  3.5  & \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA}) [1.5{\AA}] &
-                               \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA}) [1.5{\AA}] \\
-    NR\_all\_16577.1 &  6.9  & \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] &
-                               \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] &
-                               \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] \\
-    NR\_all\_18070.1 &  2.4  & \ife{4TUD}{1}{QV} (3.6{\AA}) [1.2{\AA}] \\
-    NR\_all\_33599.2 &  2.6  & \ife{4V5M}{1}{AV} (7.8{\AA}) [5.2{\AA}] \\
-    NR\_all\_33884.1 &  3.45 & \ife{4KZY}{1}{i} (7.01{\AA}) [3.56{\AA}] &
-                               \ife{4KZY}{1}{i} (7.01{\AA}) [3.56{\AA}] \\
-    NR\_all\_37074.2 &  2.1  & \ife{4V6Z}{1}{BB} (12{\AA}) [9.9{\AA}]   &
-                               \ife{5J88}{1}{DB} (3.32{\AA}) [1.22{\AA}] \\
-    NR\_all\_39327.1 &  3.8  & \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}]   &     
-                               \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}] &
-                               \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}] \\
-    NR\_all\_39428.1 &  2.6  & \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] &
-                               \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] &
-                               \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] \\
-    NR\_all\_44399.2 &  2.96 & \ife{4V70}{1}{A1} (17{\AA}) [14.04{\AA}] \\
-    NR\_all\_48374.2 &  2.1  & \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] &
-                               \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] &
-                               \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] \\
-    NR\_all\_55323.1 &  3.71 & \ife{4V68}{1}{AY} (6.4{\AA}) [2.69{\AA}] \\
-    NR\_all\_59913.2 &  2.1  & \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] &
-                               \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] &
-                               \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] \\
-    NR\_all\_62116.2 &  2.1  & \ife{4V54}{1}{DB} (3.3{\AA}) [1.2{\AA}] \\
-    NR\_all\_68375.1 &  8.3  & \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] &
-                               \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] &
-                               \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] \\
-    NR\_all\_87281.1 &  3.9  & \ife{3J3V}{1}{B} (13.3{\AA}) [9.4{\AA}] \\
-    NR\_all\_95973.1 &  3.8  & \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] &
-                               \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] &
-                               \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] \\
-    NR\_all\_97012.1 &  2.0  & \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] &
-                               \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] &
-                               \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] \\
+    NR\_all\_00304.1 &  9.0  & \ife{3J0D}{1}{A} (11.1{\AA})   &
+                               \ife{3J0D}{1}{A} (11.1{\AA})   &
+                               \ife{3J0D}{1}{A} (11.1{\AA})   \\
+    NR\_all\_13601.2 &  5.0  & | & 
+                               \ife{4KZZ}{1}{j} (7.03{\AA})  &
+                               \ife{4KZZ}{1}{j} (7.03{\AA})  \\
+   NR\_all\_14586.1 &  3.5  & | & 
+                              \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA})  &
+                              \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA}) \\
+    NR\_all\_16577.1 &  6.9  & \ife{3J0O}{1}{V} (9{\AA})  &
+                               \ife{3J0O}{1}{V} (9{\AA})  &
+                               \ife{3J0O}{1}{V} (9{\AA})  \\
+    NR\_all\_18070.1 &  2.4  & | & 
+                               \ife{4TUD}{1}{QV} (3.6{\AA}) & 
+                               | \\
+    NR\_all\_33599.2 &  2.6  & \ife{4V5M}{1}{AV} (7.8{\AA}) &
+                               | &
+                               | \\
+    NR\_all\_33884.1 &  3.45 & | & 
+                               \ife{4KZY}{1}{i} (7.01{\AA})  &
+                               \ife{4KZY}{1}{i} (7.01{\AA}) \\
+    NR\_all\_37074.2 &  2.1  & \ife{4V6Z}{1}{BB} (12{\AA})   &
+                               \ife{5J88}{1}{DB} (3.32{\AA}) &
+                               | \\
+    NR\_all\_39327.1 &  3.8  & \ife{4V6M}{1}{AV} (7.1{\AA})  &
+                               \ife{4V6M}{1}{AV} (7.1{\AA})  &
+                               \ife{4V6M}{1}{AV} (7.1{\AA})  \\
+    NR\_all\_39428.1 &  2.6  & \ife{4V8U}{1}{CV} (3.7{\AA})  &
+                               \ife{4V8U}{1}{CV} (3.7{\AA})  &
+                               \ife{4V8U}{1}{CV} (3.7{\AA})  \\
+    NR\_all\_44399.2 &  2.96 & \ife{4V70}{1}{A1} (17{\AA}) & 
+                               | & 
+                               | \\
+    NR\_all\_48374.2 &  2.1  & \ife{1C04}{1}{F} (5{\AA})  &
+                               \ife{1C04}{1}{F} (5{\AA})  &
+                               \ife{1C04}{1}{F} (5{\AA})  \\
+    NR\_all\_55323.1 &  3.71 & \ife{4V68}{1}{AY} (6.4{\AA}) &
+                               | & 
+                               | \\
+    NR\_all\_59913.2 &  2.1  & \ife{4V4Q}{1}{CA} (3.46{\AA})  &
+                               \ife{4V4Q}{1}{CA} (3.46{\AA})  &
+                               \ife{4V4Q}{1}{CA} (3.46{\AA})  \\
+    NR\_all\_62116.2 &  2.1  & \ife{4V54}{1}{DB} (3.3{\AA})   &
+                               | & 
+                               | \\
+    NR\_all\_68375.1 &  8.3  & \ife{3IZ4}{1}{A} (13.6{\AA})  &
+                               \ife{3IZ4}{1}{A} (13.6{\AA})  &
+                               \ife{3IZ4}{1}{A} (13.6{\AA})  \\
+    NR\_all\_87281.1 &  3.9  & | & 
+                               \ife{3J3V}{1}{B} (13.3{\AA})   &
+                               | \\
+    NR\_all\_95973.1 &  3.8  & \ife{4D61}{1}{j} (9{\AA})  &
+                               \ife{4D61}{1}{j} (9{\AA})  &
+                               \ife{4D61}{1}{j} (9{\AA})  \\
+    NR\_all\_97012.1 &  2.0  & \ife{4V49}{1}{AW} (8.7{\AA})  &
+                               \ife{4V49}{1}{AW} (8.7{\AA})  &
+                               \ife{4V49}{1}{AW} (8.7{\AA})  \\
     \bottomrule
   \end{tabular}
-  \caption{}
+  \caption{Listing of all groups that do not use the structure with the lowest
+  representative for all representative selection methods. This table shows all
+groups where at least one method does not use a structure with the lowest
+resolution for one method. The ``|'' indicates that the method selects a
+structure with the given resolution. The minimum resolution for the group is
+shown along with the group id. For each method column the IFE selected is shown
+and the resolution for the IFE is shown in parenthesis. }
   \label{tab:rep-res-diff-details}
-\end{table}
+  \end{table}
+\end{landscape}
 
 The new method will not select a cryo-EM structure if an X-ray structure is
 available, however, new cryo-EM structure are being solved with increasingly
@@ -396,16 +425,63 @@ differences. However, the Dual 1\% method does show a smaller resolution
 difference. Shown in Table~\ref{tab:xray-only-outliers} are the groups with large
 difference between the representative resolution and minimum resolution.
 
+\begin{landscape}
 \begin{table}
   \begin{tabular}{llrrr}
     \toprule
-    Group &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase  & Dual 1\% Increase \\
+    Group &  Minimum Resolution ({\AA}) & Previous &  Dual Increase  & Dual 1\% Increase \\
     \midrule
+    NR\_all\_18070.1 & \ife{4W2F}{1}{AX} (2.4{\AA}) & 
+                       | & 
+                       \ife{4TUD}{1}{QV} (3.6{\AA}) & 
+                       | \\
+    NR\_all\_33599.2 & \ife{5J8B}{1}{x} (2.6{\AA}) & 
+                       \ife{4V5M}{1}{AV} (7.8{\AA}) & 
+                       | &
+                       | \\
+    NR\_all\_37074.2 & \ife{4YBB}{1}{DB} (2.1{\AA}) & 
+                       \ife{4V6Z}{1}{BB} (12{\AA}) & 
+                       | &
+                       | \\ 
+    NR\_all\_39428.1 & \ife{5J8B}{1}{w} (2.6{\AA}) & 
+                       \ife{4V8U}{1}{CV} (3.7{\AA}) & 
+                       \ife{4V8U}{1}{CV} (3.7{\AA}) & 
+                       \ife{4V8U}{1}{CV} (3.7{\AA})  \\
+    NR\_all\_44399.2 & \ife{5IBB}{1}{3L} (2.96{\AA}) & 
+                       \ife{4V70}{1}{A1} (17{\AA}) &
+                       | & 
+                       | \\
+    NR\_all\_48374.2 & \ife{430D}{1}{A} (2.1{\AA}) & 
+                       \ife{1C04}{1}{F} (5{\AA}) & 
+                       \ife{1C04}{1}{F} (5{\AA}) & 
+                       \ife{1C04}{1}{F} (5{\AA})  \\
+    NR\_all\_55323.1 & \ife{4V4I}{1}{0} (3.71{\AA}) & 
+                       \ife{4V68}{1}{AY} (6.4{\AA})  & 
+                       | & 
+                       | \\
+    NR\_all\_59913.2 & \ife{4YBB}{1}{AA} (2.1{\AA}) &
+                       \ife{4V4Q}{1}{CA} (3.46{\AA}) & 
+                       \ife{4V4Q}{1}{CA} (3.46{\AA}) &
+                       \ife{4V4Q}{1}{CA} (3.46{\AA}) \\
+    NR\_all\_62116.2 & \ife{4YBB}{1}{DA} (2.1{\AA}) &
+                       | &
+                       | &
+                       | \\
+   NR\_all\_97012.1 & \ife{1EVV}{1}{A} (2{\AA}) &
+                      \ife{1EVV}{1}{A} (2{\AA}) &
+                      \ife{1EVV}{1}{A} (2{\AA}) &
+                      \ife{1EVV}{1}{A} (2{\AA}) \\
     \bottomrule
   \end{tabular}
-  \caption{}
+  \caption{Details of X-ray only groups without that do not have a
+  representative with the minimum resolution. This table lists all groups where
+at least one of the methods selects a representative that does not have the
+highest resolution among the available structures. This table only contains
+groups that contain only X-ray only. The ``|'' indicates that the method does
+pick a structure with the minimum resolution.}
   \label{tab:xray-only-outliers}
 \end{table}
+\end{landscape}
 
 From this table we can see that the Dual 1\% increase has the fewest differences.
 In addition, the times it does have issues are the same as the previous method,
