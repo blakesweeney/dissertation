@@ -12,32 +12,33 @@ represented, as is currently the case with tRNA and ribosome structures. A
 summary of is shown in Table~\ref{tab:mol-dist}.
 
 \begin{table}
-  \begin{tabular}{lrr}
+  \begin{tabulary}{\linewidth}{LRR}
     \toprule
-    Molecule &  Number of Integrated Functional Elements in the chass &  Percent
-    of all RNA containing structures in PDB as of Sept 09, 2016 \\
+    Molecule &
+      Number of Integrated Functional Elements in the class &
+      Percent of all RNA containing structures in PDB as of Sept 09, 2016 \\
     \midrule
-    Thermus thermophilus LSU     & 282  & 4.0 \\
-    Thermus thermophilus SSU     & 379  & 5.4 \\
-    Thermus thermophilus 5S      & 282  & 4.0 \\
-    Escherichia coli LSU         & 161  & 2.2 \\
-    Escherichia coli SSU         & 157  & 2.2 \\
-    Escherichia coli 5S          & 156  & 2.2 \\
-    Haloarcula marismortui LSU   & 69   & 0.9 \\
-    Haloarcula marismortui 5S    & 67   & 0.9 \\
-    Deinococcus radiodurans LSU  & 42   & 0.5 \\
-    Saccharomyces cerevisiae SSU & 56   & 0.8 \\
-    Saccharomyces cerevisiae LSU & 63   & 0.9 \\
-    Other Ribosomes              &      & \\
-    Ribosomal Subtotal           & 1714 & 24.5 \\
-    Remaining Structures         & 5287 & 75.5 \\
-    Total                        & 7001 & 100 \\
+    \TT{} LSU            & 282  & 4.0 \\
+    \TT{} SSU            & 379  & 5.4 \\
+    \TT{} 5S             & 282  & 4.0 \\
+    \EC{} LSU            & 161  & 2.2 \\
+    \EC{} SSU            & 157  & 2.2 \\
+    \EC{} 5S             & 156  & 2.2 \\
+    \HM{} LSU            & 69   & 0.9 \\
+    \HM{} 5S             & 67   & 0.9 \\
+    \DR{} LSU            & 42   & 0.5 \\
+    \SC{} SSU            & 56   & 0.8 \\
+    \SC{} LSU            & 63   & 0.9 \\
+    Other Ribosomes      &      & \\
+    Ribosomal Subtotal   & 1714 & 24.5 \\
+    Remaining Structures & 5287 & 75.5 \\
+    Total                & 7001 & 100 \\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
   \caption{Proportion of solved structures that are from bacterial and yeast
     ribosomes. This table shows data from the 2.92 release of NR set at the
-    ‘all’ resolution, availabe at:
-    url{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.92/all}. This dataset contains
+    'all' resolution, availabe at:
+    \url{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.92/all}. This dataset contains
     all structures available as of Sept 09, 2016. This table presents the
     fraction of the total structural database that comprises structures from all
     sources ribosomes. In total they make up 20\% of the solved crystal
@@ -45,7 +46,7 @@ summary of is shown in Table~\ref{tab:mol-dist}.
   \label{tab:mol-dist}
 \end{table}
 
-As seen in the table, E. coli and T. thermophilus ribosomes alone make up 20% of
+As seen in the table, \EC{} and T. thermophilus ribosomes alone make up 20% of
 the entire dataset and all ribosomal total NNN. For many statistical analyses of
 RNA structure, it is desirable to identify one high quality representative
 structure \cite{Leontis2012b}. For example, such a reduced redundancy dataset
@@ -55,22 +56,23 @@ files, called the non-redundant (NR) set was developed. We have updated the
 method to take advantage of the new mmCIF data and fix limitations of the
 previous method. These were posted on a weekly basis from February 5, 2011 to
 December 5, 2014 on the BGSU RNA site and made available for searching on NDB
-(\url{http://ndbserver.rutgers.edu/}). 
+(\url{http://ndbserver.rutgers.edu/}).
 
 \section{Requirements for representative set}
 
 The set of representative structures has a variety of uses in structural
 bioinformatics applications. Most notably it supports population and regular
-updating of the RNA 3D Motif Atlas (URL). The RNA 3D Motif Atlas is a clustering
-of all high quality loops extracted from all structures in the current
-Representative Set of structures. For this reason it is desirable to avoid
-frequent changes in the representative structure due to insignificant increments
-in the selection criteria. If we allow frequent insignificant changes in the
-representative in structures selected for the Representative set, these changes
-cause large changes in the RNA 3D Motif Atlas. This makes the resource appear
-more unstable than it actually is and so we aim to avoid changes due to minor
-improvements in structures. Thus the goals are of the improvements described in
-this chapter are:
+updating of the RNA 3D Motif Atlas \cite{http://rna.bgsu.edu/rna3dhub/motifs}.
+The RNA 3D Motif Atlas is a clustering of all high quality loops extracted from
+all structures in the current Representative Set of structures. For this reason
+it is desirable to avoid frequent changes in the representative structure due to
+insignificant increments in the selection criteria. If we allow frequent
+insignificant changes in the representative in structures selected for the
+Representative set, these changes cause large changes in the RNA 3D Motif Atlas.
+This makes the resource appear more unstable than it actually is and so we aim
+to avoid changes due to minor improvements in structures. Thus the goals are of
+the improvements described in this chapter are:
+
 \begin{enumerate}
   \item The representative set should reflect observed variation in sequence,
     structure, and biological variation in the set of solved 3D structures
@@ -100,20 +102,21 @@ This dissertation describes new methodology that represents significant
 improvements over the previously developed methodologies of the BGSU RNA
 resource. In the previous method, the Representative Structure from each
 Equivalence Class was selected based solely upon the number of annotated base
-pairs per nucleotide, discussed in detail in CITE. 
+pairs per nucleotide, discussed in detail in \cite{Leontis2012b}.
+
 As the goal is to use only high quality structures the procedure uses X-ray
 structures as the representative, if possible. Some structures, such as that of
 the the mouse ribosome (3J7Q), have only been solved using cryo-electron
-microscopy (“cryo-EM”) and in these cases, and only these cases, representative
-selected for the equivalence set is necessarily a cryo-EM structure. Only X-Ray
-structures are used when available because methods for assessing the modeling
-quality of cryo-EM structures, comparable to RSR-Z scores for X-ray
-crystallography are still under development and are not yet available available
-(Berman, personal communication). Having object assessment data, like RSR-Z
-scores available is essential for downstream applications such as selecting
-reliable loops for inclusion in the Motif Atlas. As soon as reliability data
-comparable to RSRZ scores are available for cryo-EM structures, these structures
-will be treated on an equivalent footing as X-ray.
+microscopy (``cryo-EM'') and in these cases, and only these cases,
+representative selected for the equivalence set is necessarily a cryo-EM
+structure. Only X-Ray structures are used when available because methods for
+assessing the modeling quality of cryo-EM structures, comparable to RSR-Z scores
+for X-ray crystallography are still under development and are not yet available
+available (Berman, personal communication). Having object assessment data, like
+RSR-Z scores available is essential for downstream applications such as
+selecting reliable loops for inclusion in the Motif Atlas. As soon as
+reliability data comparable to RSRZ scores are available for cryo-EM structures,
+these structures will be treated on an equivalent footing as X-ray.
 
 The procedure for each possible structure in:
 
@@ -121,7 +124,7 @@ The procedure for each possible structure in:
   \item Select the structure with the most number of annotated basepairs per
     nucleotide.
 
-  \item Find a structures with at least 1% more bases and base pairs and select
+  \item Find a structures with at least 1\% more bases and base pairs and select
     it as the current representative
 
   \item Repeat step 2 until there no structure has more base pairs and bases.
@@ -147,10 +150,10 @@ include this second criterion.
 Finally, the new method requires new representatives to show a significant
 increase in both the number of nucleotides and the BP/NT. By doing so, we avoid
 changing representatives upon insignificant changes in overall quality. Thus
-stabilizing the Representative Set overtime. This 1% increase is an empirically
+stabilizing the Representative Set overtime. This 1\% increase is an empirically
 determined cutoff that may be adjusted in the future. The new method of
 representative selection described in this dissertation will be referred to
-henceforth as the ‘dual 1\% method’.
+henceforth as the ``dual 1\% method''.
 
 To describe the overall logic of the logic I have added a figure of the
 pseudocode in Figure~\ref{fig:pseudocode-representatives}. This figure shows the
@@ -207,7 +210,7 @@ two. This selection is our desired result.
 We then evaluated the selection of representative in context of the resolution
 distribution. The ideal selection has the highest resolution of any structure in
 the class. Show in Figure~\ref{fig:hm-rep-res-dist} is a summary. In it we can
-see that all three methods select an IFE with resolution 2.4Å. This is
+see that all three methods select an IFE with resolution 2.4{\AA}. This is
 consistent with our goals for the methods.
 
 \begin{figure}
@@ -219,16 +222,16 @@ consistent with our goals for the methods.
 \end{figure}
 
 We further evaluated the method described here by examining the selection of
-representatives for the E. coli Large and Small Subunits as well as the Thermus
+representatives for the \EC{} Large and Small Subunits as well as the Thermus
 thermophilus Large and Small Ribosomal Subunits, shown in
 Figure~\ref{fig:ec-lsu-rep}, Figure~\ref{fig:ec-ssu-rep},
 Figure~\ref{fig:tt-lsu-rep} and Figure~\ref{fig:tt-ssu-rep} respectively. As we
-can see in these figures, only the E. coli LSU T. thermophilus SSU differ in
-selection of representatives. 
+can see in these figures, only the \EC{} LSU T. thermophilus SSU differ in
+selection of representatives.
 
 \begin{figure}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
-    for selected E. coli Large Subunits using the three methods discussed here.
+    for selected \EC{} Large Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
     members are shown as small red dots. The plot has been truncated to show
     only the structures with at least 2840 nucleotides and 500 basepairs for
@@ -238,7 +241,7 @@ selection of representatives.
 
 \begin{figure}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
-    for selected E. coli Small Subunits using the three methods discussed here.
+    for selected \EC{} Small Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
     members are shown as small red dots. The plot has been truncated to show
     only the structures with at least 1400 nucleotides and 300 basepairs for
@@ -276,38 +279,39 @@ all groups and the structure in the group with the smallest resolution. A
 summary of this data is shown in Table~\ref{tab:res-diff-summary}.
 
 \begin{table}
-  \begin{tabular}
+  \begin{tabulary}{\linewidth}{LRRR}
     \toprule
     Method &  Representatives with lowest resolution &  Representatives with
-    resolution within 1Å  & Representatives with resolution > 1Å //
+    resolution within 1{\AA}  & Representatives with resolution > 1{\AA} \\
     \midrule
     Previous          & 1506 (93\%) & 86 (5.3\%) & 14 (0.8\%) \\
     Dual Increase     & 1494 (93\%) & 97 (6.0\%) & 15 (0.9\%) \\
     Dual 1\% Increase & 1506 (93\%) & 88 (5.4\%) & 12 (0.7\%) \\
     \bottomrule
-    \caption{A summary of the differences between the resolution of the representatives as
-      compared to the member of the group with the lowest resolution.}
-    \label{tab:res-diff-summary}
-  \end{tabular}
+  \end{tabulary}
+  \caption{A summary of the differences between the resolution of the
+  representatives as compared to the member of the group with the lowest
+  resolution.}
+  \label{tab:res-diff-summary}
 \end{table}
 
 From this we can see that nearly all groups use a structure with the lowest
 resolution, as we desired. However, roughly 5\% of all groups have a
-representative with resolution with 1Å of the minimum. This leaves a very small
+representative with resolution with 1{\AA} of the minimum. This leaves a very small
 percent, less than 1\%, of all groups that use a representative with resolution
-greater than 1Å from the minimum. Shown in Figure~\ref{fig:res-diff-histogram}
+greater than 1{\AA} from the minimum. Shown in Figure~\ref{fig:res-diff-histogram}
 is a histogram that displays the differences for all groups where the difference
-is greater than 0Å.
+is greater than 0{\AA}.
 
 \begin{figure}
   \caption{Histogram of the differences between the resolution of the selected
     representative and the minimum resolution within the group for all 3
     methods. This histogram does not show the groups where the representative
     resolution is the same as the minimum resolution.  The red vertical line
-    indicates the cutoff of 1Å. The numbers to the left of the red box indicate
-    the total number of groups with resolution difference less than 1Å, while
+    indicates the cutoff of 1{\AA}. The numbers to the left of the red box indicate
+    the total number of groups with resolution difference less than 1{\AA}, while
     the number to the right indicates the number of groups with resolution
-  difference greater than 1Å.}
+  difference greater than 1{\AA}.}
   \label{fig:res-diff-histogram}
 \end{figure}
 
@@ -315,34 +319,56 @@ From this figure we can see two things. First, all methods are very similar in
 terms of the number of groups that select representatives with unusually high
 resolution. Secondly, several groups have very large differences between the
 selected representative and the minimum resolution. For example one group has a
-difference of 14Å. Examining this data shows that there are 19 groups with
+difference of 14\AA. Examining this data shows that there are 19 groups with
 resolution differences. Shown in Table~\ref{rep-res-diff-details} are the
 summary of those groups.
 
 \begin{table}
   \begin{tabular}{llrrr}
     \toprule
-    Group &  Minimum Resolution (Å) &  Previous &  Dual Increase &  Dual 1\% Increase //
+    Group &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase &  Dual 1\% Increase \\
     \midrule
-    NR\_all\_00304.1 &  9.0  & 3J0D|1|A (11.1Å) [2.1Å] &  3J0D|1|A (11.1Å) [2.1Å] & 3J0D|1|A (11.1Å) [2.1Å] \\
-    NR\_all\_13601.2 &  5.0  &     4KZZ|1|j (7.03Å) [2.03Å]    4KZZ|1|j (7.03Å) [2.03Å] \\
-    NR\_all\_14586.1 &  3.5  &     4V6X|1|A5+4V6X|1|A8 (5Å) [1.5Å] 4V6X|1|A5+4V6X|1|A8 (5Å) [1.5Å] \\
-    NR\_all\_16577.1 &  6.9  & 3J0O|1|V (9Å) [2.1Å]    3J0O|1|V (9Å) [2.1Å] 3J0O|1|V (9Å) [2.1Å] \\
-    NR\_all\_18070.1 &  2.4  &     4TUD|1|QV (3.6Å) [1.2Å]     \\
-    NR\_all\_33599.2 &  2.6  & 4V5M|1|AV (7.8Å) [5.2Å]         \\
-    NR\_all\_33884.1 &  3.45 &      4KZY|1|i (7.01Å) [3.56Å]    4KZY|1|i (7.01Å) [3.56Å] \\
-    NR\_all\_37074.2 &  2.1  & 4V6Z|1|BB (12Å) [9.9Å]    5J88|1|DB (3.32Å) [1.22Å] \\
-    NR\_all\_39327.1 &  3.8  & 4V6M|1|AV (7.1Å) [3.3Å]    4V6M|1|AV (7.1Å) [3.3Å] 4V6M|1|AV (7.1Å) [3.3Å] \\
-    NR\_all\_39428.1 &  2.6  & 4V8U|1|CV (3.7Å) [1.1Å]    4V8U|1|CV (3.7Å) [1.1Å] 4V8U|1|CV (3.7Å) [1.1Å] \\
-    NR\_all\_44399.2 &  2.96 &  4V70|1|A1 (17Å) [14.04Å]         \\
-    NR\_all\_48374.2 &  2.1  & 1C04|1|F (5Å) [2.9Å]    1C04|1|F (5Å) [2.9Å] 1C04|1|F (5Å) [2.9Å] \\
-    NR\_all\_55323.1 &  3.71 &  4V68|1|AY (6.4Å) [2.69Å]         \\
-    NR\_all\_59913.2 &  2.1  & 4V4Q|1|CA (3.46Å) [1.36Å]    4V4Q|1|CA (3.46Å) [1.36Å]    4V4Q|1|CA (3.46Å) [1.36Å] \\
-    NR\_all\_62116.2 &  2.1  & 4V54|1|DB (3.3Å) [1.2Å]         \\
-    NR\_all\_68375.1 &  8.3  & 3IZ4|1|A (13.6Å) [5.3Å]    3IZ4|1|A (13.6Å) [5.3Å] 3IZ4|1|A (13.6Å) [5.3Å] \\
-    NR\_all\_87281.1 &  3.9  &     3J3V|1|B (13.3Å) [9.4Å]     \\
-    NR\_all\_95973.1 &  3.8  & 4D61|1|j (9Å) [5.2Å]    4D61|1|j (9Å) [5.2Å] 4D61|1|j (9Å) [5.2Å] \\
-    NR\_all\_97012.1 &  2.0  & 4V49|1|AW (8.7Å) [6.7Å]    4V49|1|AW (8.7Å) [6.7Å] 4V49|1|AW (8.7Å) [6.7Å] \\
+    NR\_all\_00304.1 &  9.0  & \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  &
+                               \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  &
+                               \ife{3J0D}{1}{A} (11.1{\AA}) [2.1{\AA}]  \\
+    NR\_all\_13601.2 &  5.0  & \ife{4KZZ}{1}{j} (7.03{\AA}) [2.03{\AA}] &
+                               \ife{4KZZ}{1}{j$ (7.03{\AA}) [2.03{\AA}] \\
+    NR\_all\_14586.1 &  3.5  & \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA}) [1.5{\AA}] &
+                               \ifePair{4V6X}{1}{A5}{4V6X}{1}{A8} (5{\AA}) [1.5{\AA}] \\
+    NR\_all\_16577.1 &  6.9  & \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] &
+                               \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] &
+                               \ife{3J0O}{1}{V} (9{\AA}) [2.1{\AA}] \\
+    NR\_all\_18070.1 &  2.4  & \ife{4TUD}{1}{QV} (3.6{\AA}) [1.2{\AA}] \\
+    NR\_all\_33599.2 &  2.6  & \ife{4V5M}{1}{AV} (7.8{\AA}) [5.2{\AA}] \\
+    NR\_all\_33884.1 &  3.45 & \ife{4KZY}{1}{i} (7.01{\AA}) [3.56{\AA}] &
+                               \ife{4KZY}{1}{i} (7.01{\AA}) [3.56{\AA}] \\
+    NR\_all\_37074.2 &  2.1  & \ife{4V6Z}{1}{BB} (12{\AA}) [9.9{\AA}]   &
+                               \ife{5J88}{1}{DB} (3.32{\AA}) [1.22{\AA}] \\
+    NR\_all\_39327.1 &  3.8  & \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}]   &     
+                               \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}] &
+                               \ife{4V6M}{1}{AV} (7.1{\AA}) [3.3{\AA}] \\
+    NR\_all\_39428.1 &  2.6  & \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] &
+                               \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] &
+                               \ife{4V8U}{1}{CV} (3.7{\AA}) [1.1{\AA}] \\
+    NR\_all\_44399.2 &  2.96 & \ife{4V70}{1}{A1} (17{\AA}) [14.04{\AA}] \\
+    NR\_all\_48374.2 &  2.1  & \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] &
+                               \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] &
+                               \ife{1C04}{1}{F} (5{\AA}) [2.9{\AA}] \\
+    NR\_all\_55323.1 &  3.71 & \ife{4V68}{1}{AY} (6.4{\AA}) [2.69{\AA}] \\
+    NR\_all\_59913.2 &  2.1  & \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] &
+                               \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] &
+                               \ife{4V4Q}{1}{CA} (3.46{\AA}) [1.36{\AA}] \\
+    NR\_all\_62116.2 &  2.1  & \ife{4V54}{1}{DB} (3.3{\AA}) [1.2{\AA}] \\
+    NR\_all\_68375.1 &  8.3  & \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] &
+                               \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] &
+                               \ife{3IZ4}{1}{A} (13.6{\AA}) [5.3{\AA}] \\
+    NR\_all\_87281.1 &  3.9  & \ife{3J3V}{1}{B} (13.3{\AA}) [9.4{\AA}] \\
+    NR\_all\_95973.1 &  3.8  & \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] &
+                               \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] &
+                               \ife{4D61}{1}{j} (9{\AA}) [5.2{\AA}] \\
+    NR\_all\_97012.1 &  2.0  & \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] &
+                               \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] &
+                               \ife{4V49}{1}{AW} (8.7{\AA}) [6.7{\AA}] \\
     \bottomrule
   \end{tabular}
   \caption{}
@@ -364,7 +390,7 @@ Figure~\ref{fig:xray-only-diff} is this figure.
 \end{figure}
 
 In this figure we can see that there are very few groups have resolution
-difference greater than 1Å for all methods. As with the previous analysis, all
+difference greater than 1\AA{} for all methods. As with the previous analysis, all
 methods perform similarly in terms of the number of groups with large
 differences. However, the Dual 1\% method does show a smaller resolution
 difference. Shown in Table~\ref{tab:xray-only-outliers} are the groups with large
@@ -373,7 +399,7 @@ difference between the representative resolution and minimum resolution.
 \begin{table}
   \begin{tabular}{llrrr}
     \toprule
-    Group &  Minimum Resolution (Å) &  Previous &  Dual Increase  & Dual 1\% Increase \\
+    Group &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase  & Dual 1\% Increase \\
     \midrule
     \bottomrule
   \end{tabular}
@@ -381,31 +407,31 @@ difference between the representative resolution and minimum resolution.
   \label{tab:xray-only-outliers}
 \end{table}
 
-From this table we can see that the Dual 1% increase has the fewest differences.
+From this table we can see that the Dual 1\% increase has the fewest differences.
 In addition, the times it does have issues are the same as the previous method,
-indicating this method is not making new mistakes. 
+indicating this method is not making new mistakes.
 
-Overall, I note that the new method, Dual 1% Increase, almost always, greater
-than 90% of the time, selects a representative that has a resolution close to
+Overall, I note that the new method, Dual 1\% Increase, almost always, greater
+than 90\% of the time, selects a representative that has a resolution close to
 the best nominal resolution in the group. This is desirable because higher
 resolution generally means a better structure. However, there are very few cases
-where this does not occur. The new method performs better than the previous
+w’here this does not occur. The new method performs better than the previous
 version as there are fewer of these cases and the difference in resolution is
 smaller. Many of these cases appear to be due to the group containing both
 cryo-em and x-ray structures. The new method, by construction, will always
 prefer X-ray structures, even when the nominally higher resolution is a cryo-EM
-structure. 
+structure.
 
 \subsubsection{Independent measures of representative selection}
 
-PDB provides quality reports for all structures (CITE). These quality reports
-use a variety of metrics that were suggested by the X-ray validation task force
-(CITE). Here I evaluate our selection on the basis of data from these quality
-reports. Shown in Figure~\ref{fig:ec-lsu-report} is the quality report for the
-representative selected by the dual 1\% increase method as compared to that of
-the previous method. From this figure we can see that the dual 1\% increase
-method selects structures with fewer RSRZ outliers and similar RNA backbone
-scores, however, all other metrics are worse.
+PDB provides quality reports for all structures \cite{Gore2012}. These quality
+reports use a variety of metrics that were suggested by the X-ray validation
+task force \cite{Gore2012}. Here I evaluate our selection on the basis of data
+from these quality reports. Shown in Figure~\ref{fig:ec-lsu-report} is the
+quality report for the representative selected by the dual 1\% increase method
+as compared to that of the previous method. From this figure we can see that the
+dual 1\% increase method selects structures with fewer RSRZ outliers and similar
+RNA backbone scores, however, all other metrics are worse.
 
 \begin{figure}
   \caption{Screenshots of the summaries of quality reports for 4V54 (left), the
@@ -418,7 +444,7 @@ scores, however, all other metrics are worse.
 The same data is shown for the Thermus thermophilus large subunit group in
 Figure~\ref{tt-lsu-report}. In this case we see that both structures have very
 similar metrics overall. The previous method does select a structure, 5HCQ, with
-fewer RSRZ outliers. 
+fewer RSRZ outliers.
 
 \begin{figure}
   \caption{Screenshots of the summaries of quality reports for 5FDU (left), the
@@ -429,7 +455,7 @@ fewer RSRZ outliers.
 \end{figure}
 
 These figures indicates that while the dual 1\% increase method does not use the
-quality metrics, it does select a good structure. 
+quality metrics, it does select a good structure.
 
 \subsection{Stability of the Representative Set}
 
@@ -446,28 +472,32 @@ methods are comparable in stability, as they all end near 25 total changes. In
 general both the 1\% increase and the previous method are more stable, show fewer
 changes, than the any increase method. For most of the plot our current method
 shows as many or fewer changes than the previous, indicating it is slightly more
-stable. 
+stable.
 
 \begin{figure}
   \caption{A cumulative distribution of the total number of changes for all
     three methods. This plot is a cumulative sum of the total number changes for
-    all classes at the ‘all’ resolution cutoff which exist in all of the 90
-    releases used in the analysis.}
+    all classes at the ``all'' resolution cutoff which exist in all of the 90
+  releases used in the analysis.}
   \label{fig:rep-changes}
 \end{figure}
 
 We examined the number of total number of changes for each class in the dataset.
 As shown in Table~\ref{tab:rep-changes-count} most classes that exist in all the
 releases show no changes. Of those that show changes the majority change only 1
-time. 
+time.
 
 \begin{table}
   \begin{tabular}{lrrrrr}
+    \toprule
                         & \multicolumn{5}{c}{Number of Changes} \\
+    % \cmidrule{r}{2-6}
     Method              & 0    & 1  &  2 &  3 &  4 \\
+    \midrule
     Previous Method     & 1528 & 19 &  0 &  2 &  0 \\
     Any Increase Method & 1530 & 17 &  0 &  3 &  0 \\
     1\% Increase Method & 1529 & 16 &  0 &  2 &  1 \\
+    \bottomrule
   \end{tabular}
   \caption{Number of changes for classes that exist from 2.0 to 2.90. This table
     summarize the number of classes that show 0, 1, 2, 3, or 4 changes amongst
@@ -478,7 +508,7 @@ time.
 To see how often classes with more than 1 change alters the representative we
 plotted all classes that show more than one change across these releases as seen
 in Figure~\ref{fig:multi-change}. We see that there are only 3 classes that show
-this behavior: 80570, a 2 nucleotide synthetic RNA, 83717 the E. coli LSU, and
+this behavior: 80570, a 2 nucleotide synthetic RNA, 83717 the \EC{} LSU, and
 97519 the T. t LSU. From this we can see that all methods are generally stable
 for many releases followed by a few very quick changes. This is more
 desirable over a method which changes very frequently. One class, 80570
@@ -487,7 +517,7 @@ added by all methods. This class has few members, 8 in 2.90, and a very
 few nucleotides, leading to minor changes in resolution changing the
 selected representative. Shown in Figure CONSTANT CHANGE are the
 structures of the representative in 2.0 and 2.90. From this we can see
-that the structures are highly similar 
+that the structures are highly similar
 
 \begin{figure}
   \caption{This figure shows the rate of changes in for each class that changes
