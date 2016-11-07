@@ -7,6 +7,7 @@ let
         name = "env";
         buildInputs = [
           pkgs.texLiveFull
+          pkgs.ghostscript
         ];
       };
   }
