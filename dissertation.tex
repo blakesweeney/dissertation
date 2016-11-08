@@ -3,23 +3,29 @@
 
 \usepackage{alltt}
 \usepackage{times}
+% \usepackage{gensymb}
 \usepackage{amstext}
 \usepackage{caption}
 \usepackage{booktabs}
-% \usepackage{epstopdf}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{listings}
-% \usepackage{rotating}
+\usepackage{etoolbox}
 \usepackage{tabulary}
+\usepackage{titlesec}
 \usepackage{longtable}
 \usepackage{pdflscape}
 \usepackage{subcaption}
 \usepackage[inline]{enumitem}
+\usepackage[version=4]{mhchem}
+\usepackage[nottoc]{tocbibind}
 \usepackage[longnamesfirst]{natbib}
+
+% \usepackage{epstopdf}
 
 \newcommand{\angstrom}{\textup{\AA}}
 
+\newcommand{\I}[1]{$I_{#1}$}
 \newcommand{\TT}{\emph{Thermus thermophilus}}
 \newcommand{\EC}{\emph{E. coli}}
 \newcommand{\HM}{\emph{Haloarcula marismortui}}
@@ -27,6 +33,11 @@
 \newcommand{\SC}{\emph{Saccharomyces cerevisiae}}
 \newcommand{\ife}[3]{#1$\vert$#2$\vert$#3}
 \newcommand{\ifePair}[6]{\ife{#1}{#2}{#3}+\ife{#4}{#5}{#6}}
+
+\makeatletter
+\patchcmd{\l@chapter}{\bfseries}{}{}{}
+\makeatother
+
 
 \title{TITLE}
 \author{Blake A. Sweeney}
@@ -38,19 +49,19 @@
   Dr. George Bullerjahn \\ \\ 
   Dr. Hans Wildschutte}
 
-% % The first level headings need to be centered, unbolded and 12 point size
-% \titleformat{\chapter}[hang]% NEW
-%     {\fontsize{12}{15}\centering}{\chaptertitlename\ \thechapter}{1em}{}  %\fontsize{<size>}{<line space>}
-% \titlespacing{\chapter}{0pt}{5pt}{5pt}
-% \titleformat{\section}
-%     {\fontsize{12}{15}}{\thesection}{5pt}{}
-% \titlespacing{\section}{0pt}{5pt}{5pt}
-% \titleformat{\subsection}
-%     {\fontsize{12}{15}}{\thesubsection}{5pt}{}
-% \titlespacing{\subsection}{0pt}{5pt}{5pt}
-% \titleformat{\subsubsection}
-%     {\fontsize{12}{15}}{\thesubsection}{5pt}{}
-% \titlespacing{\subsubsection}{0pt}{5pt}{5pt}
+% The first level headings need to be centered, unbolded and 12 point size
+\titleformat{\chapter}[hang]% NEW
+    {\fontsize{12}{15}\centering}{\chaptertitlename\ \thechapter}{1em}{}  %\fontsize{<size>}{<line space>}
+\titlespacing{\chapter}{0pt}{5pt}{5pt}
+\titleformat{\section}
+    {\fontsize{12}{15}}{\thesection}{5pt}{}
+\titlespacing{\section}{0pt}{5pt}{5pt}
+\titleformat{\subsection}
+    {\fontsize{12}{15}}{\thesubsection}{5pt}{}
+\titlespacing{\subsection}{0pt}{5pt}{5pt}
+\titleformat{\subsubsection}
+    {\fontsize{12}{15}}{\thesubsection}{5pt}{}
+\titlespacing{\subsubsection}{0pt}{5pt}{5pt}
 
 \begin{document}
 
@@ -74,9 +85,11 @@
 
 \mainmatter % starts over page counter and gives regular page numbers
 
+\include{chapter-1/body}
 \include{chapter-2/body}
 \include{chapter-3/body}
-\include{chapter-4/body}
+
+% \include{chapter-4/body}
 % \include{chapter-5/body}
 
 \backmatter
