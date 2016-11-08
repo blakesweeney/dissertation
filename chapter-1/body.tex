@@ -331,31 +331,40 @@ between nts distant in the 2D. The farther apart two nts are in the 2D
 structure, the more WC base pairs they ``cross over'' when they interact. By
 definition, all of the WC base pairs that define the 2D structure are ``nested''
 with respect to each of the others.  Two WC pairs (i,k) and (m,n) are nested
-when either i \textgreater m \textgreater n \textgreater k (as shown in Figure
-7A) or m \textgreater i \textgreater k \textgreater n, where i, k, m and n are
-the nt numbers in the linear RNA sequence (given in the 5’ to 3’ direction) and
-i \textgreater k, m \textgreater n. In other words, nested interactions do not
-cross over each other in the 2D structure. On the other hand, if two
-interactions (i,k) and (m,n) are such that i \textgreater m \textgreater k
-\textgreater n, as shown in Figure 7B, or alternatively, m \textgreater i
-\textgreater n \textgreater k, then they ``cross.'' Once a comprehensive set of
-nested WC pairs is identified and assigned to the 2D structure, one can measure
-how ``local'' or ``LR'' any other interaction is, by counting the number of nested
-WC pairs it crosses over. This measure is called the “crossing number,” and the
-larger it is, the more distant the interacting nts are in the 2D structure.  By
-definition, all WC pairs that belong to the 2D structure have crossing number
-equal to zero. An example of an interaction (x,y) that crosses two nested
-Watson-Crick pairs, (i,j) and (m,n), is shown in Figure 7C. The pair (x,y) has
-crossing number equal to two. Whether interactions are labeled local or LR
-depends on the choice of cutoff for the crossing number. Certainly, the cutoff
-should be $\ge 1$, so that interactions with crossing number zero are labeled
-“local.” The smaller the cutoff, the more interactions will be defined as LR,
-but if the cutoff is set too low, interactions between nts that are very close
-to each other in the 2D structure and best considered local, will be labeled LR.
-If the cutoff is set too high, interactions best classified as LR will be
-labeled local. We find that a cutoff equal to four provides a good compromise,
-so we label all interactions with crossing number $\ge 4$ ``LR'' (Zirbel, private
-communication). 
+when either i \textgreater m \textgreater n \textgreater k (as shown in
+Figure~\ref{fig:nesting}A) or m \textgreater i \textgreater k \textgreater n,
+where i, k, m and n are the nt numbers in the linear RNA sequence (given in the
+5’ to 3’ direction) and i \textgreater k, m \textgreater n. In other words,
+nested interactions do not cross over each other in the 2D structure. On the
+other hand, if two interactions (i,k) and (m,n) are such that i \textgreater m
+\textgreater k \textgreater n, as shown in Figure~\ref{fig:nesting}B, or
+alternatively, m \textgreater i \textgreater n \textgreater k, then they
+``cross.'' Once a comprehensive set of nested WC pairs is identified and
+assigned to the 2D structure, one can measure how ``local'' or ``LR'' any other
+interaction is, by counting the number of nested WC pairs it crosses over. This
+measure is called the “crossing number,” and the larger it is, the more distant
+the interacting nts are in the 2D structure.  By definition, all WC pairs that
+belong to the 2D structure have crossing number equal to zero. An example of an
+interaction (x,y) that crosses two nested Watson-Crick pairs, (i,j) and (m,n),
+is shown in Figure~\ref{fig:nesting}C. The pair (x,y) has crossing number equal
+to two. Whether interactions are labeled local or LR depends on the choice of
+cutoff for the crossing number. Certainly, the cutoff should be $\ge 1$, so that
+interactions with crossing number zero are labeled ``local.'' The smaller the
+cutoff, the more interactions will be defined as LR, but if the cutoff is set
+too low, interactions between nts that are very close to each other in the 2D
+structure and best considered local, will be labeled LR. If the cutoff is set
+too high, interactions best classified as LR will be labeled local. We find that
+a cutoff equal to four provides a good compromise, so we label all interactions
+with crossing number $\ge 4$ ``LR'' (Zirbel, private communication). 
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth]{chapter-1/figs/nested}
+  \caption{Definition of Crossing Number for Long-range Interactions. Base pairs
+    (i,k) and (m,n) are nested in (A) but non-nested in (B). Interaction (x,y)
+    in (C) crosses over two nested base pairs, (i,k) and (m,n) and has crossing
+  number equal to 2.}
+  \label{fig:nesting}
+\end{figure}
 
 \subsubsection{Local vs. long-range (LR) interactions in 16S rRNA}
 
@@ -368,16 +377,17 @@ loops (552/2323) and 19\% (448/2323) involve nts in adjacent loops and helices.
 Most such local loop-helix interactions are base stacking (386 of 448 or 86\%),
 indicating that loop nts frequently stack with the WC pairs of adjacent helices.
 Many of these helices appear in the 2D to be very short, comprising only one or
-two base pairs (see Figures 1 and 2). Thus, for the most part, these very short
-helices are not isolated but are stabilized by stacking on bases in the adjacent
-HL, IL or MHJ loops, many of which form non-WC base pairs. In fact, 16S rRNA
-contains 15 local AG cis Watson-Crick (cWW) base pairs, most of which occur at
-the interfaces between loops and helices. Readers should note that cWW pairs
+two base pairs (see Figures \ref{fig:ec-ssu-2d-3d} and
+\ref{fig:ec-helix-lengths}). Thus, for the most part, these very short helices
+are not isolated but are stabilized by stacking on bases in the adjacent HL, IL
+or MHJ loops, many of which form non-WC base pairs. In fact, 16S rRNA contains
+15 local AG cis Watson-Crick (cWW) base pairs, most of which occur at the
+interfaces between loops and helices. Readers should note that cWW pairs
 composed of non-canonical base combinations (i.e. other than AU or GC) are
-considered non-WC pairs. These and other non-WC pairs can be considered to form
-extensions of the secondary structure \cite{Gutell1990}. Local stacking
-interactions also play major roles in loops; they account for 336/552 or 61\% of
-interactions within loops. In fact, 336/1600 (22\%) of all local stacking
+considered non-WC pairs. These and other non-WC pairs can be considered to
+form extensions of the secondary structure \cite{Gutell1990}. Local stacking
+interactions also play major roles in loops; they account for 336/552 or 61\%
+of interactions within loops. In fact, 336/1600 (22\%) of all local stacking
 interactions occur in loops. 
 
 As concerns local pairing and base-phosphate interactions in loops, most of
@@ -449,12 +459,20 @@ intercalation of a bulged base from another loop \cite{Nagaswamy2002}.
 
 Most, if not all, cellular RNAs interact specifically with one or more protein.
 \EC{} 16S rRNA associates with 21 different ribosomal proteins (r-proteins) to
-form the small (30S) ribosomal subunit or “SSU,” and transiently with several
-translation factors. Figure 8 shows a histogram of SSU protein-RNA interactions
-for loop and helix nts in 16S rRNA (PDB file 2AW7). About 60\% of nt-amino acid
-interactions involve loop nts, even though loop nts constitute just 42\% of all
-16S nts, demonstrating once again the important role of loop nts in the
-functional interactions of structured RNA.
+form the small (30S) ribosomal subunit or ``SSU,'' and transiently with several
+translation factors. Figure~\ref{fig:aa-loop-v-nt} shows a histogram of SSU
+protein-RNA interactions for loop and helix nts in 16S rRNA (PDB file 2AW7).
+About 60\% of nt-amino acid interactions involve loop nts, even though loop nts
+constitute just 42\% of all 16S nts, demonstrating once again the important role
+of loop nts in the functional interactions of structured RNA.
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth]{chapter-1/figs/aa-loop-v-nt}
+  \caption{Amino Acid Interactions for Loop vs. Helix Nucleotides. Histogram of
+    number of amino acids within 4Å for nucleotides in loops (blue) vs helices
+  (red) in E. coli 30S ribosome. }
+  \label{fig:aa-loop-v-nt}
+\end{figure}
 
 The 30S particle also interacts with the large (50S) ribosomal subunit, or LSU,
 to form the functional 70S ribosome. Non-covalent interactions or ``bridges''
@@ -555,7 +573,7 @@ involving the embedded WC pairs. Moreover, these pairs tend to be highly
 conserved in sequence, due to the additional interactions. In these cases we
 propose that the WC pair should be assigned to the MHJ loop and not to the 2D
 structure. This was done in constructing Table 1. All the WC pairs marked with
-red lines in Figure 1 are of this type. 
+red lines in Figure~\ref{fig:ec-ssu-2d-3d}  are of this type. 
 
 \subsubsection{GU cWW pairs}
 
@@ -618,12 +636,24 @@ in its equilibrium geometry and quite rigid, due to delocalization of
 pi-electrons. RNA bases are of two types, the pyrimidines (U and C), composed of
 one six-membered aromatic, heterocyclic ring, and the larger purines (A and G),
 composed of fused five- and six-membered rings. Structures of nts with the
-numbering of base positions are shown in Figure 9. Base ring atoms are numbered
+numbering of base positions are shown in Figure~\ref{fig:bases}. Base ring atoms are numbered
 from 1 to 9 in purines and from 1 to 6 in pyrimidines. Exocyclic groups and
 attached hydrogen atoms are numbered according to ring position. Ribose atoms
 are numbered with primes, from 1' to 5', to distinguish their atoms from those
 of the base. 
 
+\begin{figure}[p]
+  \includegraphics[width=\linewidth]{chapter-1/figs/bases}
+  \caption{Structures of RNA nucleotides. RNA nts G, C, A, and U each have three
+    edges along which H-bonding takes place. Hoogsteen, Watson-Crick, and Sugar
+    Edges are marked with dotted lines. Base ring atoms are numbered from 1 to 9
+    for purines and 1 to 6 for pyrimidines. Exocyclic groups and attached
+    hydrogens are numbered according to ring position. H-bond donors are
+  highlighted with blue and H-bond acceptors with red.}
+  \label{fig:bases}
+\end{figure}
+
+The planar RNA bases present three ``edges'' studded with H-bonding donor and 
 acceptor groups along which H-bonds can form with the edges of other bases, as
 well as with phosphate and ribose groups, amino acid side chains or backbone
 atoms of proteins and small molecules. These edges are called the Watson-Crick
@@ -631,11 +661,11 @@ atoms of proteins and small molecules. These edges are called the Watson-Crick
 useful to represent RNA bases, purines as well as pyrimidines, as triangles, or
 more precisely, oblate triangular prisms to describe and classify their diverse
 interactions as observed in RNA 3D structures \cite{Hoehndorf2011}. The base
-edges are indicated for each RNA base in Figure 9. Further support for
+edges are indicated for each RNA base in Figure~\ref{fig:bases}. Further support for
 representing bases as triangles comes from the observation that bases can pair
 edge-to-edge with up to three other bases at the same time, but no more than
 three \cite{AbuAlmakarem2012b}. This explains the observation that no nt in 16S
-forms more than three base pairs (see Figure 5). 
+forms more than three base pairs (see Figure~\ref{fig:ec-bp-loop-v-helix}). 
 
 In triangles representing the RNA bases, two of the vertices coincide with
 exocyclic H-bonding functional groups. The H and W edges meet at the vertex
@@ -647,11 +677,11 @@ base to the C1’ carbon of the ribose defines the third vertex of the triangle,
 where the H and S edges meet. The 2'-OH group, unique to RNA, extends the
 H-bonding capability of the Sugar edge of each nucleotide
 
-The RNA bases are shown in Figure 9 with H-bond donor groups shaded with blue
-``clouds'' and the H-bond acceptor groups shaded with red ``clouds,''
-representing centers of positive and negative charge, respectively. The ribose
-2'-OH group is shaded in purple because it can serve as either H-bond donor or
-H-bond acceptor. 
+The RNA bases are shown in Figure~\ref{fig:bases} with H-bond donor groups
+shaded with blue ``clouds'' and the H-bond acceptor groups shaded with red
+``clouds,'' representing centers of positive and negative charge, respectively.
+The ribose 2'-OH group is shaded in purple because it can serve as either H-bond
+donor or H-bond acceptor. 
 
 \subsection{Ribose sugar rings}
 
@@ -790,13 +820,13 @@ and C or A and U to form canonical Watson-Crick base pairs.
 RNA bases can form many types of base pairs, in addition to the well-known WC
 pairs, because they have three distinct edges available for H-bonding
 \cite{Leontis2001, Leontis2002f}, the Watson-Crick edge (W), the Hoogsteen edge
-(H) and the Sugar edge (S) as shown in Figure 9. The base edges interact with
-each other in all combinations, W with W, W with H, W with S, H with H, H with
-S, and S with S, and in each of two orientations, cis and trans, to create
-twelve geometrically distinct types of base pairs \cite{Leontis2001}. These
-twelve types of base pairing geometries are shown schematically in Table 3 using
-right triangles to represent RNA bases. The Hoogsteen edge corresponds to the
-hypotenuse of each triangle in Table 3 and the marked vertex indicates the
+(H) and the Sugar edge (S) as shown in Figure~\ref{fig:bases}. The base edges
+interact with each other in all combinations, W with W, W with H, W with S, H
+with H, H with S, and S with S, and in each of two orientations, cis and trans,
+to create twelve geometrically distinct types of base pairs \cite{Leontis2001}.
+These twelve types of base pairing geometries are shown schematically in Table 3
+using right triangles to represent RNA bases. The Hoogsteen edge corresponds to
+the hypotenuse of each triangle in Table 3 and the marked vertex indicates the
 location of the ribose sugar. 
 
 Table 3 also shows symbols developed to mark base pairs in extended 2D diagrams.
@@ -820,34 +850,59 @@ with U, etc.) can form geometrically similar base pairs, depending on the
 arrangement of H-bond donor and acceptor groups on each base edge. To help the
 reader explore the base-pairing possibilities of RNA bases, we have prepared
 planar structures of the four nucleotides that can be xeroxed onto colored
-transparencies and cut out individually (see Figures 10 and 11). Each nt is
-reproduced in two distinct orientations, to aid in forming cis as well as trans
-base pairs. Possible base pairs can be explored by aligning base edges in
-various combinations to identify potentially stable H-bonding arrangements. To
-guide the reader in this exercise, lone pair electrons have been included on the
-exocyclic carbonyl oxygen and ring imine nitrogen atoms; these serve as
-electron-rich, H-bond acceptors and are colored red. Readers will note that the
-lone pairs of exocyclic amino groups (GN2, CN6, and AN6) are not shown in these
-diagrams because these electrons are delocalized into the aromatic rings and are
-generally not available as H-bond acceptors, except in special cases
-\cite{Zirbel2009, Sponer2003}.
+transparencies and cut out individually (see Figures \ref{fig:ua} and
+\ref{fig:gc}). Each nt is reproduced in two distinct orientations, to aid in
+forming cis as well as trans base pairs. Possible base pairs can be explored by
+aligning base edges in various combinations to identify potentially stable
+H-bonding arrangements. To guide the reader in this exercise, lone pair
+electrons have been included on the exocyclic carbonyl oxygen and ring imine
+nitrogen atoms; these serve as electron-rich, H-bond acceptors and are colored
+red. Readers will note that the lone pairs of exocyclic amino groups (GN2, CN6,
+and AN6) are not shown in these diagrams because these electrons are delocalized
+into the aromatic rings and are generally not available as H-bond acceptors,
+except in special cases \cite{Zirbel2009, Sponer2003}.
 
-The H-bond acceptor groups are colored red in Figures 10 and 11, to reflect
-their overall negative charge. H-bond donor groups, comprising H-atoms
-covalently bonded to electro-negative oxygen or nitrogen atoms, are colored
-blue, reflecting their overall positive charges. The goal when manipulating the
-colored transparencies is to obtain stable base pairs by juxtaposing H-bond
-donors and acceptors so as to form at least two H-bonds. Each red-colored
-functional group should partly overlap a blue-colored functional group while
-avoiding any red-with-red or blue-with-blue juxtaposition. The 2’-OH (hydroxyl)
-groups are colored purple to indicate that they can serve either as H-bond
-donors or acceptors. Moreover, a single hydroxyl group can simultaneously
+\begin{figure}
+  \includegraphics[width=\linewidth]{chapter-1/figs/ua}
+  \caption{U and A Nucleotides to print on transparencies. U and A nts in two
+    orientations to print on transparencies for making base pairs by juxtaposing
+  H-bonding donor (blue) and acceptor (red) groups. }
+  \label{fig:ua}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{chapter-1/figs/gc}
+  \caption{G and C Nucleotides to print on transparencies. U and A nts in two
+    orientations to print on transparencies for making base pairs by juxtaposing
+  H-bonding donor (blue) and acceptor (red) groups.}
+  \label{fig:gc}
+\end{figure}
+
+The H-bond acceptor groups are colored red in Figures \ref{fig:ua} and
+\ref{fig:gc}, to reflect their overall negative charge. H-bond donor groups,
+comprising H-atoms covalently bonded to electro-negative oxygen or nitrogen
+atoms, are colored blue, reflecting their overall positive charges. The goal
+when manipulating the colored transparencies is to obtain stable base pairs by
+juxtaposing H-bond donors and acceptors so as to form at least two H-bonds. Each
+red-colored functional group should partly overlap a blue-colored functional
+group while avoiding any red-with-red or blue-with-blue juxtaposition. The 2’-OH
+(hydroxyl) groups are colored purple to indicate that they can serve either as
+H-bond donors or acceptors. Moreover, a single hydroxyl group can simultaneously
 interact with an H-bond acceptor and at least one H-bond donor. The –OH bond can
 rotate as needed to optimize H-bonding.
 
+\begin{figure}
+  \includegraphics[width=\linewidth]{chapter-1/figs/basepairs}
+  \caption{Representative basepairs. UA base combination in four different
+    basepairing geometries: A. \emph{cis} Watson-Crick/Watson-Crick (cWW); B. \emph{trans}
+    Watson-Crick/Watson-Crick (tWW); C. \emph{cis} Watson-Crick/Hoogsteen (cWH); and D.
+  \emph{trans} Watson-Crick/ Hoogsteen (cWH).}
+  \label{fig:basepairs}
+\end{figure}
+
 To get started, readers can arrange the transparent cutouts of uracil and
 adenine having WC edges facing in opposite directions to form the canonical AU
-cis Watson-Crick (cWW) base pair. This pair is shown in Figure 12A to illustrate
+cis Watson-Crick (cWW) base pair. This pair is shown in Figure~\ref{fig:basepairs}A to illustrate
 the complementary arrangements of color-coded H-bond donating and accepting
 groups, red opposite blue. The H-atom attached to C2 of adenine (AH2) is colored
 light blue to show that it is slightly polarized and capable of weak H-bonding
@@ -857,7 +912,7 @@ sufficiently polarized to form weak H-bonds are also colored light blue.
 To form the non-WC trans Watson-Crick (tWW) UA pair, the A and U cutouts printed
 with W edges facing in the same direction can be used.  Bringing together the W
 edges forms an AU trans Watson-Crick (tWW) base pair, that can be compared with
-Figure 12B. This pair differs from the canonical (cis) Watson-Crick AU base pair
+Figure~\ref{fig:basepairs}B. This pair differs from the canonical (cis) Watson-Crick AU base pair
 in the mutual orientation of the glycosidic bonds. In the cis pair, the
 glycosidic bonds are on the same side of the base pair axis running through the
 base centers parallel to the H-bonds, while in the trans pair, the glycosidic
@@ -865,14 +920,14 @@ bonds are on opposite sides of this axis.
 
 Next readers can reorient the W edge of the U so that it faces the H edge of the
 A, juxtaposing complementary H-bond donor and acceptor groups. Results can be
-compared with the pairs shown in Figure 12C and 12D. There are two possible
-results, the cis and the trans Watson-Crick/Hoogsteen pairings (cWH or tWH UA).
-These pairs are stabilized by two strong H-bonds, involving NH donors, and one
-relatively weak bond involving AH8. These base pairs have the same base
-combination (UA) as the cWW and tWW pairs, but involve the Hoogsteen edge of A,
-illustrating that each distinct combination of edges and glycosidic bond
-orientations produces a different base-pairing geometry and therefore a
-different pair. 
+compared with the pairs shown in Figure \ref{fig:basepairs}C and
+\ref{fig:basepairs}D. There are two possible results, the \emph{cis} and the
+\emph{trans} Watson-Crick/Hoogsteen pairings (cWH or tWH UA). These pairs are
+stabilized by two strong H-bonds, involving NH donors, and one relatively weak
+bond involving AH8. These base pairs have the same base combination (UA) as the
+cWW and tWW pairs, but involve the Hoogsteen edge of A, illustrating that each
+distinct combination of edges and glycosidic bond orientations produces a
+different base-pairing geometry and therefore a different pair. 
 
 Readers are encouraged to try other base combinations, to see how many form
 stable pairs for each geometric family, and can check their base-pair models
@@ -965,7 +1020,7 @@ isomorphic or “isosteric” to each other in the sense of occupying the same s
 between the backbone atoms of the two strands of the helix. The property of
 being isosteric can be quantified using a measure called the Iso-Discrepancy
 Index (IDI), which depends on three distinct geometric features of base-pairs,
-as illustrated in Figure 13 \cite{Stombaugh2009}. The geometric classification
+as illustrated in Figure~\ref{fig:idi} \cite{Stombaugh2009}. The geometric classification
 of base pairs is useful because only base pairs belonging to the same family are
 isosteric by qualitative and quantitative (i.e. the IDI) criteria. Isosteric
 pairs substitute for each other without distorting the local RNA 3D structure.
@@ -975,10 +1030,26 @@ high-quality structures. Quantitative analysis with IDI values confirms that for
 two base pairs to be isosteric, they must belong to the same geometric family
 \cite{Stombaugh2009}. 
 
+\begin{figure}
+  \includegraphics[height=0.5\textheight]{chapter-1/figs/idi}
+  \caption{Calculation of Iso-Discrepancy Index (IDI) to compare geometries of
+    basepairs. The IDI is illustrated using non-isosteric base pairs. To
+    calculate the IDI for two base pairs, the bases designated ‘first base’ in
+    each base pair are superposed (bases on the left in each panel) and then the
+    following three quantities are evaluated, normalized and summed: (1) The
+    difference, ∆c, in the intra-base pair C1’–C1’ distances, illustrated for
+    non-isosteric cWW AG and AU. (2) The inter-base pair C1’–C1’ distance, t1,
+    between the C1’ atoms of the second bases of the base pairs, illustrated for
+    the near isosteric cWW AU and AC base pairs. (3) The angle, theta, about an
+    axis perpendicular to the base pair plane, required to superpose the second
+  bases, illustrated using non-isosteric cWW AU and cWS AU base pairs.}
+  \label{fig:idi}
+\end{figure}
+
 All base pairs from the same geometric family have equal or very similar values
 of the angle describing the mutual orientations of the glycosidic bonds of the
 interacting bases, however they can differ by the other geometric measures used
-to define the IDI (see Figure 13). Therefore, not all base pairs belonging to
+to define the IDI (see Figure~\ref{fig:idi}). Therefore, not all base pairs belonging to
 the same geometric family are necessarily isosteric. For example, purines and
 pyrimidines differ considerably in size, so substituting a purine by a
 pyrimidine or vice versa may change the space occupied by the base pair within
@@ -1083,8 +1154,20 @@ quantum mechanical (QM) calculations and molecular dynamics simulation studies
 geometries and the intrinsic stabilizing energies of these interactions, and
 showed that the most stable BPh interactions, those on the W edge of G, rival GC
 WC base pairs in stability. Very stable BPh interactions also are formed by the
-WC edge of U and the Hoogsteen edge of C (see Figure 14 and citation
+WC edge of U and the Hoogsteen edge of C (see Figure~\ref{fig:bph} and citation
 \cite{Zirbel2009}).
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{chapter-1/figs/bph}
+  \caption{Base-Phosphate (BPh) interactions observed in RNA 3D structures for
+    each base. H-bonds are indicated with dashed lines. BPh categories are
+    numbered 0–9, starting at the H6 (pyrimidine) or H8 (purine) base positions.
+    BPh interactions that involve equivalent functional groups on different
+    bases are grouped together: 0BPh (A, C, G, U), 5BPh (G, U), 6BPh (A, C),
+    7BPh (A, C) and 9BPh (C, U). Bridging interactions, 8BPh and 4BPh, are
+  especially stable.}
+  \label{fig:bph}
+\end{figure}
 
 Many recurrent 3D motifs contain specific BPh interactions that tend to be
 highly conserved. For instance, many hairpin loops, including the anti-codon and
@@ -1105,18 +1188,28 @@ documented in Table 2.
 The 2'-OH of ribose participates in sugar-edge base pairs, acting as both H-bond
 donor and acceptor. It is considered part of the nt Sugar edge. H-bonds can also
 form with the ribose O4' atom, acting as H-bond donor. Another type of
-interaction involves stacking of bases on ribose rings as shown in Figure 15.
-The example in this figure is a key interaction that stabilizes the binding of
-tRNAs to the P-site of the 30S subunit. The base-ribose stacking occurs between
-the ribose of the first anti-codon nt of tRNA (G34) in the anti-codon HL (nts
-32-38 of tRNA) and the highly conserved base G966, located in HL 34 of 16S rRNA
-(an intermolecular loop-loop interaction). Because only the tRNA ribose and not
-the base is involved in the interaction with 16S, the base can vary in sequence,
-allowing tRNAs with different anti-codon sequences to bind to the same site. The
-16S base involved in the interaction, G966, on the other hand is highly
-conserved and is in fact chemically modified \cite{Burakovsky2012}. The sequence
-propensities of base-ribose stacking interactions also deserve attention.
-Annotations of base-ribose interactions are also posted on NDB.
+interaction involves stacking of bases on ribose rings as shown in
+Figure~\ref{fig:base-ribose}. The example in this figure is a key interaction
+that stabilizes the binding of tRNAs to the P-site of the 30S subunit. The
+base-ribose stacking occurs between the ribose of the first anti-codon nt of
+tRNA (G34) in the anti-codon HL (nts 32-38 of tRNA) and the highly conserved
+base G966, located in HL 34 of 16S rRNA (an intermolecular loop-loop
+interaction). Because only the tRNA ribose and not the base is involved in the
+interaction with 16S, the base can vary in sequence, allowing tRNAs with
+different anti-codon sequences to bind to the same site. The 16S base involved
+in the interaction, G966, on the other hand is highly conserved and is in fact
+chemically modified \cite{Burakovsky2012}. The sequence propensities of
+base-ribose stacking interactions also deserve attention. Annotations of
+base-ribose interactions are also posted on NDB.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{chapter-1/figs/base-ribose}
+  \caption{Base-ribose stacking interaction. The conserved base-ribose stacking
+    interaction involving ribose 34 in the anti-codon of tRNA bound to the
+    P-site of 16S rRNA and conserved base G966 in 16S.  From PDB file 4GD1
+    \cite{Dunkle2011a}.}
+  \label{fig:base-ribose}
+\end{figure}
 
 \subsubsection{Metal-ion mediated phosphate-phosphate interactions}
 
@@ -1159,16 +1252,28 @@ that structure HL, IL, and MHJ captures much of the crucial information found in
 the 3D structure. An example of a recurrent 3D motif from 16S rRNA is the
 internal loop of helix 20 which is a variant of bacterial loop E of 5S rRNA
 \cite{Leontis1998a}. Renditions of the 3D and annotated 2D structures are shown
-in Figure 16A and B. The \EC{} and \TT{} versions of this recurrent motif are
-superposable in 3D space even though the sequences are different because
-corresponding bases form isosteric base pairs of the same geometric type, as
-shown in Figure 16B \& C. This and several related 3D motifs were predicted from
-sequence analysis based on non-WC base variations observed in sequence
-alignments, before the release of the atomic-resolution 3D structures of the 16S
-rRNAs \cite{Leontis1998, Leontis2002e}. This example illustrates the general
-principle that corresponding motifs in homologous RNA molecules often fold into
-very similar 3D structures and are stabilized by the same interactions, that is
-the same types of base pairs, stacking and BPh interactions \cite{Petrov2013}.
+in Figure~\ref{fig:compare-il}A and B. The \EC{} and \TT{} versions of this
+recurrent motif are superposable in 3D space even though the sequences are
+different because corresponding bases form isosteric base pairs of the same
+geometric type, as shown in Figure \ref{fig:compare-il}B \& C. This and several
+related 3D motifs were predicted from sequence analysis based on non-WC base
+variations observed in sequence alignments, before the release of the
+atomic-resolution 3D structures of the 16S rRNAs \cite{Leontis1998,
+Leontis2002e}. This example illustrates the general principle that corresponding
+motifs in homologous RNA molecules often fold into very similar 3D structures
+and are stabilized by the same interactions, that is the same types of base
+pairs, stacking and BPh interactions \cite{Petrov2013}.
+
+\begin{figure}
+  \includegraphics[width=0.5\textwidth]{chapter-1/figs/IL-20}
+  \caption{A. 3D structures of IL from helix 20 of 16S rRNA (PDB files 2AW7 [10]
+    and 1FJG \cite{Carter2000}. B. 2D annotations showing conserved non-WC basepairs.
+    Although they differ in sequence, the two motifs have the same interactions
+    and are assigned to the same motif group. C. Superposition of isosteric tWH
+    and tSH non-Watson-Crick basepairs from the E. coli and T.thermophilus
+  versions of the helix 20 motif.}
+  \label{fig:compare-il}
+\end{figure}
 
 Grouping structurally similar RNA motif instances in motif families and aligning
 corresponding nts among them is crucial to improving bioinformatic methods for
@@ -1250,15 +1355,16 @@ between helical elements. However, interactive computer technology can fill the
 gap between the over-simplification of 2D diagrams and the complexity of the 3D. 
 
 The most basic step is the use of color to coordinate the 2D and 3D
-representations of RNA molecules, as illustrated for 16S in Figure 1. Nts
-belonging to the same helical element are colored in 3D as shown in the 2D.
-Coordinated color-coding of 2D and 3D structures by helical element facilitates
-identifying the elements to which interacting nts belong. In the 3D structure,
-helical elements distant in the 2D can be in close proximity and each helical
-element can interact with several different elements, not to mention proteins
-and ligands.  We have provided SwissPDBViewer and PyMol files with these color
-codings as supplementary files to this article to allow readers to visualize
-\EC{} 16S rRNA on their own computers. 
+representations of RNA molecules, as illustrated for 16S in
+Figure~\ref{fig:ec-ssu-2d-3d}. Nts belonging to the same helical element are
+colored in 3D as shown in the 2D. Coordinated color-coding of 2D and 3D
+structures by helical element facilitates identifying the elements to which
+interacting nts belong. In the 3D structure, helical elements distant in the 2D
+can be in close proximity and each helical element can interact with several
+different elements, not to mention proteins and ligands.  We have provided
+SwissPDBViewer and PyMol files with these color codings as supplementary files
+to this article to allow readers to visualize \EC{} 16S rRNA on their own
+computers. 
 
 The 2D can also be used to rapidly access specific regions of the 3D structure.
 In this approach clickable ``hotspots'' are embedded at the locations of
