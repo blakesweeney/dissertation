@@ -369,15 +369,16 @@ with crossing number $\ge 4$ ``LR'' (Zirbel, private communication).
 \subsubsection{Local vs. long-range (LR) interactions in 16S rRNA}
 
 Using crossing number $\ge 4$, we find 163 LR interactions in 16S rRNA. The
-relevant data for \EC{} 16S rRNA are presented in Table 2. Not surprisingly,
-most nt interactions are local (2323 local vs. 163 long-range) and most of these
-are between two nts in the same or adjacent helices (1323 out of 2323 or 57\%);
-however, almost 24\% of local interactions are between nts in the same or nearby
-loops (552/2323) and 19\% (448/2323) involve nts in adjacent loops and helices.
-Most such local loop-helix interactions are base stacking (386 of 448 or 86\%),
-indicating that loop nts frequently stack with the WC pairs of adjacent helices.
-Many of these helices appear in the 2D to be very short, comprising only one or
-two base pairs (see Figures \ref{fig:ec-ssu-2d-3d} and
+relevant data for \EC{} 16S rRNA are presented in
+Table~\ref{tab:helix-loop-inter}. Not surprisingly, most nt interactions are
+local (2323 local vs. 163 long-range) and most of these are between two nts in
+the same or adjacent helices (1323 out of 2323 or 57\%); however, almost 24\% of
+local interactions are between nts in the same or nearby loops (552/2323) and
+19\% (448/2323) involve nts in adjacent loops and helices. Most such local
+loop-helix interactions are base stacking (386 of 448 or 86\%), indicating that
+loop nts frequently stack with the WC pairs of adjacent helices. Many of these
+helices appear in the 2D to be very short, comprising only one or two base pairs
+(see Figures \ref{fig:ec-ssu-2d-3d} and
 \ref{fig:ec-helix-lengths}). Thus, for the most part, these very short helices
 are not isolated but are stabilized by stacking on bases in the adjacent HL, IL
 or MHJ loops, many of which form non-WC base pairs. In fact, 16S rRNA contains
@@ -389,6 +390,31 @@ form extensions of the secondary structure \cite{Gutell1990}. Local stacking
 interactions also play major roles in loops; they account for 336/552 or 61\%
 of interactions within loops. In fact, 336/1600 (22\%) of all local stacking
 interactions occur in loops. 
+
+\begin{landscape}
+\begin{table}
+  \begin{tabulary}{\linewidth}{LRRRRRRRRR}
+    \toprule
+                & \multicolumn{3}{c}{Short Range}               & & \multicolumn{4}{c}{Short Range} & \\
+                & Base-Pairing & Base-Stacking & Base-Phosphate & Subtotals & Base-Pairing & Base-Stacking & Base-Phosphate & Helix Packing & Subtotals \\
+    \midrule
+    Helix-Helix & 440 & 878 & 5 & 1323 & 0 & 0 & 6  & 5 & 11 \\
+    Helix-Loop  & 38 & 386 & 17 & 448 & 42 & 6 & 6  & & 70 \\
+    Loop-Helix  &    &     & 7  &     &    &   & 16 & &  \\
+    Loop-Loop   & 135 & 336 & 81 & 552 & 35 & 34 & 18 & & 87 \\
+    Totals      & 613 & 1600 & 110 & 2323 & 77 & 40 & 46 & & 168 \\
+    \bottomrule
+  \end{tabulary}
+  \caption{Interactions between helix and loop nts, local vs. long-range.
+    Analysis of interactions between nts in helices, in loops and between loops
+    and helices. Interactions are classified as long-range if they cross four or
+    more nested WC base pairs. All other interactions are local. Base-phosphate
+    interactions are separated, depending on whether the helix or loop nt
+    contribute the base to the interaction, ``Helix-Loop'' and ``Loop-Helix'',
+  respectively.}
+  \label{tab:helix-loop-inter}
+\end{table}
+\end{landscape}
 
 As concerns local pairing and base-phosphate interactions in loops, most of
 these occur between nts in the same or adjacent loops and far fewer with nts in
@@ -411,15 +437,16 @@ edges with AU or GC WC pairs and occur exclusively between helices, forming
 crucial highly conserved inter-helical tertiary contacts in structured RNAs
 \cite{Gagnon2006, Gagnon2002}. 
 
-Table 2 shows that LR loop-loop interactions include comparable numbers of
-pairing, stacking and BPh interactions, while LR loop-helix interactions are
-dominated by non-WC base pairing. Most of these involve the sugar edges of the
-helix nts (see below). 
+Table~\ref{tab:helix-loop-inter} shows that LR loop-loop interactions include
+comparable numbers of pairing, stacking and BPh interactions, while LR
+loop-helix interactions are dominated by non-WC base pairing. Most of these
+involve the sugar edges of the helix nts (see below). 
 
 In base-phosphate (BPh) interactions, one nt contributes the base and the other
-the phosphate group. The base-phosphate interactions are separated in Table 2
-according to whether the helix or loop nt contributes the base to the
-interaction. The row in Table 2 labeled ``Helix-Loop'' includes interactions in
+the phosphate group. The base-phosphate interactions are separated in
+Table~\ref{tab:helix-loop-inter} according to whether the helix or loop nt
+contributes the base to the interaction. The row in
+Table~\ref{tab:helix-loop-inter} labeled ``Helix-Loop'' includes interactions in
 which the helical nts contribute the base and vice versa for the row labeled
 ``Loop-Helix.'' These data show that the loop nt usually provides the base in LR
 loop-helix BPh interactions, whereas this is reversed in local interactions.
@@ -572,8 +599,9 @@ adjacent to five of the MHJ loops of 16S rRNA there are additional interactions
 involving the embedded WC pairs. Moreover, these pairs tend to be highly
 conserved in sequence, due to the additional interactions. In these cases we
 propose that the WC pair should be assigned to the MHJ loop and not to the 2D
-structure. This was done in constructing Table 1. All the WC pairs marked with
-red lines in Figure~\ref{fig:ec-ssu-2d-3d}  are of this type. 
+structure. This was done in constructing Table~\ref{tab:ec-element-count}. All
+the WC pairs marked with red lines in Figure~\ref{fig:ec-ssu-2d-3d}  are of this
+type. 
 
 \subsubsection{GU cWW pairs}
 
@@ -824,12 +852,25 @@ pairs, because they have three distinct edges available for H-bonding
 interact with each other in all combinations, W with W, W with H, W with S, H
 with H, H with S, and S with S, and in each of two orientations, cis and trans,
 to create twelve geometrically distinct types of base pairs \cite{Leontis2001}.
-These twelve types of base pairing geometries are shown schematically in Table 3
+These twelve types of base pairing geometries are shown schematically in Table~\ref{tab:bp-families}
 using right triangles to represent RNA bases. The Hoogsteen edge corresponds to
-the hypotenuse of each triangle in Table 3 and the marked vertex indicates the
+the hypotenuse of each triangle in Table~\ref{tab:bp-families} and the marked vertex indicates the
 location of the ribose sugar. 
 
-Table 3 also shows symbols developed to mark base pairs in extended 2D diagrams.
+\begin{table}
+  % \includegraphics{chapter-1/figs/
+  \caption{The Twelve Geometric Families of RNA Base pairs. Each geometric
+    base pair family is defined by the interacting edges of the bases and the
+    relative orientation of the glycosidic bonds (columns 2-4). Abbreviations
+    and symbols for representing each base pair family in text and secondary
+    structures are shown in columns 5 and 6. Column 7 shows an abstract
+    representation of each family using triangles to represent the bases,
+    where the hypotenuse represents the Hoogsteen edge. The shaded cells
+  denote base pairs in the \emph{cis} orientation. }
+  \label{tab:bp-families}
+\end{table}
+
+Table~\ref{tab:bp-families} also shows symbols developed to mark base pairs in extended 2D diagrams.
 In these symbols, circles represent Watson-Crick edges, squares Hoogsteen edges
 and triangles Sugar edges. Base pairs involving distinct edges are represented
 by two symbols connected by a line. For example, a trans Watson-Crick/Hoogsteen
@@ -934,7 +975,37 @@ stable pairs for each geometric family, and can check their base-pair models
 against the on-line RNA Base pair Catalogue containing structures of all
 observed and predicted base pairs organized by geometric family
 (\url{http://rna.bgsu.edu/FR3D/base pairs/}). The base combinations that form
-pairs in each pairing geometry are summarized in Table 4.
+pairs in each pairing geometry are summarized in Table~\ref{tab:base-combinations}.
+
+\begin{landscape}
+\begin{table}
+  \begin{tabular}{lcccccccccccccccc}
+    \toprule
+        &              \multicolumn{4}{c}{A}             &             \multicolumn{4}{c}{C}          &               \multicolumn{4}{c}{G}       &            \multicolumn{4}{c}{U}            \\
+        & A        & C        & G            & U         & A        & C        & G        & U         & A        & C        & G        & U        & A         & C        & G        & U          \\
+    \midrule
+    cWW & \I{1.4}  & \I{1.2a} & \I{1.3}      & \I{1.1}   & \I{1.2b} & \I{1.6}  & \I{1.1}  & \I{1.5}   & \I{1.3}  & \I{1.1}  &          & \I{1.2a} & \I{1.1}   & \I{1.5}  & \I{1.2b} & \I{1.7}    \\
+    tWW & \I{2.7}  & \I{2.4}  &              & \I{2.2}   & \I{2.3}  & \I{2.9}  & \I{2.6}  & \I{2.8}   &          & \I{2.5}  & \I{2.7}  & \I{2.4}  & \I{2.1}   & \I{2.8}  & \I{2.3}  & \I{2.9}    \\
+    cWH &          &          & \I{3.3}      & \I{(3.3)} &          & \I{3.2}  & \I{3.1}  & \I{(3.2)} & \I{3.3}  &          & \I{3.4}  &          & \I{(3.3)} &          & \I{3.1}  & \I{3.2}    \\
+    tWH & \I{4.3}  &          & \I{4.3/4.2}  &           & \I{4.2}  & \I{4.1}  & \I{4.2}  &           &          &          & \I{4.5}  & \I{4.3}  & \I{4.1}   &          & \I{4.4}  & \I{4.2}    \\
+    cWS & \I{5.1}  & \I{5.1}  & \I{5.1}      & \I{5.1}   & \I{5.2}  & \I{5.2}  & \I{5.2}  & \I{5.2}   & \I{5.3}  & \I{5.3}  & \I{5.5}  & \I{5.3}  & \I{5.4}   & \I{5.4}  & \I{5.4}  & \I{5.4}    \\
+    tWS & \I{6.1}  & \I{6.2}  & \I{6.2}      & \I{6.1}   & \I{6.2}  & \I{6.1}  & \I{6.3}  & \I{(6.1)} &          & \I{6.3}  &          & \I{6.3}  & \I{6.3}   & \I{6.4}  & \I{6.4}  & \I{6.4}    \\
+    cHH &          &          & \I{7.2}      &           &          &          & \I{7.1a} &           & \I{7.3}  & \I{7.1b} & \I{7.1}  &          &           &          &          &            \\
+    tHH & \I{8.1}  & \I{8.1}  & \I{8.3}      & \I{8.3}   & \I{8.1}  &          & \I{8.1}  & \I{8.3}   & \I{8.2}  & \I{8.1}  & \I{8.4}  &          & \I{8.2}   & \I{8.2}  &          &            \\
+    cHS & \I{9.1}  & \I{9.1}  & \I{9.1}      & \I{9.1}   & \I{9.1}  & \I{9.1}  & \I{9.2}  & \I{9.1}   & \I{9.1}  &          & \I{9.1}  &          & \I{9.3}   & \I{9.1}  & \I{9.1}  & \I{9.1}    \\
+    tHS & \I{10.1} & \I{10.1} & \I{10.1}     & \I{10.1}  & \I{10.1} & \I{10.1} &          & \I{10.1}  &          &          & \I{10.2} &          & \I{10.2}  &          & \I{10.2} &            \\
+    cSS & \I{11.1} & \I{11.1} & \I{11.1}     & \I{11.1}  & \I{11.1} & \I{11.1} & \I{11.1} & \I{11.1}  & \I{11.1} & \I{11.1} & \I{11.1} & \I{11.1} & \I{11.1}  & \I{11.1} & \I{11.1} & \I{(11.1)} \\
+    tSS & \I{12.1} & \I{12.1} & \I{12.1}     & \I{12.1}  &          &          &          &           & \I{12.2} & \I{12.2} & \I{12.2} & \I{12.2} &           &          &          &            \\
+    \bottomrule
+  \end{tabular}
+  \caption{Base combinations that form base pairs in each geometric family. The
+    base combinations (columns) that form observed or predicted base pairs of
+    the geometric type indicated in each row are marked with “x”. Base
+    combinations that do not form base pairs are indicated by blank cells.
+  [\url{http://rna.bgsu.edu/FR3D/base pairs/BPfamilies.php}]}
+  \label{tab:base-combinations}
+\end{table}
+\end{landscape}
 
 \subsubsection{The Sugar Edge}
 
@@ -990,21 +1061,21 @@ energy.
 Readers can check their base-pair models against the on-line RNA Base pair
 Catalogue containing structures of all observed and predicted base pairs
 organized by geometric family (\url{http://rna.bgsu.edu/FR3D/base pairs/}) and
-by comparison with Table 4. The base combinations (columns of Table 4) that form
-a stable pair in a particular base pair geometry (rows of Table 4) are indicated
+by comparison with Table~\ref{tab:base-combinations}. The base combinations (columns of Table~\ref{tab:base-combinations}) that form
+a stable pair in a particular base pair geometry (rows of Table~\ref{tab:base-combinations}) are indicated
 with an entry beginning with ``I.'' If no stable pair forms for that geometry, the
 cell is left empty. Each column shows the base pair geometries that each base
 combination can adopt. The 3D structures of base combinations forming pairs in
 each geometric family can be viewed and downloaded as PDB files from the pages
 of the online Base Pair Catalogue. 
 
-Regarding Table 4, readers should note that for base pair geometries that
+Regarding Table~\ref{tab:base-combinations}, readers should note that for base pair geometries that
 involve different edges (for example cWH or tHS) the order in which the bases
 are listed makes a difference. For example, in the tWH AG base pair, the A
 interacts with its W edge and the G with its H edge. Consequently, ``AG tWH''
 and ``GA tWH'' refer to different base pairs. On the other hand, ``tWH AG'' and
 ``GA tHW'' refer to the same base pair. However, tHW pairs do not have their own
-row in Table 4 because they are redundant with tWH pairs. 
+row in Table~\ref{tab:base-combinations} because they are redundant with tWH pairs. 
 
 \subsection{Base pair Isostericity and Sequence Variation}
 
@@ -1181,7 +1252,7 @@ of helical elements \cite{Mokdad2006b}. It is necessary to consider conserved
 BPh interactions to fully account for the chemical protections observed in 16S
 rRNA \cite{Merryman1999, Stern1988}. These examples show that BPh interactions
 are widespread in RNA structures and play significant roles in RNA folding, as
-documented in Table 2.
+documented in Table~\ref{tab:helix-loop-inter}.
 
 \subsubsection{Base-Ribose Interactions}
 
@@ -1231,23 +1302,49 @@ Recurrent modular 3D motifs generally correspond to individual HL, IL, or MHJ
 loops. As we have seen, ``loops'' play very important roles in structured RNA
 molecules. While some motifs appear to be unique, many occur over and over in
 unrelated RNA molecules. Most recurrent 3D motifs are relatively small (less
-than \textasciitilde 20 nts) and therefore can evolve independently in unrelated molecules.
-For example, kink-turns, sarcin-ricin motifs, C-loops, and GNRA or UNCG HL are
-found in many different molecules and even in multiple locations in the same
-large RNA molecule. In fact, 16S rRNA contains instances of each of these
-motifs. Non-WC pairs play two fundamental roles in RNA 3D structure: (1) They
-are the building blocks of RNA 3D motifs \cite{Leontis2006}, where they provide
-the specific local interactions that structure individual HL, IL and MHJ 3D
-motifs. (2) Non-WC pairs mediate most LR (tertiary) interactions, usually in
+than \textasciitilde 20 nts) and therefore can evolve independently in unrelated
+molecules. For example, kink-turns, sarcin-ricin motifs, C-loops, and GNRA or
+UNCG HL are found in many different molecules and even in multiple locations in
+the same large RNA molecule. In fact, 16S rRNA contains instances of each of
+these motifs. Non-WC pairs play two fundamental roles in RNA 3D structure: (1)
+They are the building blocks of RNA 3D motifs \cite{Leontis2006}, where they
+provide the specific local interactions that structure individual HL, IL and MHJ
+3D motifs. (2) Non-WC pairs mediate most LR (tertiary) interactions, usually in
 combination with LR WC pairs, base-stacking, and base-phosphate interactions, as
 discussed above for 16S rRNA. As we have seen, most of these interactions occur
 between loop nts or loop and helix nts. The different types of non-WC pairs tend
 to contribute to different extents to local vs. LR interactions, as shown in
-Table 5. For example, cWW, tWH, and tHS together account for almost 90\% of
-local base pairs, whereas cSS, tSS, cWS, tWS and cWH account for almost 80\% of
-long-range (LR) pairs. 
+Table~\ref{tab:bp-family-counts}. For example, cWW, tWH, and tHS together
+account for almost 90\% of local base pairs, whereas cSS, tSS, cWS, tWS and cWH
+account for almost 80\% of long-range (LR) pairs. 
 
-Use of the base-pair symbols shown in Table 3 to annotate local interactions
+\begin{table}
+  \begin{tabulary}{\linewidth}{LRRRRRR}
+    \toprule
+    Basepair Family & \multicolumn{2}{c}{Local Interactions} & \multicolumn{2}{c}{Long-range Interactions} & \multicolumn{2}{c}{All Interactions} \\
+           & Counts & Relative Frequencey (\%) & Counts & Relative Frequencey (\%) & Counts & Relative Frequencey (\%) \\
+    \midrule
+    cWW    & 460    & 75.3                     & 12     & 15.6                     & 472    & 68.6                     \\
+    tWW    & 9      & 1.5                      & 2      & 2.6                      & 11     & 1.6                      \\
+    cWH    & 8      & 1.3                      & 5      & 6.5                      & 13     & 1.9                      \\
+    tWH    & 37     & 6.1                      & 1      & 1.3                      & 38     & 5.5                      \\
+    cWS    & 9      & 1.5                      & 4      & 5.2                      & 13     & 1.9                      \\
+    tWS    & 7      & 1.1                      & 5      & 6.5                      & 12     & 1.7                      \\
+    cHH    & 0      & 0.0                      & 0      & 0.0                      & 0      & 0.0                      \\
+    tHH    & 3      & 0.5                      & 0      & 0.0                      & 3      & 0.4                      \\
+    cHS    & 11     & 1.8                      & 0      & 0.0                      & 11     & 1.6                      \\
+    tHS    & 41     & 6.7                      & 2      & 2.6                      & 43     & 6.3                      \\
+    cSS    & 12     & 2.0                      & 30     & 39.0                     & 42     & 6.1                      \\
+    tSS    & 14     & 2.3                      & 16     & 20.8                     & 30     & 4.4                      \\
+    Totals &        & 100\%                    &        & 100\%                    &        & 100\%                    \\
+    \bottomrule
+  \end{tabulary}
+  \caption{Local vs. Long-range Interactions in E. coli 16S rRNA by Base-pair
+  Family.}
+  \label{tab:bp-family-counts}
+\end{table}
+
+Use of the base-pair symbols shown in Table~\ref{tab:bp-families} to annotate local interactions
 that structure HL, IL, and MHJ captures much of the crucial information found in
 the 3D structure. An example of a recurrent 3D motif from 16S rRNA is the
 internal loop of helix 20 which is a variant of bacterial loop E of 5S rRNA
