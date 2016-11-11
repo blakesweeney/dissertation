@@ -518,46 +518,69 @@ Table~\ref{tab:hl-rszr-cutoffs-combinations}. From these tables we can see that
 the 
 
 \begin{table}
-  \begin{tabular}{llccccc}
+  \begin{tabular}{llcccccc}
     \toprule
-    &            & \multicolumn{4}{c}{Fictional Loop Cutoff}    \\
-                                           \cmidrule(r){3-6} 
-                                           &            & \rsrz{1} & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5} \\
+                                    &            & \multicolumn{5}{c}{Fictional Loop}    \\
+                                                \cmidrule(r){3-7} 
+                                    &            & None & \rsrz{1} & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5} \\
     \midrule
-    \multirow{4}{*}{Interacting NT Cutoff} & \rsrz{1}   &          &            &          &             \\
-                                           & \rsrz{1.5} &          &            &          &             \\
-                                           & \rsrz{2}   &          &            &          &             \\
-                                           & \rsrz{2.5} &          &            &          &             \\
+    \multirow{5}{*}{Interacting NT} & None       & (1945) & 19       & 5          & 4        & 2   \\
+                                    & \rsrz{1}   & 372    & 372      & 372        & 372      & 372 \\
+                                    & \rsrz{1.5} & 212    & 212      & 212        & 212      & 212 \\
+                                    & \rsrz{2}   & 132    & 132      & 132        & 132      & 132 \\
+                                    & \rsrz{2.5} & 87     & 87       & 87         & 87       & 87  \\
     \bottomrule
   \end{tabular}
   \caption{Table showing the number of Internal Loops that are rejected based
     upon the fictional loop and poorly modeled interacting nucleotides. The
     values in the cells indicate the number of loops that are rejected at each
-    cutoff. The total number of internal loops is shown in the upper left.
+    cutoff, with the exception of the entry in parenthesis, which indicates the
+    total number of loops in the dataset. The row and column with the 'None'
+    cutoff mean that the cutoff was not used. The cell with both cutoffs set to
+    None show the total number in parenthesis.
   }
   \label{tab:il-rsrz-cutoffs-combinations}
 \end{table}
 
 \begin{table}
-  \begin{tabular}{llccccc}
+  \begin{tabular}{llcccccc}
     \toprule
-    &      & \multicolumn{4}{c}{Fictional Loop Cutoff}          \\
-                                                  \cmidrule{3-6}  
-                                           &            & \rsrz{1}   & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5}         \\
+                                    &            & \multicolumn{5}{c}{Fictional Loop}    \\
+                                                   \cmidrule(r){3-7} 
+                                    &             & None    & \rsrz{1} & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5} \\
     \midrule
-    \multirow{4}{*}{Interacting NT Cutoff} & \rsrz{1}   &          &            &          &         \\
-                                           & \rsrz{1.5} &          &            &          &         \\
-                                           & \rsrz{2}   &          &            &          &         \\
-                                           & \rsrz{2.5} &          &            &          &         \\
+    \multirow{5}{*}{Interacting NT} & None       & (1319)   & 45       & 23       & 10   & 6   \\
+                                    & \rsrz{1}   & 385      & 385      & 385      & 385  & 385  \\
+                                    & \rsrz{1.5} & 256      & 256      & 256      & 256  & 256  \\
+                                    & \rsrz{2}   & 188      & 188      & 188      & 188  & 188  \\
+                                    & \rsrz{2.5} & 138      & 144      & 139      & 138  & 138  \\
+
     \bottomrule
   \end{tabular}
   \caption{Table showing the number of Hairpin Loops that are rejected based
-    upon the fictional loop and poorly modeled interacting nucleotides.
+    upon the fictional loop and poorly modeled interacting nucleotides. The
+    values in the cells indicate the number of loops that are rejected at each
+    cutoff, with the exception of the entry in parenthesis, which indicates the
+    total number of loops in the dataset. The row and column with the 'None'
+    cutoff mean that the cutoff was not used. The cell with both cutoffs set to
+    None show the total number in parenthesis.
   }
   \label{tab:hl-rsrz-cutoffs-combinations}
 \end{table}
 
-The goal of the study is to ensure the quality of the Motif Atlas is as
+These tables show interesting differences. Notably that the majority of loops
+are rejected because of poorly modeled interactions (the None column for the
+fictional cutoff is normally the values in all other columns). However, there
+are a few hairpin loops which are detected as fictional but are not detected
+with the poorly modeled interaction criterion (The columns with a fictional
+cutoff of 1 and interacting cutoff of 2 or 2.5). I interpret this to mean that
+even in a poorly modeled loop there is at least one base making an interaction,
+which allows the loop to be rejected by both criteria.
+
+Using these tables I set the value of the two RSRZ cutoffs, so that fictional
+loops are detected and excluded at an RSRZ cutoff of 1, while loops with poorly
+modeled interactions are detected at an RSRZ cutoff of 2. This leads to the
+exclusion of 132 internal loops and 188 hairpin loops from the data set.
 
 \section{Exploring the effects of the new quality criteria on motif clustering}
 
