@@ -46,7 +46,7 @@ summary of is shown in Table~\ref{tab:mol-dist}.
   \label{tab:mol-dist}
 \end{table}
 
-As seen in the table, \EC{} and T. thermophilus ribosomes alone make up 20% of
+As seen in the table, \EC{} and \TT{} ribosomes alone make up 20\% of
 the entire dataset and all ribosomal total NNN. For many statistical analyses of
 RNA structure, it is desirable to identify one high quality representative
 structure \cite{Leontis2012b}. For example, such a reduced redundancy dataset
@@ -62,7 +62,7 @@ December 5, 2014 on the BGSU RNA site and made available for searching on NDB
 
 The set of representative structures has a variety of uses in structural
 bioinformatics applications. Most notably it supports population and regular
-updating of the RNA 3D Motif Atlas \cite{http://rna.bgsu.edu/rna3dhub/motifs}.
+updating of the RNA 3D Motif Atlas \url{http://rna.bgsu.edu/rna3dhub/motifs}.
 The RNA 3D Motif Atlas is a clustering of all high quality loops extracted from
 all structures in the current Representative Set of structures. For this reason
 it is desirable to avoid frequent changes in the representative structure due to
@@ -194,7 +194,7 @@ selects a example with more nucleotides and basepairs but a worse ratio of the
 two. This selection is our desired result.
 
 \begin{figure}
-  % \includegraphics[width=\textwidth]{chapter-4/figs/hm-lsu-rep}
+  \includegraphics[width=\textwidth]{chapter-4/figs/hm-lsu-rep}
   \caption{Scatter plot of representative selection across three possible
     methodologies for the \HM{} Large Ribosomal Subunit. Shown here is a summary
     of which IFE’s are selected as the representative for the 3 method discussed
@@ -215,7 +215,7 @@ see that all three methods select an IFE with resolution 2.4{\AA}. This is
 consistent with our goals for the methods.
 
 \begin{figure}
-  % \includegraphics[width=\linewidth]{chapter-4/figs/hml-lsu-res}
+  \includegraphics[width=\linewidth]{chapter-4/figs/hm-lsu-res}
   \caption{Distribution of resolutions for \HM{} Large Ribosomal subunit IFE’s
     in NR\_all\_65634.1 with the resolution of the representative indicated.
     This histogram shows the resolution distribution of all IFE’s in the
@@ -233,6 +233,7 @@ can see in these figures, only the \EC{} LSU T. thermophilus SSU differ in
 selection of representatives.
 
 \begin{figure}
+  \includegraphics[width=\linewidth]{chapter-4/figs/ec-lsu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected \EC{} Large Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
@@ -243,6 +244,7 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
+  \includegraphics[width=\linewidth]{chapter-4/figs/ec-ssu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected \EC{} Small Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
@@ -253,6 +255,7 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
+  \includegraphics[width=\linewidth]{chapter-4/figs/tt-lsu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected T. thermophilus Large Subunits using the three methods
     discussed here. The representative selected is shown as a large blue dot,
@@ -263,6 +266,7 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
+  \includegraphics[width=\linewidth]{chapter-4/figs/tt-ssu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected T. thermophilus Small Subunits using the three methods
     discussed here. The representative selected is shown as a large blue dot,
@@ -307,6 +311,7 @@ is a histogram that displays the differences for all groups where the difference
 is greater than 0{\AA}.
 
 \begin{figure}
+  % \includegraphics[width=\linewidth]{chapter-4/figs/}
   \caption{Histogram of the differences between the resolution of the selected
     representative and the minimum resolution within the group for all 3
     methods. This histogram does not show the groups where the representative
@@ -510,6 +515,16 @@ dual 1\% increase method selects structures with fewer RSRZ outliers and similar
 RNA backbone scores, however, all other metrics are worse.
 
 \begin{figure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/4V54}
+    \caption{4V54}
+    \label{fig:4V54-quality}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5J91}
+    \caption{5J91}
+    \label{fig:5J91-quality}
+  \end{subfigure}
   \caption{Screenshots of the summaries of quality reports for 4V54 (left), the
     representative selected by the Dual 1\% increase method as compared to the
     report for 5J91 (right), the representative selected by the previous
@@ -523,10 +538,20 @@ similar metrics overall. The previous method does select a structure, 5HCQ, with
 fewer RSRZ outliers.
 
 \begin{figure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5FDU}
+    \caption{5FDU}
+    \label{fig:5FDU-quality}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5HCQ}
+    \caption{5HCQ}
+    \label{fig:5HCQ-quality}
+  \end{subfigure}
   \caption{Screenshots of the summaries of quality reports for 5FDU (left), the
-    representative selected by the dual 1% increase method as compared to the
-    report for 5HCQ (right), the representative selected by the previous
-  method.}
+          representative selected by the dual 1\% increase method as compared to
+          the report for 5HCQ (right), the representative selected by the previous
+          method.}
   \label{fig:tt-lsu-report}
 \end{figure}
 
@@ -543,7 +568,7 @@ all releases. We expect that the any increase method will be the most unstable,
 with the previous and current method being comparable. Our goal is the current
 1\% increase method will be more stable. The summary is shown in
 Figure~\ref{fig:rep-changes}. This plot summarizes the total number of changes
-for 1449 classes that exist in all 91 releases. We can see that all three
+for 1449 classes that exist in all 91 releases. We can see that all thr% ee
 methods are comparable in stability, as they all end near 25 total changes. In
 general both the 1\% increase and the previous method are more stable, show fewer
 changes, than the any increase method. For most of the plot our current method
@@ -567,7 +592,7 @@ time.
   \begin{tabular}{lrrrrr}
     \toprule
                         & \multicolumn{5}{c}{Number of Changes} \\
-    % \cmidrule{r}{2-6}
+    % \cmidrule[r]{2-6}
     Method              & 0    & 1  &  2 &  3 &  4 \\
     \midrule
     Previous Method     & 1528 & 19 &  0 &  2 &  0 \\

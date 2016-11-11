@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{etoolbox}
+\usepackage{multirow}
 \usepackage{tabulary}
 \usepackage{titlesec}
 \usepackage{longtable}
@@ -24,6 +25,11 @@
 % \usepackage{epstopdf}
 
 \newcommand{\angstrom}{\textup{\AA}}
+\newcommand{\TILDE}{{\raise.17ex\hbox{$\scriptstyle\sim$}}}
+\newcommand{\rot}{\rotatebox{90}}
+\newcommand{\cyem}{cryo-EM}
+\newcommand{\etal}{\emph{et al}}
+\newcommand{\rsrz}[1]{RSRZ \textgreater #1}
 
 \newcommand{\I}[1]{$I_{#1}$}
 \newcommand{\TT}{\emph{Thermus thermophilus}}
@@ -39,7 +45,8 @@
 \makeatother
 
 
-\title{TITLE}
+\title{BUILDING REPRESENTATIVE SETS OF RNA 3D STRUCTURES AND SELECTING HIGH
+QUALITY LOOPS}
 \author{Blake A. Sweeney}
 \degree{Doctor of Philosophy}
 \date{December 2016}
@@ -85,12 +92,11 @@
 
 \mainmatter % starts over page counter and gives regular page numbers
 
-\include{chapter-1/body}
-\include{chapter-2/body}
-\include{chapter-3/body}
-
+% \include{chapter-1/body}
+% \include{chapter-2/body}
+% \include{chapter-3/body}
 % \include{chapter-4/body}
-% \include{chapter-5/body}
+\include{chapter-5/body}
 
 \backmatter
 

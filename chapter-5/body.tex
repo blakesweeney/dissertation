@@ -1,16 +1,20 @@
-\chapter{SELECTION OF LOOPS FROM THE REPRESENTATIVE SET}
+\chapter{SELECTION OF LOOPS FOR CLUSTERING IN THE RNA 3D MOTIF ATLAS FROM THE
+REPRESENTATIVE SET OF STRUCTURES}
 
 In this chapter I will discuss the changes I have made to the way the BGSU RNA
 pipeline selects loops for building the RNA 3D Motif Atlas
 (\url{http://rna.bgsu.edu/rna3dhub/motifs}). The goal of our Motif Atlas is to
-maintain a high quality, up-to-date clustering of representative structured from
-the 3D structure database on an ongoing basis. An important step in of building
-the motif atlas is the selection of loops. The original process of selecting
-loops was implemented by Dr. Anton Petrov in previous work \ref{Petrov2012}.
-Overall, the new procedure works as follows: First, all loops from all
-representative IFE’s from the 4.0{\AA} equivalence classes are extracted. Then each
-loop is examined for the presence of possible structural flaws, which serve as
-criteria for removal. The criteria are: 
+maintain a high quality, up-to-date clustering of representative RNA 3D Motifs
+(hairpin, internal, and multi helix junction loops) from the 3D structure
+database, on an ongoing basis. An important step in of building the Motif Atlas
+is the selection of loops. The original process of selecting loops was
+implemented by Dr. Anton Petrov in previous work \cite{Petrov2012}. Overall, the
+procedure worked as follows: First, all loops from all representative from the
+all 4.0{\AA} equivalence classes are extracted. This representative was always
+the longest chain in a PDB file. Then each loop was examined for the presence of
+possible structural flaws, which serve as criteria for removal. In the previous
+version the representative was only the longest chain in each file. The loop
+exclusion criteria criteria included:
 
 \begin{enumerate}
   \item Presence of chain breaks in the loop. Chain breaks occur when the
@@ -24,13 +28,13 @@ criteria for removal. The criteria are:
   \item Presence of incomplete nucleotides. Incomplete nucleotides occur when
     only part of a nucleotide is modeled. In some structures only electron
     density for the backbone is observed, leading to models that lack the base
-    of a nucleotide in some positions
+    in some nucleotide positions
 \end{enumerate}
 
-Examples of these structural issues are shown in Figure~\ref{loops-with-issues}.
-These criteria all examine the structure of the loops for signs of data
-incompleteness or modeling flaws. If any loop shows one these problems it is
-rejected from clustering. 
+Examples of these structural issues are shown in
+Figure~\ref{fig:loops-with-issues}. These criteria all examine the structure of
+the loops for signs of data incompleteness or modeling flaws. If any loop shows
+one these problems it is rejected from clustering.
 
 \begin{figure}
   \caption{Examples of loops with structural problems.}
@@ -39,152 +43,228 @@ rejected from clustering.
 
 In addition to these structural issues, the previous also rejects loops that
 have been incorrectly extracted. This occurs when a single loop contains too
-many chains.
+many chains. For example, an internal loop composed of 3 or more chains would be
+rejected. An example of such a loop IL\_3OL6\_001 is shown in
+Figure~\ref{fig:too-many-chains}.
+
+\begin{figure}
+  % \includegraphics{chapter-5/figs/IL_3OL6_001}
+  \caption{3D structure of an internal loop with too many chains. This loop
+    IL\_3OL6\_001 is rejected by our loop quality procedures because it contains
+    too many chains, 3 in this case, loops for a valid internal loop.}
+  \label{fig:too-many-chains}
+\end{figure}
 
 Finally, the previous method rejects loops that contain modifications. This is
 because our current FR3D cannot process modified bases \cite{Sarver2008a}. We are
-currently working on removing this limitation.
+currently working on removing this limitation. An example of such a loop is
+shown in Figure~\ref{fig:modified-loop}.
 
-My changes to the selection process are in three areas. First I improved the
-selection criteria to take advantage of mmCIF data. For example, mmCIF data
-includes information on occupancy. Secondly, I altered the logic to exclude
-loops from cyro-EM data. Finally, I have used a measure of modeling quality,
-Real Space R Z-Score (RSRZ), to exclude loops. I will discuss each of these
-changes in turn.
+\begin{figure}
+  % \includegraphics{chapter-5/figs/IL\_4YBB\_320}
+  \caption{3D structure of, IL\_4YBB\_320, an internal loop with modified bases.
+  This internal loop is currently rejected with our loop quality steps.}
+  \label{fig:modified-loop}
+\end{figure}
+
+My changes to the loop selection process are in three areas. First, I improved
+the selection criteria to take advantage of additional information available in
+mmCIF data. For example, mmCIF data includes information on atom occupancy.
+Secondly, I altered the logic to include the capability to exclude loops from
+cryo-EM data for some versions of the Motif Atlas. Finally, I have used a
+measure of modeling quality, Real Space R Z-Score (RSRZ), to exclude loops
+outside certain statistical limits. I tested different thresholds for RSR-Z and
+their effects. I will discuss each of these changes in turn.
 
 \section{Modifications to Previous Loop Selection Methodology}
 
-The first change was to take advantage of mmCIF data. This change affected two
-of the criteria, how the presence of chain breaks is detected, and how the
-presence of incomplete nucleotides is detected. 
+The first change was to take advantage of new information in mmCIF data. This
+change affected two of the criteria, how the presence of chain breaks and
+the presence of incomplete nucleotides are detected.
 
 Previously, chain breaks were detected by measuring the distance between the
-phosphate atom of one nucleotide and the O3'' of the preceding nucleotide. This
-distance should be less than 2{\AA} \cite{Petrov2012}. This is a geometric cut off
-with a free parameter that requires selection. The new format, mmCIF, provides a
-mapping between the observed sequence and the experimental sequence. In this
-mapping, chain breaks are detected as nucleotide  positions in the experimental
-sequence that are not mapped to observed sequences. By using the experimental
-sequence mapping we no longer need to measure distances in the structure. 
+phosphate atom of one nucleotide and the O3` of the preceding nucleotide. This
+distance should be less than 2{\AA} \cite{Petrov2012} when a covalent bond is
+present. This approach requires computing bond distances between all successive
+pairs of nucleotides and comparison to a free parameter that requires selection.
+The new format, mmCIF, provides a mapping between the observed sequence and the
+experimental sequence. In this mapping, chain breaks are detected as nucleotide
+positions in the experimental sequence that are not mapped to observed
+sequences, ie the nucleotides for which no 3D coordinates are provided. By
+using the experimental sequence mapping we no longer need to measure distances
+in the structure to make this decision.
 
-The second affected criteria, presence of incomplete nucleotides has been
-extended to include atoms with zero occupancy. The previous procedure rejected a
-loop if it contained any nucleotide that lacked all the required atoms. This
-occurs when an author chooses not to model a nucleotide because of missing data.
-However, some authors will model nucleotides when there is missing data and then
-mark one or more of the atoms as having zero occupancy (CITE). The procedure
-will now detect these cases by checking the occupancy data for each atoms of the
-nucleotide. In the case that one or more atoms in a loop has zero occupancy, the
-loop is excluded from clustering. The new logic is more rigorous and removes
-more loops than the previous method. Table CHANGES compares the new selection
-criteria to the previous one.
+The second affected criterion, presence of incomplete nucleotides has been
+extended to include atoms with zero occupancy. The previous procedure rejected
+any loop that contained any nucleotide that lacked all the required atoms. This
+occurs when an author chooses not to model a nucleotide because of missing  or
+incomplete electron density data. However, some authors will model nucleotides
+for which there is incomplete data and then mark one or more of the atoms of
+that nucleotide as having zero occupancy (CITE). My new procedure will now
+detect these cases by checking the occupancy data for each atom of each
+nucleotide of the loop. In the case that the occupancy for one or more atoms in
+a loop is zero, the entire loop is excluded from clustering. The new logic is
+more rigorous and removes more loops than the previous method.
+Table~\ref{tab:loop-quality-changes} compares the effects the new selection
+criteria to the last Motif Atlas with the Petrov method in December 2014.
 
-Finally, when beginning mmCIF data I found a bug in our loop extraction
-procedure that inadvertently extracts loops formed by molecules related by
-symmetry operators in the crystal structures. While this bug has been fixed I
-have added a new criteria to ensure that we do not extract loops with more than
-one symmetry operator. 
+Finally, when beginning to work with mmCIF data, I found a bug in our loop
+extraction procedure that inadvertently extracted loops formed by molecules
+related by symmetry operators in the crystal structures. To fix this bug has
+added a new criteria to ensure that we do not extract loops formed by
+nucleotides generated by more than one symmetry operator.  In other words
+we do not extract loops created by crystal contacts.
 
 These changes alter the loop selection logic. Shown in
 Table~\ref{tab:loop-quality-changes} is a comparison between the new and
-previous method. I took all loops from the previous motif atlas release that
-were clustered into motifs which still exist in the current data set and
-determined their status using the new logic. I then summarized it as counts.
-From this we can see that the majority of loops will have the same
-classifications, but a small percent do change.
+previous method. I took all accepted loops from the Motif Atlas Release 1.18,
+which are from representative structures from the 2.85 Representative release
+and determined their status using the new logic. The counts are compred in
+Table~\ref{tab:loop-quality-changes}, which shows that that the majority of
+loops will have the same classifications, but a small percent do change.
 
 \begin{table}
-  \begin{tabular}{lr}
+  \begin{tabulary}{\linewidth}{LLRRRR}
     \toprule
+    Loop Type &
+      Previous Accepted Loops (1.85) &
+      Currently Accepted Loops (2.86) &
+      Missing Nucleotides &
+      Modified with Nucleotides &
+      Incomplete Nucleotides \\
     \midrule
+    Hairpin Loops  & 736 & 708 & 15 & 6 & 7 \\
+    Internal Loops & 933 & 914 & 4  & 6 & 9 \\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
   \caption{A table showing the numbers of loops affected by the changes to the
-    selection procedure to address incomplete or flawed loop data or models.
-  This uses loops from motif release 1.18 compared to NR release 2.92}
+    selection procedure to address incomplete or flawed loop data or models. The
+    number in parenthesis in the header indicates the representative release
+    for that column.}
   \label{tab:loop-quality-changes}
 \end{table}
 
-\section{Rejection of loops from Cyro-Electron Microscopy}
+\section{Exclusion of loops from cryo-Electron Microscopy}
 
-The next change to loop selection, rejection of loops from cyro-EM structures,
-is a simple addition with a large effect. Currently, X-Ray structures are the
-'gold standard' of structural methods (CITE). There is a great deal of exciting
-work in cyro-electron microscopy (cyro-em) (CITES) however this technique is
-under rapid development and lacks defined criteria for assessing structural
-quality studies and standards that are already well-established for X-ray
-structures \cite{Henderson2012a}. The loop extraction procedure will no longer
-use loops that come from structures solved by cyro-EM. 
+The next change to loop selection, exclusion of loops from cryo-EM structures,
+is a simple addition with a large effect. Currently, X-Ray structure
+determination is the ``gold standard'' of structural methods for large
+biomolecules (CITE). There is a great deal of exciting work using cryo-electron
+microscopy (cryo-em) to determine structures of large biomolecules that form
+multiple conformational states \cite{Amunts2014, Quade2015, Schureck2016}.
+However, this technique is under rapid development and still lacks defined
+criteria for assessing structural quality on a par with the standards that are
+already well-established for X-ray structures \cite{Henderson2012}. We plan to
+carry out the loop extraction procedure in two ways, with and without loops
+loops that come from structures solved by \cyem, until defined criteria re
+established and we can integrate cryo-EM loops in the ``gold standard'' Motif
+Atlas release. Comparison of the two releases will allow monitoring of new
+motif geometries that are only found in \cyem structures.
 
-Rejecting loops from cyro-em structures has a large effect on the number of
-loops for available clustering. As a test of this I extracted all loops from the
-representative set described in the previous chapter and then counted the number
-of valid loops from each source.  Shown in Table~\ref{tab:source-counts} is a
-summary of counts of valid internal loops. 
+Rejecting loops from \cyem structures has a large effect on the number of loops
+available for clustering. As a test of this I extracted all loops from the
+representative set, representative release 2.86, described in the previous
+chapter and then counted the number of valid loops from each source.  Shown in
+Table~\ref{tab:source-counts} is a summary of counts of valid internal loops.
 
 \begin{table}
-  \begin{tabular}{lr}
+  \begin{tabulary}{\linewidth}{LLRRRRRR}
     \toprule
+                             &                 & \multicolumn{3}{c}{Number of Valid Internal Loops} & \multicolumn{3}{c}{Number of Valid Hairpin Loops} \\
+    Representative           & Number of IFE's & X-ray & \cyem & Total & X-ray & \cyem & Total \\
     \midrule
+    1.18 (December 05, 2014) & 858  & 1653 (69\%) & 757 (31\%)  & 2410 (100\%) & & & \\
+    2.85 (July 28, 2016)     & 1232 & 1945 (50\%) & 1951 (50\%) & 3896 (100\%) & & & \\
     \bottomrule
-  \end{tabular}
-  \caption{}
+  \end{tabulary}
+  \caption{Counts of the number of valid loops from X-ray vs \cyem{} structures.
+  This table highlights the large growth of \cyem{} loops.}
   \label{tab:source-counts}
 \end{table}
 
 The comparison in Table~\ref{tab:source-counts} shows that there is a much
-larger growth in number of loops extracted from cryo-EM structures over the past
-DD months. 
+larger growth over the past \TILDE 20 months in the number of loops present in
+from \cyem structures.
 
-By not using cyro-EM loops, we reduce the number loops available for clustering
-greatly. Notably it reduces the number of loops in release 2.85 by half bringing
-the number of selected internal loops, 1945, to fewer than number used in the
+When not using cryo-EM loops, we reduce the number of internal loops available
+for clustering by half for release 2.85 by half bringing the number of selected
+internal loops, from 3896 to 1945. This total is fewer than number used in the
 previous motif release, 2410. This change has a large effect on the selection of
-loops and thus the final clustering of motifs. 
+loops and thus the final clustering of motifs.
 
 \section{Usage of Real Space R data for loop selection}
 
-The final change to the loop selection procedure is to use modeling quality data
-as an addition criterion measuring how well 3D models reflect the underlying
-electron density. Our previous selection procedure successfully detected
-structural deficiencies of the loops but did not consider modeling issues
-\cite{Petrov2012}. The new changes uses the recently made available by PDB for
-each X-ray structure Real Space Refinement (RSR) and RSR Z-Score (RSRZ) data.
-RSR directly measures how well the 3D model fits the underlying experimental
-electron density. I begin with a discussion of the new RSRZ data and the discuss
-the modifications to our quality criteria.
+The final change to the loop selection procedure implemented is to use modeling
+quality data from PDB as an additional criterion measuring how well 3D models
+determined by X-ray crystallography reflect the underlying electron density. The
+Petrov \etal selection procedure successfully detected structural
+deficiencies of the loops but did not consider modeling issues
+\cite{Petrov2012}. The new changes apply the modeling criteria the recently made
+available by PDB for each X-ray structure, the Real Space Refinement (RSR)
+statistic and the RSR Z-Score (RSRZ) statistical score. RSR directly measures
+how well the 3D model fits the underlying experimental electron density. I begin
+with a discussion of the new RSRZ scores and discuss the modifications to our
+quality criteria and their consequences on the numbers of structures retained.
 
-\subsection{Description of Real Space Z-Score}
+\subsection{Description of Real Space Refinement and the associated Z-Score}
 
-Real Space Refinement (RSR) is a measure of how well the 3D model present in a
-PDB file fits the observed, underlying electron density obtained by X-ray
-diffraction. There are several issues with this measure however
-\cite{Tickle2012}. To deal with these issues a new statistical measure has been
-proposed \cite{Gore2012}, RSR Z-Score. PDB provides a normalized version of RSR,
-called Real Space Z-Score (RSRZ). This data is calculated for each structure on
-a residue level. The data is produced by computing a Z-Score for each type of
+Real Space Refinement (RSR) is a measure of how well the atomic resolution 3D
+model present in a PDB file fits the observed, underlying electron density
+obtained by X-ray diffraction. This was originally described by Jones \etal in
+the development of Uppsala validation server \cite{Kleywegt2004a}. RSR is
+calculated using equation:
+
+\begin{equation}
+  RSR = \frac{\sum \mid \rho_{obs} - \rho_{calc} \mid}
+             {\sum \mid \rho_{obs} + \rho_{calc} \mid}
+\end{equation}
+
+where $\rho$ is electron density. In words this equation computes the normalized
+difference between the observed electron density and modeled electron density. I
+explored the distribution of the RSR values for all nucleotides in loops. This
+is shown in Figure~\ref{fig:rsr-nt-distribution}.
+
+\begin{figure}[ht]
+  \caption{Histograms of the distribution of RSR values for nucleotides in
+    loops. Each panel represents a different residue. The loop used are all
+    accepted loops from Representative release 2.85. The blue bars indicate the mean
+  of each distribution.}
+  \label{fig:rsr-nt-distribution}
+\end{figure}
+
+This figure shows that MORE.
+
+There are several issues with RSR however \cite{Tickle2012}. To deal with these
+issues, the corresponding Z-score, statistical measure, RSRZ, has been proposed
+for general use \cite{Gore2012}. The Real Space Z-Score (RSRZ) is a normalized
+version of RSR calculated by PDB. This data is calculated for each structure on
+a residue level. The data is produced by computing RSR Z-Scores for each type of
 residue present in the structure and comparing to like residues in all other
-comparable structures, ie A’s are compared to other A’s, while C’s are compared
-to other C’s, of similar resolution \cite{Gore2012, Kleywegt2004a}. PDB provides
-this data as part of their validation reports and the data is imported as part
-of our weekly update pipeline. In this way the quality of each structure is
-compared to other structures of comparable resolution, as well as all other
-X-ray structures in PDB.
+comparable structures of similar resolution, ie A's are compared to other A's,
+while C's are compared to other C's \cite{Gore2012, Kleywegt2004a}. PDB provides
+this statistic as part of their validation reports and the data is imported as
+part of our weekly update pipeline. This data is available on their FTP site,
+the URLs depend upon the structure, for example the data for 1FJG is available
+at: \url{http://ftp.wwpdb.org/pub/pdb/validation\_reports/fj/1fjg/}. In this way
+the quality of each structure is compared to other structures of comparable
+resolution, as well as to all other X-ray structures in PDB that contain RNA.
 
 \subsection{Determining how to use RSRZ to reject loops}
 
 We begin by examining the distribution of RSRZ data for each type of loop in the
-representative set of structures created in the previous chapter. This release
-corresponds to the 2.85 representative structure release avaiable at
-(\url{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.85}). The distribution of
-such data is shown in Figure~\ref{fig:rsrz-distribution}. In this figure we can
-see that loops nucleotides have a median value nucleotides in loops have an RSRZ
-value of near 0, indicating a good fit. We can also see a long tail in the RSRZ
-distribution that indicates a large range in the quality of structures. PDB
+representative set of 3D structures selected as described in the previous
+chapter, which corresponds to the 2.85 representative structure release
+available at (\url{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.85}). The
+distribution of such data is shown in Figure~\ref{fig:rsrz-distribution}. In
+this figure we can see that loops nucleotides have a median value near 0,
+indicating a good fit to observed density. We can also see a long tail in the
+RSRZ distribution that indicates a large range in the quality of modeling. PDB
 assigns an RSRZ value of 2 to indicate a large outlier. This is shown on the
 graphs as a red bar.
 
 \begin{figure}
+  \caption{Distribution of RSRZ values for nucleotides in all accepted loops.
+    The nucleotides are only from loops that pass all structural criteria.}
   \label{fig:rsrz-distrubution}
 \end{figure}
 
@@ -205,7 +285,7 @@ must have a low RSRZ value as well. This criterion is used because we expect
 that loops interacting within a loop will have a lower RSRZ value by virtue of
 being ``fixed in place'' in the crystal.
 
-\subsection{Detecting poorly modeled loops}
+\subsection{Detecting fictional loops}
 
 The first criterion is that all bases in a loop should be sufficiently well
 modeled. A well modeled base has a low RSRZ value, thus a poorly modeled loop is
@@ -220,9 +300,14 @@ loops in the dataset. A summary of the number of loops sorted by this criterion
 into successive ranges of RSRZ in Table~\ref{tab:cutoffs-reject-summary}.
 
 \begin{table}
-  \begin{tabular}{lr}
+  \begin{tabular}{llrrrr}
     \toprule
+              &                   & \multicolumn{4}{c}{Number of Loops Rejected by Cutoff} \\
+    Loop Type & Total Valid Loops & RSRZ \textgreater 1  & RSRZ \textgreater 1.5 & RSRZ \textgreater 2 & RSRZ \textgreater 2.5 \\
     \midrule
+    Internal Loops & 1794 (100\%) & 19 (1\%)   & 5 (0.2\%)  & 4 (0.2\%)  & 2 (0.1\%) \\
+    Hairpin Loops  & 1319 (100\%) & 45 (3.4\%) & 23 (1.7\%) & 10 (0.7\%) & 6 (0.4\%) \\
+    3-Way Junction & 132 (100\%)  & 0          & 0          & 0          & 0 \\
     \bottomrule
   \end{tabular}
   \caption{Number of loops Exceeding different RSRZ cutoff values: Counts of the
@@ -243,22 +328,22 @@ of interactions per nucleotide for all loops shown in
 Table~\ref{tab:all-bad-structuring}.
 
 \begin{table}
-  \begin{tabular}{lllrrrr}
+  \begin{tabulary}{\linewidth}{LLLRRRR}
     \toprule
-    & & & Number of Interactions & & & \\
-    % \cmidline{r}{4-7}
-    Loop & 
-      Loop Type & 
-      Number Nucleotides & 
-      Basepairs & 
+    % & & & \multicolumn{8}{c}{Number of Annotated Interactions} & & & \\
+    Loop &
+      Loop Type &
+      Number Nucleotides &
+      Basepairs &
       Stacking &
       Base-phosphate &
       Total \\
     \midrule
     HL\_4DR7\_033 & Hairpin Loop & & & & & \\
     \bottomrule
-  \end{tabular}
-  \caption{Details of the loops rejected by the constraint that all loops must }
+  \end{tabulary}
+  \caption{Details of the loops rejected by the constraint that all nucleotides
+    in the loop must have an RSRZ value greater than 1.}
   \label{tab:all-bad-structuring}
 \end{table}
 
@@ -270,10 +355,10 @@ addition, the loop appears poorly modeled because of the lack of interactions.
 These are the types of loops I expected to reject with this method.
 
 \begin{figure}
-  \caption{}
+  \caption{3D structure of loop HL\_46R7\_033. This loop}
   \label{fig:hl-4dr7-033}
 \end{figure}
- 
+
 Others loops, such as HL\_2OIU\_002 as shown in Figure~\ref{fig:hl-20iu-002},
 appear to be well structured loops but poorly modeled. We believe this is
 because the modeling procedure for a new structure is to begin with a previous
@@ -295,7 +380,7 @@ making more interactions will have a lower RSRZ score than nucleotides that make
 fewer interactions. This is because the lack of interactions may allow the base
 to adopt a variety of conformations in the crystal, leading to diffuse electron
 density. With diffuse data any single modeled position fits experimental
-electron density poorly resulting in a high RSRZ value. 
+electron density poorly resulting in a high RSRZ value.
 
 I explored this by plotting the distribution of RSRZ values for all nucleotides
 in loops vs the number of FR3D annotated interactions the BGSU database records
@@ -304,8 +389,8 @@ plot', which were originally developed in \cite{Hintze1998}. The figure is a mix
 of a density estimation and a box plot. In this figure all nucleotides making
 the same number of interactions are grouped together and a density estimate for
 each group is produced. The estimate is plotted along each row and is referred
-to as a ``density trace'' or ``trace'' for this description. The range of the trace
-indicates the range of the values. The width of the trace at any region
+to as a ``density trace'' or ``trace'' for this description. The range of the
+trace indicates the range of the values. The width of the trace at any region
 indicates what fraction of all nucleotides are in this region.
 
 In this figure I included all types of annotated interactions, base pairs, base
@@ -317,42 +402,64 @@ gently decrease as the number of interactions increase. The RSRZ value for
 nucleotides in internal loops with zero interactions is NN +- NN, while for 3 it
 is NN +- NN \ref{tab:rsrz-means}.
 
-\begin{figure}
-  \caption{ Distribution of RSRZ values for nucleotides in loops clustered by
-    the total number of annotated interactions they form with other nucleotides
-    in the loop. The nucleotides are grouped by the total number of interactions
-    formed, including basepairs, base backbone, and base-stacking interactions.
-    The distributions of the RSRZ values are represented as violin plots. The
-    blue dots and inner bars within each ``bubble'' represent the mean and
-    standard deviation of the data respectively. The data is plotted vertically
-    to better display the trend of decreasing mean RSRZ as the number of
-  interactions for each nucleotide increases. }
-  \label{tab:rsrz-means}
-\end{figure}
-
 The large range of RSRZ makes it difficult to examine the number of outliers in
 each group. To alleviate this I created a truncated version of this plot to
 visualize the number of outliers for each number of interactions as shown in
 Figure~\ref{fig:truncated-rsrz-dist}. In this figure the RSRZ values are
 truncated at a value of 3. Thus all nucleotides with an RSRZ value above 3 was
-set to 3. 
+set to 3.
+
 
 \begin{figure}
-  \caption{Violin plot showing truncated distributions of RSRZ values for
-    nucleotides in loops clustered by the total number annotated interactions
-    the nucleotide makes. This plot is the same data as Figure NT RSRZ DIST but
-    the displayed RSRZ has been clamped to a maximum value of 3. Outlier
-    instances (RSRZ > 3) are represented at RSRZ = 3. Numbers above each violin
-    indicate the number of nucleotides with the given number of interactions.
-    The means and standard deviations are still computed with the untruncated
-    data however. The data is plotted horizontally to better compare the shapes
-  of the distributions.}
-  \label{fig:truncated-rsrz-dist}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \caption{Distribution of RSRZ values for nucleotides in loops clustered by
+      the total number of annotated interactions they form with other nucleotides
+      in the loop. The nucleotides are grouped by the total number of interactions
+      formed, including basepairs, base backbone, and base-stacking interactions.
+      The distributions of the RSRZ values are represented as violin plots. The
+      blue dots and inner bars within each ``bubble'' represent the mean and
+      standard deviation of the data respectively. The data is plotted vertically
+      to better display the trend of decreasing mean RSRZ as the number of
+    interactions for each nucleotide increases. }
+    \label{fig:rsrz-dist}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \caption{Violin plot showing truncated distributions of RSRZ values for
+      nucleotides in loops clustered by the total number annotated interactions
+      the nucleotide makes. This plot is the same data as Figure~\ref{fig:rsrz-dist} but
+      the displayed RSRZ has been clamped to a maximum value of 3. Outlier
+      instances (RSRZ \textgreater 3) are represented at RSRZ = 3. Numbers above each violin
+      indicate the number of nucleotides with the given number of interactions.
+      The means and standard deviations are still computed with the untruncated
+      data however. The data is plotted horizontally to better compare the shapes
+    of the distributions.}
+    \label{fig:truncated-rsrz-dist}
+  \end{subfigure}
 \end{figure}
 
 From this more focused figure we can see that there are far fewer RSRZ outliers
 for Nts forming three or more annotated interactions (the tails are skinnier as
-interactions increase) across all loop types. 
+interactions increase) across all loop types. Another useful detailed
+examination of this data is shown in Table~\ref{tab:interaction-means}. This
+table shows the mean and standard deviation of all distributions shown in
+Figure~\ref{fig:truncated-rsrz-dist}.
+
+\begin{table}
+  \begin{tabulary}{\linewidth}{LRRRRRRR}
+    \toprule
+              & \multicolumn{7}{c}{Number of Interactions} \\
+    Loop Type            & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+    \midrule
+    Hairpin Loop & 0.73 (1.76) & 0.2 (1.04) & 0.03 (0.86) & 0.02 (0.82) & -0.05 (0.72) & -0.04 (0.48) & -0.08 (0.71) \\
+    Internal Loop & 0.63 (1.68) & 0.11 (1.05) & -0.02 (0.82) & -0.02 (0.74) & -0.03 (0.63) & 0.02 (0.62) & 0.07 (0.48) \\
+    3-Way Junction Loop & 0.17 (0.68) & 0.1 (0.66) & -0.02 (0.65) & -0.09 (0.6) & -0.12 (0.59) & -0.04 (0.61) & -0.15 (0.32) \\
+    \bottomrule
+  \end{tabulary}
+  \caption{Table showing the mean and standard deviation of RSRZ for nucleotides
+    in Internal, Hairpin and 3-Way Junction Loops by the number of interactions
+  each nucleotide makes. The numbers in parenthesis are the standard deviation.}
+  \label{tab:interaction-means}
+\end{table}
 
 These observations generally confirm the expectation that nucleotides the
 interactions have lower mean RSRZ values and fewer outliers. Thus I implemented
@@ -361,14 +468,20 @@ values below the cutoff for the loop to be included. As with the previous
 criterion it is necessary to determine its effect on clustering the effect on
 clustering. Shown in Table INTERACTION BAD COUNTS is a summary of the number of
 loops excluded by this method for each cutoff value. In other words, a loop is
-excluded if one or more interacting nucleotides has RSRZ > the threshold.
+excluded if one or more interacting nucleotides has RSRZ \textgreater the
+threshold.
 
 \begin{table}
-  \begin{tabular}{lr}
+  \begin{tabulary}{\linewidth}{LLCCCC}
     \toprule
+              &                   & \multicolumn{4}{c}{Number of Loops Rejected by Cutoff} \\
+    Loop Type & Total Valid Loops & RSRZ \textgreater 1 & RSRZ \textgreater 1.5 & RSRZ \textgreater 2 & RSRZ \textgreater 2.5 \\
     \midrule
+    Internal Loops & 1794 (100\%) & 419 (23\%)   & 239 (13\%)  & 149 (8\%)  & 92 (5\%) \\
+    Hairpin Loops  & 1319 (100\%) & 430 (33\%)   & 279 (21\%)  & 198 (14\%) & 144 (11\%) \\
+    3-Way Junction & 132 (100\%)  & 37 (28\%)    & 21 (16\%)   & 7 (5\%)    & 5 (4\%)\\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
   \caption{Counts and percent of all loops extracted that are rejected by
     requiring all bases with annotated interactions passing each RSRZ cutoff.
     The percentages are the percent of all loops that are rejected by the
@@ -377,9 +490,9 @@ excluded if one or more interacting nucleotides has RSRZ > the threshold.
 
 As before increasing the RSRZ cutoff decreases the number of loops excluded.
 Here we can see a much larger effect of this criterion. The highest number of
-loops excluded, 400, occurs for internal loops with a constraint of RSRZ > 1, on
+loops excluded, 400, occurs for internal loops with a constraint of RSRZ \textgreater 1, on
 the other hand, the largest number of loops rejected for the previous constraint
-is 45 for hairpin loops at RSRZ > 1. 
+is 45 for hairpin loops at RSRZ \textgreater 1.
 
 We use the two criteria described here to build a new RSRZ quality assurance
 step for loops; all nucleotides in a loop must have an RSRZ value below the
@@ -390,16 +503,61 @@ same RSRZ value for both cutoffs. The total number of loops rejected by this
 method are summarized in Table~\ref{tab:rsrz-reject-summary}.
 
 \begin{table}
-  \begin{tabular}{lr}
-    \toprule
-    \midrule
-    \bottomrule
+  \begin{tabular}{llrrrrrrrr}
   \end{tabular}
   \caption{Counts and percent of all loops extracted that are rejected by the
     RSRZ tested here. The percentages are the percent of all loops that are
   rejected by the cutoff.}
   \label{tab:rsrz-reject-summary}
 \end{table}
+
+I then tested the effects of all RSRZ cutoffs on the number of internal and
+hairpin loops that are excluded, as shown in
+Table~\ref{tab:il-rsrz-cutoffs-combinations} and
+Table~\ref{tab:hl-rszr-cutoffs-combinations}. From these tables we can see that
+the 
+
+\begin{table}
+  \begin{tabular}{llccccc}
+    \toprule
+    &            & \multicolumn{4}{c}{Fictional Loop Cutoff}    \\
+                                           \cmidrule(r){3-6} 
+                                           &            & \rsrz{1} & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5} \\
+    \midrule
+    \multirow{4}{*}{Interacting NT Cutoff} & \rsrz{1}   &          &            &          &             \\
+                                           & \rsrz{1.5} &          &            &          &             \\
+                                           & \rsrz{2}   &          &            &          &             \\
+                                           & \rsrz{2.5} &          &            &          &             \\
+    \bottomrule
+  \end{tabular}
+  \caption{Table showing the number of Internal Loops that are rejected based
+    upon the fictional loop and poorly modeled interacting nucleotides. The
+    values in the cells indicate the number of loops that are rejected at each
+    cutoff. The total number of internal loops is shown in the upper left.
+  }
+  \label{tab:il-rsrz-cutoffs-combinations}
+\end{table}
+
+\begin{table}
+  \begin{tabular}{llccccc}
+    \toprule
+    &      & \multicolumn{4}{c}{Fictional Loop Cutoff}          \\
+                                                  \cmidrule{3-6}  
+                                           &            & \rsrz{1}   & \rsrz{1.5} & \rsrz{2} & \rsrz{2.5}         \\
+    \midrule
+    \multirow{4}{*}{Interacting NT Cutoff} & \rsrz{1}   &          &            &          &         \\
+                                           & \rsrz{1.5} &          &            &          &         \\
+                                           & \rsrz{2}   &          &            &          &         \\
+                                           & \rsrz{2.5} &          &            &          &         \\
+    \bottomrule
+  \end{tabular}
+  \caption{Table showing the number of Hairpin Loops that are rejected based
+    upon the fictional loop and poorly modeled interacting nucleotides.
+  }
+  \label{tab:hl-rsrz-cutoffs-combinations}
+\end{table}
+
+The goal of the study is to ensure the quality of the Motif Atlas is as
 
 \section{Exploring the effects of the new quality criteria on motif clustering}
 
@@ -415,7 +573,7 @@ clustering.
 
 I discuss the effects of the new quality criteria on the loops, followed by a
 general description of the motif clustering and then discuss the effects of
-applying the RSRZ cutoffs to the clustering. 
+applying the RSRZ cutoffs to the clustering.
 
 \subsection{Summary of the new loop quality criteria}
 
@@ -425,11 +583,23 @@ loops from the representative IFE’s from the 4.0{\AA} resolution cutoff reject
 each criterion.
 
 \begin{table}
-  \begin{tabular}{lr}
-    \toprule
+  \begin{tabulary}{\linewidth}{LCCCCCCCCCC}
+    \rot{Loop Type} &
+      \rot{Total Loops} &
+      \rot{Missing Nucleotides} &
+      \rot{Abnormal Chain Number} &
+      \rot{Incomplete Nucleotides} &
+      \rot{Self-Complementary Internal Loop} &
+      \rot{Too Many Symmetry Operators} & 
+      \rot{Subtotal with Flaws} &
+      \rot{Modified Nucleotides} &
+      \rot{cryo-EM loops} &
+      \rot{Accepted Loops} \\
     \midrule
+    Hairpin Loop & 2748 (100\%) & 171 (6\%) & 2 (0.07\%) & 35 (1\%)   & 0         & 27 (1\%) & 235 (9\%) & 103 (4\%) & 757 (27\%)  & 1653 (60\%) \\
+    Internal Loop & 4334 (100\%) & 54 (1\%) & 6 (0.1\%)  & 20 (0.5\%) & 162 (4\%) & 55 (1\%) & 297 (7\%) & 151 (3\%) & 1951 (45\%) & 1945 (45\%) \\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
   \caption{Counts of the loops that are rejected by each quality criteria for
   all loops that come from a representative IFE from the 2.85 representative
   release with resolution cutoff of 4.0{\AA}.}
@@ -439,7 +609,7 @@ each criterion.
 From this table we can see that 151, or 3\%, internal loops are rejected on the
 basis of modified nucleotides. This differs from the previous clustering where
 0.9\% of loops were rejected \cite{Petrov2012}. In addition, the largest
-fraction of loops, 45\%, that are rejected are due to being cyro-EM loops
+fraction of loops, 45\%, that are rejected are due to being cryo-EM loops
 
 \subsection{Description of the properties of the new motif atlas}
 
@@ -455,14 +625,24 @@ includes the counts of singleton motif families, families with only one
 instance, and the recurrent motifs, families with more than one instance.
 
 \begin{table}
-  \begin{tabular}{lr}
+  \begin{tabular}{lrrrrrrr}
     \toprule
+                  &                                      & \multicolumn{3}{c}{Singleton Groups} & \multicolumn{3}{c}{Recurrent Groups} \\
+    Motif Release & 
+      Motif Groups & 
+      Total & 
+      X-Ray &
+      cryo-EM & 
+      Total & 
+      X-Ray &
+      cryo-EM \\
     \midrule
+    1.18 (Decemeber 2014) & 372 & 175 & 108 & 197 & \\
+    2.0 (July 2016)       & 256 & 109 & 0   & 147 & \\
     \bottomrule
   \end{tabular}
-  \caption{A table summarizing the number of loops in the previous motif
-    release as compared to the new release. Percentages are out of the total
-    number of motifs in that release.}
+  \caption{A table summarizing the number of internal loop motif groups in the
+  previous motif release as compared to the new release. }
   \label{tab:loop-counts}
 \end{table}
 
@@ -477,7 +657,7 @@ however, the change is fairly small.
 I next examined the sizes of the motifs in the new clustering. Shown in
 Figure~\ref{fig:num-motif-instances} is the size distribution in terms of number
 of motif instances in all motifs motif. From this figure we can see there are 50
-singleton motif groups and two groups with around 250 members. 
+singleton motif groups and two groups with around 250 members.
 
 \begin{figure}
   \caption{}
@@ -486,11 +666,11 @@ singleton motif groups and two groups with around 250 members.
 
 This figure shows a large spike at 1, indicating the large number of singleton
 motifs in the clustering. The majority of motifs have fewer than 50 instances,
-with only 2 motifs having near 250 instances. 
+with only 2 motifs having near 250 instances.
 
 The next consideration is the distribution of the number of nucleotides in the
 motifs. Show in Figure~\ref{fig:num-motifs-nucleotides} is the distribution of
-the number of nucleotides in each motif. 
+the number of nucleotides in each motif.
 
 \begin{figure}
   \caption{}
@@ -501,7 +681,7 @@ This figure shows the overall size distribution of internal loop motifs for all
 motifs in the new motif release. It is useful to know the sizes of each class of
 motifs, singleton and recurrent. Shown in Figure~\ref{fig:num-nt-by-class} is this
 information. This figure shows that singleton motifs tend to be larger, with a
-mean of 9.5 as opposed to the mean of 8.5 for recurrent motifs. 
+mean of 9.5 as opposed to the mean of 8.5 for recurrent motifs.
 
 \begin{figure}
   \caption{}
@@ -514,24 +694,38 @@ I then explored what would happen to the motif atlas when the RSRZ cutoffs
 applied. This was done by examining each motif for loops that are rejected by
 each RSRZ cutoff and seeing the motif would still exist. I explored two main
 questions. First, what type of motifs are changed? Secondly, are the loops I am
-removing geometrically distinct from all other loops? 
+removing geometrically distinct from all other loops?
+
+\begin{table}
+  \begin{tabulary}{\linewidth}{LLLRRRR}
+    \toprule
+    & & & \multicolumn{4}{c}{Number of Loops Excluded at} \\
+    Type of Motif & 
+      Motifs & 
+      Instances &
+      RSRZ \textgreater 1 &
+      RSRZ \textgreater 1.5 &
+      RSRZ \textgreater 2 &
+      RSRZ \textgreater 2.5 \\
+  \midrule
+  Singleton \\
+  Recurrent \\
+  \bottomrule
+  \end{tabulary}
+
+  \caption{A table showing the counts of rejected loops in each type of motif,
+    singleton or recurrent. The percents in the parenthesis indicate the percent
+    of rejected loops that occur in each type of motif. Thus the upper row shows
+    that there are 419 loops rejected using the RSRZ \textgreater 1 cutoff, of
+    those 36 or 9\%, 36/419, occur in singleton motifs while 383 or 91\%,
+  383/419, occur in recurrent motifs. }
+  \label{tab:loop-motif-fraction}
+\end{table}
 
 To answer the first question I explored the distributions of the number of
 instances group as well as the number of nucleotides in each motif  that
 contains at least one outlier. Shown in Table~\ref{tab:number-motifs-altered} is
-the summary of the number of motifs altered at each cutoff. 
-
-\begin{table}
-  \caption{A table showing the number of motifs for singletons vs recurrent
-    motifs with rejected loops for each cutoff tested here. The counts are the
-    number of loops rejected by each cutoff while the percents in the
-    parenthesis are the fraction of all motifs of that type that are are
-    affected by the cutoff. The upper left column indicates that there are 120
-    total motifs that contain rejected loops, and this is 46\% (120/256) of all
-    motifs, while the column to the right indicates that 33\% (36/109) of all
-  singleton motifs are rejected by the RSRZ > 1 cutoff.}
-  \label{tab:number-motifs-altered}
-\end{table}
+the summary of the number of motifs altered at each cutoff.
 
 From this table it appears that the majority of motifs affected are recurrent
 motifs, 57\% of recurrent motifs contain at least one loop that is rejected as
@@ -547,24 +741,27 @@ recurrent motifs. From this I infer that the singleton motifs are generally
 modeled correctly. However, the recurrent motifs  often contain poorly  modeled
 loops. This is consistent with the hypothesis that poorly modeled loops occur
 because a structure was used as a template and a loop was not modified to fit
-the new data well.  
+the new data well.
 
 \begin{table}
-  \caption{A table showing the counts of rejected loops in each type of motif,
-    singleton or recurrent. The percents in the parenthesis indicate the percent
-    of rejected loops that occur in each type of motif. Thus the upper row shows
-    that there are 419 loops rejected using the RSRZ > 1 cutoff, of those 36 or
-    9\%, 36/419, occur in singleton motifs while 383 or 91\%, 383/419, occur in
-  recurrent motifs. }
-  \label{tab:loop-motif-fraction}
+  \caption{A table showing the number of motifs for singletons vs recurrent
+    motifs with rejected loops for each cutoff tested here. The counts are the
+    number of loops rejected by each cutoff while the percents in the
+    parenthesis are the fraction of all motifs of that type that are are
+    affected by the cutoff. The upper left column indicates that there are 120
+    total motifs that contain rejected loops, and this is 46\% (120/256) of all
+    motifs, while the column to the right indicates that 33\% (36/109) of all
+  singleton motifs are rejected by the RSRZ \textgreater 1 cutoff.}
+  \label{tab:number-motifs-altered}
 \end{table}
+
 
 To answer the second question I created a histogram of the minimum for excluded
 loops to all other loops it’s motif group show in
 Figure~\ref{fig:exclude-min-disc}. From this figure we can see that the RSRZ
 cutoffs appear to reject outliers within groups as the distribution of
 discrepancy values peaks near 0, indicating that there is always at least one
-other loop that the outlier is similar to. 
+other loop that the outlier is similar to.
 
 \begin{figure}
   \caption{A histogram of the minimum discrepancy from a rejected loop to all
@@ -576,12 +773,12 @@ other loop that the outlier is similar to.
 
 This figure shows that the excluded loops are often similar to at least one
 other member of their family. This indicates that our RSRZ criteria is not
-removing geometric outliers from each motif family. 
+removing geometric outliers from each motif family.
 
 The RSRZ criteria appear to primarily exclude members of recurrent motifs that
 are geometrically similar to other members of the motif family. RSRZ criteria
 have a much smaller effect than than other motifs, most notably the criteria to
-not use any loops from cyro-em structures. 
+not use any loops from cryo-em structures.
 
 \section{Conclusions and future work}
 
@@ -589,8 +786,8 @@ Here I have described improvements to the previous loop selection criteria, as
 well as a new method that uses a measure of modeling quality, RSRZ, to better
 select loops. After investigating the effects of these new criteria on
 clustering we see that the largest effect comes from rejecting loops from
-cyro-em structures. Usage of RSRZ does not appear to improve the homogeneity of
-groups, as seen by examining the discrepancies of rejected loops. However, 
+cryo-em structures. Usage of RSRZ does not appear to improve the homogeneity of
+groups, as seen by examining the discrepancies of rejected loops. However,
 
 Future work may focus on exploring other measures such as number of clashes in a
 motif. In addition, it is possible to calculate RSRZ by parts of nucleotides,

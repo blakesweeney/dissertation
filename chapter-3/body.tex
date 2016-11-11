@@ -1,5 +1,4 @@
-\chapter{GROUPING RNA 3D STRUCTURES FROM FROM PDB USING MMCIF FILES IN RNA INTO
-EQUIVALENCE SETS}
+\chapter{GROUPING RNA 3D STRUCTURE FILES IN MMCIF FORMAT INTO EQUIVALENCE SETS}
 
 \section{Introduction}
 
@@ -330,6 +329,7 @@ basepairs. We then join chains based upon a few rules. A representation of these
 rules is shown in Figure~\ref{fig:build-ife}.
 
 \begin{figure}
+  % 
   \includegraphics[width=\linewidth]{chapter-3/figs/build-ifes}
   \caption{The rules for building connecting chains into IFE's. Each chain is
     represented by a circle. Unstructured chains are in blue with the letter
@@ -465,7 +465,7 @@ We build EC through transitivity. This means that all connected IFE’s, even if
 the connections are indirect, are placed into a single group. An example of such
 a clustering is shown in Figure~\ref{fig:transitivity}.
 
-\begin{figure}{ht}
+\begin{figure}[ht]
   \includegraphics[width=\linewidth]{chapter-3/figs/ife-transtivity}
   \caption{Schema of Equivalence Classes built by transitivity. In this figure
     each IFE instance is represented by a circle.Lines connecting circles
@@ -717,8 +717,8 @@ discrepancy, and sequence similarity with respect to the size of the group in
 terms of nucleotides and members as shown in Figure~\ref{fig:outlier-detail}.
 This figure shows that the majority of the groups with outliers contain
 relatively few members and are relatively small. However, there are a few groups
-that contain many members and are large. The spike at \~80 nucleotides
-corresponds to 2 tRNA groups.
+that contain many members and are large. The spike at \TILDE 80
+nucleotides corresponds to 2 tRNA groups.
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{chapter-3/figs/outlier-details}
@@ -767,7 +767,7 @@ From the definition of our methodology, I know that all groups that contain
 pairs with low sequence similarity will do so because they are connected through
 a chain of high sequence similarity pairs. The NR\_all\_03381.1 group contains
 protein/stem loop constructs of length 22 nt and has 4 members,
-\ife{1K8W}{1}{B}, \ife{1ZL3}{1}{B}, \ife{1ZE2}{1}{D} , and 1ZE.
+\ife{1K8W}{1}{B}, \ife{1ZL3}{1}{B}, \ife{1ZE2}{1}{D}, and \ife{1ZE2}{1}{C}.
 
 The other class of groups with outliers, those that contain a pair with high
 discrepancy, can be caused in two ways. First, the pairs may be connected
@@ -785,11 +785,11 @@ yellow bars that only cover part of the
 \end{figure}
 
 The other possibility is that the chains are connected through an IFE which did
-not have discrepancy computed. An example of this is show in NR\_all\_18070.1
-DISC. In this figure we can see a yellow line in the upper right which covers
-the entire heatmap. This indicates that this IFE has high discrepancy to all
-other members of the group. This IFE is connected to all other members through
-the IFE’s that have no discrepancy shown (grey bars).
+not have discrepancy computed. An example of this is show in
+Figure~\ref{fig:NR-all-18070-1-disc}. In this figure we can see a yellow line in
+the upper right which covers the entire heatmap. This indicates that this IFE
+has high discrepancy to all other members of the group. This IFE is connected to
+all other members through the IFE’s that have no discrepancy shown (grey bars).
 
 We examined the two groups, NR\_all\_18070.1 and NR\_all\_75770.1 manually and found
 that they are tRNA groups. We will look at NR\_all\_18070.1 first, which is a tRNA
