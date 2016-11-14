@@ -29,7 +29,7 @@ summary of is shown in Table~\ref{tab:mol-dist}.
     \DR{} LSU            & 42   & 0.5  \\
     \SC{} SSU            & 56   & 0.8  \\
     \SC{} LSU            & 63   & 0.9  \\
-    Other Ribosomes      &      &      \\
+    % Other Ribosomes      &      &      \\
     Ribosomal Subtotal   & 1714 & 24.5 \\
     Remaining Structures & 5287 & 75.5 \\
     Total                & 7001 & 100  \\
@@ -106,8 +106,8 @@ pairs per nucleotide, discussed in detail in \cite{Leontis2012b}.
 
 As the goal is to use only high quality structures the procedure uses X-ray
 structures as the representative, if possible. Some structures, such as that of
-the the mouse ribosome (3J7Q), have only been solved using cryo-electron
-microscopy (``cryo-EM'') and in these cases, and only these cases,
+the the mouse ribosome (3J7Q) \cite{Voorhees2014}, have only been solved using
+cryo-electron microscopy (``cryo-EM'') and in these cases, and only these cases,
 representative selected for the equivalence set is necessarily a cryo-EM
 structure. Only X-Ray structures are used when available because methods for
 assessing the modeling quality of cryo-EM structures, comparable to RSR-Z scores
@@ -161,6 +161,14 @@ overall logic of this procedure, but does not correspond exactly to the
 implementation.
 
 \begin{figure}
+  \texttt{
+    procedure selecting a representative
+    select candidate representative with best BP/NT
+    for all members of the group
+      if representative has 1\% more BP and 1\% NT
+        set as representative
+    repeat loop until representative does not change
+  }
   \caption{Pseudocode showing the overall logic of the selection for
   representative sets.}
   \label{fig:pseudocode-representatives}
@@ -194,7 +202,7 @@ selects a example with more nucleotides and basepairs but a worse ratio of the
 two. This selection is our desired result.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{chapter-4/figs/hm-lsu-rep}
+  \includegraphics[width=0.5\textwidth]{chapter-4/figs/hm-lsu-rep}
   \caption{Scatter plot of representative selection across three possible
     methodologies for the \HM{} Large Ribosomal Subunit. Shown here is a summary
     of which IFE’s are selected as the representative for the 3 method discussed
@@ -215,7 +223,7 @@ see that all three methods select an IFE with resolution 2.4{\AA}. This is
 consistent with our goals for the methods.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{chapter-4/figs/hm-lsu-res}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/hm-lsu-res}
   \caption{Distribution of resolutions for \HM{} Large Ribosomal subunit IFE’s
     in NR\_all\_65634.1 with the resolution of the representative indicated.
     This histogram shows the resolution distribution of all IFE’s in the
@@ -225,15 +233,14 @@ consistent with our goals for the methods.
 \end{figure}
 
 We further evaluated the method described here by examining the selection of
-representatives for the \EC{} Large and Small Subunits as well as the Thermus
-thermophilus Large and Small Ribosomal Subunits, shown in
-Figure~\ref{fig:ec-lsu-rep}, Figure~\ref{fig:ec-ssu-rep},
-Figure~\ref{fig:tt-lsu-rep} and Figure~\ref{fig:tt-ssu-rep} respectively. As we
-can see in these figures, only the \EC{} LSU T. thermophilus SSU differ in
-selection of representatives.
+representatives for the \EC{} Large and Small Subunits as well as the \TT{}
+Large and Small Ribosomal Subunits, shown in Figure~\ref{fig:ec-lsu-rep},
+Figure~\ref{fig:ec-ssu-rep}, Figure~\ref{fig:tt-lsu-rep} and
+Figure~\ref{fig:tt-ssu-rep} respectively. As we can see in these figures, only
+the \EC{} LSU \TT{} SSU differ in selection of representatives.
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{chapter-4/figs/ec-lsu-rep}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/ec-lsu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected \EC{} Large Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
@@ -244,7 +251,7 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{chapter-4/figs/ec-ssu-rep}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/ec-ssu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
     for selected \EC{} Small Subunits using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
@@ -255,9 +262,9 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{chapter-4/figs/tt-lsu-rep}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/tt-lsu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
-    for selected T. thermophilus Large Subunits using the three methods
+    for selected \TT{} Large Subunits using the three methods
     discussed here. The representative selected is shown as a large blue dot,
     while all other members are shown as small red dots. The plot has been
     truncated to show only the structures with at least 2725 nucleotides and 500
@@ -266,9 +273,9 @@ selection of representatives.
 \end{figure}
 
 \begin{figure}
-  \includegraphics[width=\linewidth]{chapter-4/figs/tt-ssu-rep}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/tt-ssu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
-    for selected T. thermophilus Small Subunits using the three methods
+    for selected \TT{} Small Subunits using the three methods
     discussed here. The representative selected is shown as a large blue dot,
     while all other members are shown as small red dots. The plot has been
     truncated to show only the structures with at least 1490 nucleotides and 200
@@ -311,7 +318,7 @@ is a histogram that displays the differences for all groups where the difference
 is greater than 0{\AA}.
 
 \begin{figure}
-  % \includegraphics[width=\linewidth]{chapter-4/figs/}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/res-diff}
   \caption{Histogram of the differences between the resolution of the selected
     representative and the minimum resolution within the group for all 3
     methods. This histogram does not show the groups where the representative
@@ -335,8 +342,8 @@ summary of those groups.
   \begin{table}
   \begin{tabular}{llrrr}
     \toprule
-               % &                             & \multicolumn{3}{c}{Method} \\
-    % \cmidrule(r){3-5}
+               &                             & \multicolumn{3}{c}{Method} \\
+    \cmidrule(r){3-5}
     Group Name &  Minimum Resolution ({\AA}) &  Previous &  Dual Increase &  Dual 1\% Increase \\
     \midrule
     NR\_all\_00304.1 &  9.0  & \ife{3J0D}{1}{A} (11.1{\AA})   &
@@ -419,7 +426,16 @@ groups, using only X-ray structures and repeating the analysis. Shown in
 Figure~\ref{fig:xray-only-diff} is this figure.
 
 \begin{figure}
-  \caption{}
+  \includegraphics[width=0.5\linewidth]{chapter-4/figs/xray-res-diff}
+  \caption{Histogram of the differences between the resolution of the selected
+    representative and the minimum resolution for X-Ray structures within the
+    group for all 3 methods. This histogram does not show the groups where the
+    representative resolution is the same as the minimum resolution.  The red
+    vertical line indicates the cutoff of 1{\AA}. The numbers to the left of the
+    red box indicate the total number of groups with resolution difference less
+    than 1{\AA}, while the number to the right indicates the number of groups
+    with resolution
+  difference greater than 1{\AA}.}
   \label{fig:xray-only-diff}
 \end{figure}
 
@@ -434,6 +450,8 @@ difference between the representative resolution and minimum resolution.
 \begin{table}
   \begin{tabular}{llrrr}
     \toprule
+          &                             & \multicolumn{3}{c}{Method} \\
+    \cmidrule(r){3-5}
     Group &  Minimum Resolution ({\AA}) & Previous &  Dual Increase  & Dual 1\% Increase \\
     \midrule
     NR\_all\_18070.1 & \ife{4W2F}{1}{AX} (2.4{\AA}) & 
@@ -532,10 +550,10 @@ RNA backbone scores, however, all other metrics are worse.
   \label{fig:ec-lsu-report}
 \end{figure}
 
-The same data is shown for the Thermus thermophilus large subunit group in
-Figure~\ref{fig:tt-lsu-report}. In this case we see that both structures have very
-similar metrics overall. The previous method does select a structure, 5HCQ, with
-fewer RSRZ outliers.
+The same data is shown for the \TT{} large subunit group in
+Figure~\ref{fig:tt-lsu-report}. In this case we see that both structures have
+very similar metrics overall. The previous method does select a structure, 5HCQ,
+with fewer RSRZ outliers.
 
 \begin{figure}
   \begin{subfigure}[b]{0.5\textwidth}
@@ -576,6 +594,7 @@ shows as many or fewer changes than the previous, indicating it is slightly more
 stable.
 
 \begin{figure}
+  \includegraphics[width=0.5\textwidth]{chapter-4/figs/rep-count-changes}
   \caption{A cumulative distribution of the total number of changes for all
     three methods. This plot is a cumulative sum of the total number changes for
     all classes at the ``all'' resolution cutoff which exist in all of the 90
@@ -592,7 +611,7 @@ time.
   \begin{tabular}{lrrrrr}
     \toprule
                         & \multicolumn{5}{c}{Number of Changes} \\
-    % \cmidrule[r]{2-6}
+                          \cmidrule(r){2-6}
     Method              & 0    & 1  &  2 &  3 &  4 \\
     \midrule
     Previous Method     & 1528 & 19 &  0 &  2 &  0 \\
@@ -616,11 +635,10 @@ desirable over a method which changes very frequently. One class, 80570
 shown in red, the representative is changed every time a new structure is
 added by all methods. This class has few members, 8 in 2.90, and a very
 few nucleotides, leading to minor changes in resolution changing the
-selected representative. Shown in Figure CONSTANT CHANGE are the
-structures of the representative in 2.0 and 2.90. From this we can see
-that the structures are highly similar
+selected representative. 
 
 \begin{figure}
+  \includegraphics[width=0.5\textwidth]{chapter-4/figs/change-frequency}
   \caption{This figure shows the rate of changes in for each class that changes
     more than once between 2.0 and 2.90. Each colored line represents a class,
     and each mark indicates when members are added to the class. The three sets
