@@ -331,14 +331,14 @@ between nts distant in the 2D. The farther apart two nts are in the 2D
 structure, the more WC base pairs they ``cross over'' when they interact. By
 definition, all of the WC base pairs that define the 2D structure are ``nested''
 with respect to each of the others.  Two WC pairs (i,k) and (m,n) are nested
-when either i \textgreater m \textgreater n \textgreater k (as shown in
-Figure~\ref{fig:nesting}A) or m \textgreater i \textgreater k \textgreater n,
+when either i \textgreater{} m \textgreater{} n \textgreater{} k (as shown in
+Figure~\ref{fig:nesting}A) or m \textgreater{} i \textgreater{} k \textgreater{} n,
 where i, k, m and n are the nt numbers in the linear RNA sequence (given in the
-5’ to 3’ direction) and i \textgreater k, m \textgreater n. In other words,
+5’ to 3’ direction) and i \textgreater{} k, m \textgreater{} n. In other words,
 nested interactions do not cross over each other in the 2D structure. On the
-other hand, if two interactions (i,k) and (m,n) are such that i \textgreater m
-\textgreater k \textgreater n, as shown in Figure~\ref{fig:nesting}B, or
-alternatively, m \textgreater i \textgreater n \textgreater k, then they
+other hand, if two interactions (i,k) and (m,n) are such that i \textgreater{} m
+\textgreater{} k \textgreater{} n, as shown in Figure~\ref{fig:nesting}B, or
+alternatively, m \textgreater{} i \textgreater{} n \textgreater{} k, then they
 ``cross.'' Once a comprehensive set of nested WC pairs is identified and
 assigned to the 2D structure, one can measure how ``local'' or ``LR'' any other
 interaction is, by counting the number of nested WC pairs it crosses over. This
@@ -395,7 +395,8 @@ interactions occur in loops.
 \begin{table}
   \begin{tabulary}{\linewidth}{LRRRRRRRRR}
     \toprule
-                & \multicolumn{3}{c}{Short Range}               & & \multicolumn{4}{c}{Short Range} & \\
+                & \multicolumn{4}{c}{Local Interactions}               & \multicolumn{5}{c}{Long-Range Interactions} \\
+    \cmidrule(r){2-5}                                       \cmidrule(r){6-10}
                 & Base-Pairing & Base-Stacking & Base-Phosphate & Subtotals & Base-Pairing & Base-Stacking & Base-Phosphate & Helix Packing & Subtotals \\
     \midrule
     Helix-Helix & 440 & 878 & 5 & 1323 & 0 & 0 & 6  & 5 & 11 \\
@@ -497,7 +498,7 @@ of loop nts in the functional interactions of structured RNA.
   \includegraphics[width=0.5\linewidth]{chapter-1/figs/aa-loop-v-nt}
   \caption{Amino Acid Interactions for Loop vs. Helix Nucleotides. Histogram of
     number of amino acids within 4Å for nucleotides in loops (blue) vs helices
-  (red) in E. coli 30S ribosome. }
+    (red) in \EC{} 30S ribosome. }
   \label{fig:aa-loop-v-nt}
 \end{figure}
 
@@ -816,7 +817,7 @@ phosphate groups repel each other, precluding direct contact, the phosphates can
 indirectly interact through bridging divalent ions, especially \ce{Mg2+}, which is
 maintained at milli-molar (mM) concentration in cells. Metal-bridging
 interactions are very important for the compact folding of complex RNA
-architectures and have been reviewed elsewhere cite{Woodson2005, Bowman2012}. 
+architectures and have been reviewed elsewhere \cite{Woodson2005, Bowman2012}. 
 
 \subsection{Base-Base Interactions}
 
@@ -858,7 +859,7 @@ the hypotenuse of each triangle in Table~\ref{tab:bp-families} and the marked ve
 location of the ribose sugar. 
 
 \begin{table}
-  % \includegraphics{chapter-1/figs/
+  \includegraphics[width=\textwidth]{chapter-1/figs/bp-families}
   \caption{The Twelve Geometric Families of RNA Base pairs. Each geometric
     base pair family is defined by the interacting edges of the bases and the
     relative orientation of the glycosidic bonds (columns 2-4). Abbreviations
@@ -982,6 +983,7 @@ pairs in each pairing geometry are summarized in Table~\ref{tab:base-combination
   \begin{tabular}{lcccccccccccccccc}
     \toprule
         &              \multicolumn{4}{c}{A}             &             \multicolumn{4}{c}{C}          &               \multicolumn{4}{c}{G}       &            \multicolumn{4}{c}{U}            \\
+    \cmidrule(r){2-5} \cmidrule(r){6-9} \cmidrule(r){10-13} \cmidrule(r){14-17}
         & A        & C        & G            & U         & A        & C        & G        & U         & A        & C        & G        & U        & A         & C        & G        & U          \\
     \midrule
     cWW & \I{1.4}  & \I{1.2a} & \I{1.3}      & \I{1.1}   & \I{1.2b} & \I{1.6}  & \I{1.1}  & \I{1.5}   & \I{1.3}  & \I{1.1}  &          & \I{1.2a} & \I{1.1}   & \I{1.5}  & \I{1.2b} & \I{1.7}    \\
@@ -1061,13 +1063,14 @@ energy.
 Readers can check their base-pair models against the on-line RNA Base pair
 Catalogue containing structures of all observed and predicted base pairs
 organized by geometric family (\url{http://rna.bgsu.edu/FR3D/base pairs/}) and
-by comparison with Table~\ref{tab:base-combinations}. The base combinations (columns of Table~\ref{tab:base-combinations}) that form
-a stable pair in a particular base pair geometry (rows of Table~\ref{tab:base-combinations}) are indicated
-with an entry beginning with ``I.'' If no stable pair forms for that geometry, the
-cell is left empty. Each column shows the base pair geometries that each base
-combination can adopt. The 3D structures of base combinations forming pairs in
-each geometric family can be viewed and downloaded as PDB files from the pages
-of the online Base Pair Catalogue. 
+by comparison with Table~\ref{tab:base-combinations}. The base combinations
+(columns of Table~\ref{tab:base-combinations}) that form a stable pair in a
+particular base pair geometry (rows of Table~\ref{tab:base-combinations}) are
+indicated with an entry beginning with ``I.'' If no stable pair forms for that
+geometry, the cell is left empty. Each column shows the base pair geometries
+that each base combination can adopt. The 3D structures of base combinations
+forming pairs in each geometric family can be viewed and downloaded as PDB files
+from the pages of the online Base Pair Catalogue. 
 
 Regarding Table~\ref{tab:base-combinations}, readers should note that for base pair geometries that
 involve different edges (for example cWH or tHS) the order in which the bases
@@ -1091,15 +1094,15 @@ isomorphic or “isosteric” to each other in the sense of occupying the same s
 between the backbone atoms of the two strands of the helix. The property of
 being isosteric can be quantified using a measure called the Iso-Discrepancy
 Index (IDI), which depends on three distinct geometric features of base-pairs,
-as illustrated in Figure~\ref{fig:idi} \cite{Stombaugh2009}. The geometric classification
-of base pairs is useful because only base pairs belonging to the same family are
-isosteric by qualitative and quantitative (i.e. the IDI) criteria. Isosteric
-pairs substitute for each other without distorting the local RNA 3D structure.
-The IDI was calibrated by carrying out statistical analysis of IDI values of
-isosteric and near isosteric AU, GC, and GU base pairs extracted from
-high-quality structures. Quantitative analysis with IDI values confirms that for
-two base pairs to be isosteric, they must belong to the same geometric family
-\cite{Stombaugh2009}. 
+as illustrated in Figure~\ref{fig:idi} \cite{Stombaugh2009}. The geometric
+classification of base pairs is useful because only base pairs belonging to the
+same family are isosteric by qualitative and quantitative (i.e. the IDI)
+criteria. Isosteric pairs substitute for each other without distorting the local
+RNA 3D structure. The IDI was calibrated by carrying out statistical analysis of
+IDI values of isosteric and near isosteric AU, GC, and GU base pairs extracted
+from high-quality structures. Quantitative analysis with IDI values confirms
+that for two base pairs to be isosteric, they must belong to the same geometric
+family \cite{Stombaugh2009}. 
 
 \begin{figure}
   \includegraphics[height=0.5\textheight]{chapter-1/figs/idi}
@@ -1321,8 +1324,9 @@ account for almost 80\% of long-range (LR) pairs.
 \begin{table}
   \begin{tabulary}{\linewidth}{LRRRRRR}
     \toprule
-    Basepair Family & \multicolumn{2}{c}{Local Interactions} & \multicolumn{2}{c}{Long-range Interactions} & \multicolumn{2}{c}{All Interactions} \\
-           & Counts & Relative Frequencey (\%) & Counts & Relative Frequencey (\%) & Counts & Relative Frequencey (\%) \\
+                    & \multicolumn{2}{c}{Local Interactions} & \multicolumn{2}{c}{Long-range Interactions} & \multicolumn{2}{c}{All Interactions} \\
+    \cmidrule(r){2-3} \cmidrule(r){4-5} \cmidrule(r){6-7}
+    Basepair Family & Counts & Frequency (\%) & Counts & Frequency (\%) & Counts & Frequency (\%) \\
     \midrule
     cWW    & 460    & 75.3                     & 12     & 15.6                     & 472    & 68.6                     \\
     tWW    & 9      & 1.5                      & 2      & 2.6                      & 11     & 1.6                      \\
@@ -1339,7 +1343,7 @@ account for almost 80\% of long-range (LR) pairs.
     Totals &        & 100\%                    &        & 100\%                    &        & 100\%                    \\
     \bottomrule
   \end{tabulary}
-  \caption{Local vs. Long-range Interactions in E. coli 16S rRNA by Base-pair
+  \caption{Local vs. Long-range Interactions in \EC{} 16S rRNA by Base-pair
   Family.}
   \label{tab:bp-family-counts}
 \end{table}
@@ -1367,8 +1371,8 @@ pairs, stacking and BPh interactions \cite{Petrov2013}.
     and 1FJG \cite{Carter2000}. B. 2D annotations showing conserved non-WC basepairs.
     Although they differ in sequence, the two motifs have the same interactions
     and are assigned to the same motif group. C. Superposition of isosteric tWH
-    and tSH non-Watson-Crick basepairs from the E. coli and T.thermophilus
-  versions of the helix 20 motif.}
+    and tSH non-Watson-Crick basepairs from the \EC{} and \TT{} versions of the
+    helix 20 motif.}
   \label{fig:compare-il}
 \end{figure}
 
