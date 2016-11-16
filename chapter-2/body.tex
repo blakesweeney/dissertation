@@ -780,10 +780,10 @@ extensive documentation on writing tests and readers are strongly encouraged to
 read documentation on writing unit tests in python and using py.test. Examples
 of such links are: 
 \begin{itemize}
-  \item \url{https://stackoverflow.com/questions/3371255/writing-unit-tests-in-python-how-do-i-start}
-  \item \url{http://docs.pytest.org/en/latest/}
-  \item \url{https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/}
-  \item \url{https://docs.python.org/2/library/unittest.html}.
+  \item \href{https://stackoverflow.com/questions/3371255/writing-unit-tests-in-python-how-do-i-start}{https://stackoverflow.com/questions/3371255/writing-unit-tests-in-python-how-do-i-start}
+  \item \href{http://docs.pytest.org/en/latest/}{http://docs.pytest.org/en/latest/}
+  \item \href{https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/}{https://jeffknupp.com/blog/2013/12/09/improve-your-python-understanding-unit-testing/}
+  \item \href{https://docs.python.org/2/library/unittest.html}{https://docs.python.org/2/library/unittest.html}.
 \end{itemize}
 
 Here we give a quick overview of testing in python, as well as information on
@@ -822,17 +822,18 @@ One useful extension to the testing methodology currently used is to automate
 testing using a service like \href{https://travis-ci.org/}{Travis CI}. This
 service reruns all tests whenever someone pushes code to the github repository.
 Such testing has been implemented for the fr3d-python repository and can be seen
-at \url{http://www.travis-ci.org/BGSU-RNA/fr3d-python}. Travis CI and related tools
-are now standard in software development. This approach has not been used with
-the pipeline for two reasons. First, setting up the database is a long and
-complex procedure. The bootstrap script takes nearly half a day to run and
-produces several gigabytes of data. Secondly, Travis CI and all services like it
-do not have matlab installed as this is a commercial product. While the
-skip\_without\_matlab annotation will ensure that other tests do not fail, it will
-mean that key functionality that matlab provides will not be tested. This may
-result in tests passing even though they are actually failing in an environment
-with matlab. Thus we should not use the service as long as we continue to rely
-on Matlab code.
+at
+\url{http://www.travis-ci.org/BGSU-RNA/fr3d-python}{http://www.travis-ci.org/BGSU-RNA/fr3d-python}.
+Travis CI and related tools are now standard in software development. This
+approach has not been used with the pipeline for two reasons. First, setting up
+the database is a long and complex procedure. The bootstrap script takes nearly
+half a day to run and produces several gigabytes of data. Secondly, Travis CI
+and all services like it do not have matlab installed as this is a commercial
+product. While the skip\_without\_matlab annotation will ensure that other tests
+do not fail, it will mean that key functionality that matlab provides will not
+be tested. This may result in tests passing even though they are actually
+failing in an environment with matlab. Thus we should not use the service as
+long as we continue to rely on Matlab code.
 
 It should be possible to deal with these issues by first, removing matlab from
 the pipeline. Once all of FR3D's functionality is written in python the pipeline
