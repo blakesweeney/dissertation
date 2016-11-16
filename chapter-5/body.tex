@@ -247,17 +247,16 @@ model present in a PDB file fits the observed, underlying electron density
 obtained by X-ray diffraction. This was originally described by Jones \etal{} in
 the development of Uppsala validation server \cite{Kleywegt2004a}. RSR is
 calculated using equation:
-
 \begin{equation}
   RSR = \frac{\sum \mid \rho_{obs} - \rho_{calc} \mid}
              {\sum \mid \rho_{obs} + \rho_{calc} \mid}
 \end{equation}
-
 where $\rho$ is electron density. 
-In words this equation computes the normalized
-difference between the observed electron density and modeled electron density. I
-explored the distribution of the RSR values for all nucleotides in loops. This
-is shown in Figure~\ref{fig:rsr-nt-distribution}.
+
+In words this equation computes the normalized difference between the observed
+electron density and modeled electron density. I explored the distribution of
+the RSR values for all nucleotides in loops. This is shown in
+Figure~\ref{fig:rsr-nt-distribution}.
 
 \begin{figure}[ht]
   \begin{subfigure}[b]{0.49\textwidth}
@@ -279,83 +278,97 @@ is shown in Figure~\ref{fig:rsr-nt-distribution}.
   \label{fig:nt-quality-distribution}
 \end{figure}
 
-This figure shows that Guanine has the lowest median RSR value of 0.17, while
-the highest value is shared between Uracil and Adenine with a median of 0.19.
-These distributions have a long tail that goes near 2.5 (a Cystine).
+Figure~\ref{fig:rsr-nt-distribution} shows that Guanine has the lowest median
+RSR value of $0.17 \pm 0.07$, while the highest value is shared between Uracil
+with a median of $0.19 \pm 0.1$. These distributions have a long tail that goes
+near 2.5 (a Cystine). \textbf{MORE}
 
-There are several issues with directly using RRSR as the criterion for
+However, there are several issues with directly using RRSR as the criterion for
 evaluation loop quality. RSR however \cite{Tickle2012}. To deal with these
 issues, the corresponding Z-score, statistical measure, RSRZ, has been proposed
 for general use \cite{Gore2012}. The Real Space Z-Score (RSRZ) is a normalized
-version of RSR calculated by PDB. This data is calculated for each structure on
-a residue level. The data is produced by computing RSR Z-Scores for each type of
-residue present in the structure and comparing to like residues in all other
-comparable structures of similar resolution, ie A's are compared to other A's,
-while C's are compared to other C's \cite{Gore2012, Kleywegt2004a}. PDB provides
-this statistic as part of their validation reports and the data is imported as
-part of our weekly update pipeline. This data is available on their FTP site,
-the URLs depend upon the structure, for example the data for 1FJG is available
-at: \url{http://ftp.wwpdb.org/pub/pdb/validation\_reports/fj/1fjg/}. In this way
-the quality of each structure is compared to other structures of comparable
-resolution, as well as to all other X-ray structures in PDB that contain RNA.
+version of RSR calculated by PDB as described in \cite{Gore2012}. This data is
+calculated for each structure on a residue level, by computing RSR Z-Scores for
+each type of residue present in the structure and comparing to like residues in
+all other comparable structures of similar resolution, e.g. A's are compared to
+other A's, while C's are compared to other C's \cite{Gore2012, Kleywegt2004a},
+etc. PDB provides this statistic as part of their validation reports and the
+data is imported as part of our weekly update pipeline. These data are available
+on the PDB FTP site, using URLs that depend upon the structure, for example the
+data for 1FJG are available at:
+\href{http://ftp.wwpdb.org/pub/pdb/validation\_reports/fj/1fjg/}{http://ftp.wwpdb.org/pub/pdb/validation\_reports/fj/1fjg/}.
+In this way, the quality of each structure is compared to other structures of
+comparable resolution, as well as to all other X-ray structures in PDB that
+contain RNA \cite{Gore2012}.
 
-\subsection{Determining how to use RSRZ to reject loops}
+\subsection{Determining suitable criteria for using RSRZ to reject loops}
 
 We begin by examining the distribution of RSRZ data for each type of loop in the
 representative set of 3D structures selected as described in the previous
-chapter, which corresponds to the 2.85 representative structure release
-available at (\url{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.85}). The
-distribution of such data is shown in Figure~\ref{fig:rsrz-distribution}. In
-this figure we can see that loops nucleotides have a median value near 0,
-indicating a good fit to observed density. We can also see a long tail in the
-RSRZ distribution that indicates a large range in the quality of modeling. PDB
-assigns an RSRZ value of 2 to indicate a large outlier. This is shown on the
-graphs as a red bar.
+chapter, which corresponds to the v2.85 representative structure release,
+available at (\URL{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.85}). The
+distribution of such data are shown in Figure~\ref{fig:rsrz-distribution}. This
+figure shows that loop nucleotides have median RSRZ values near 0, indicating a
+good fit to observed density. We can also see a long tail in the RSRZ
+distribution that indicates a large range in the quality of modeling. The reader
+should note that an RSR-Z value of 2 indicates two standard deviations, so
+values greater than 2 correspond to outlier data. This is shown on the graphs as
+a red bar.
 
 \begin{figure}
   \includegraphics[width=0.5\linewidth]{chapter-5/figs/loops/rsrz-distribution}
   \caption{Distribution of RSRZ values by loop for nucleotides in all accepted
-  loops. The nucleotides are only from loops that pass all structural criteria.}
+  loops in NR version v2.85. The nucleotides are only from loops that pass all
+  structural criteria.}
   \label{fig:rsrz-distribution}
 \end{figure}
 
-From this distribution we can see that median value is less than 0. This
-indicates that loops in bases from our representative structures are better
-modeled than the average nucleotide. This supports the conclusions of the
-previous chapter that appropriate criteria are used to select the representative
-structure. However, there is a long tail of nucleotides with very high values.
-Loops with containing poorly modeled nucleotides that should be excluded from
-clustering and inclusion in the 3D Motif Atlas. When the distributions are examined
-on the basis of nucleotide, as shown in Figure~/ref{fig:rsrz-nt-distribution},
-the means are all slightly above zero, near 0.13. This shows that while loops as
-a whole are modeled better, the individual nucleotides are 
+Figure~\ref{fig:rsrz-distribution} supports the conclusions of the previous
+chapter that appropriate criteria are used to select the representative
+structure because the median values are near zero, indicating good modeling.
+However, there is a long tail in the RSRZ distribution corresponding to
+nucleotides with very high RSR-Z values. Loops containing poorly modeled
+nucleotides should be excluded from clustering and inclusion in the 3D Motif
+Atlas. When the distributions are examined on the basis of nucleotide, as shown
+in Figure~/ref{fig:rsrz-nt-distribution}, the means are all slightly above zero,
+near 0.13. This shows that while loops as a whole are modeled better, the
+individual nucleotides are 
 
+I used RSRZ values to create two criteria for screening loops. The first is that
+all bases in a loop must be reasonably well modeled, that is if all nucleotides
+in the loop have a low RSRZ values, that is, if all nucleotides in a loop have
+RSR-Z values above a suitably chosen, fairly low RSR-Z value (e.g. 1) that loop
+should not be included. I propose this cutoff to ensure that no ``fictional
+loops'' are included. We do not consider if the bases are interacting in this
+criterion because some loops do not contain interactions. 
 
-I used RSRZ values to create two criteria. The first is that all bases in a loop
-must be well modeled, that is all nucleotides in the loop should have a low RSRZ
-value. I use this cutoff because we want to ensure that a loop is not an
-``appealing fiction'' where all bases in it are poorly modeled. We do not
-consider if the bases are interacting in this criterion because some loops do
-not contain interactions. Secondly, is that all nucleotides that make
-interactions with other bases within the loop must have a low RSRZ value as
-well. This criterion is used because we expect that loops interacting within a
-loop will have a lower RSRZ value by virtue of being ``fixed in place'' in the
-crystal.
+Secondly, is that all nucleotides that make interactions with other bases within
+the loop must have RSR-Z values below a suitably chosen, somewhat higher second
+cutoff. This criterion is used because we expect that loops interacting within a
+loop will generally have lower RSRZ values by virtue of being ``fixed in place''
+by these interactions. If any nucleotides are above this cutoff (e.g. about 2),
+the whole loop should be rejected.
 
 \subsection{Detecting fictional loops}
 
 The first criterion is that all bases in a loop should be sufficiently well
 modeled. A well modeled base has a low RSRZ value, thus a poorly modeled loop is
-one where all modeled bases in the loop have a high RSRZ value. I will refer to
-these loops as ``fictional'' as they are not supported by the experimental
-density. I am interested in exploring the effect of various RSRZ cutoffs on
-motif clustering so we will use a range of RSRZ values. We have been advised by PDB
-to implemented an RSRZ threshold of 2 to identify loops that are poorly modeled.
-I tested cutoffs of 1, 1.5 and 2.5 to explore the effect of various cutoffs on
-motif clustering. I applied this criterion, all nucleotides in the loop must
-have an RSRZ less than the cutoff, to all valid loops in the dataset. A summary
-of the number of loops sorted by this criterion into successive ranges of RSRZ
-in Table~\ref{tab:cutoffs-reject-summary}.
+one where all modeled bases in the loop have a RSRZ value above a fairly strict
+cutoff. I will refer to these loops as ``fictional'' as they are not supported
+by the experimental density. 
+
+I am interested in exploring the effect of various RSRZ cutoffs on motif
+clustering so we will use a range of RSRZ values to detect fictional loops. We
+have been advised by Helen Berman at PDB to use an RSRZ threshold of 2 to
+identify nucleotides that are poorly modeled. This is consistent with they
+validation reports that to detect regions of poor modeling. However, they did
+not specify if this cutoff would work well for detection of fictional loops, or
+just poorly modeled individual nucleotides. Thus, I tested cutoffs of 1, 1.5, 2 and
+2.5 to explore the effect of various cutoffs on motif clustering. I applied this
+criterion, all nucleotides in the loop must have an RSRZ less than the cutoff,
+to all valid loops in the dataset. A summary of the number of loops sorted by
+this criterion into successive ranges of RSRZ in
+Table~\ref{tab:cutoffs-reject-summary}.
 
 \begin{table}
   \begin{tabular}{llrrrr}

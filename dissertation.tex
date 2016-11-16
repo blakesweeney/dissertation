@@ -3,7 +3,6 @@
 
 \usepackage{alltt}
 \usepackage{times}
-% \usepackage{gensymb}
 \usepackage{amstext}
 \usepackage{caption}
 \usepackage{booktabs}
@@ -22,14 +21,13 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage[longnamesfirst]{natbib}
 
-% \usepackage{epstopdf}
-
 \newcommand{\angstrom}{\textup{\AA}}
 \newcommand{\TILDE}{{\raise.17ex\hbox{$\scriptstyle\sim$}}}
 \newcommand{\rot}{\rotatebox{90}}
 \newcommand{\cyem}{cryo-EM}
 \newcommand{\etal}{\emph{et al}}
 \newcommand{\rsrz}[1]{RSRZ \textgreater #1}
+\newcommand{\URL}[1]{\href{#1}{#1}}
 
 \newcommand{\I}[1]{$I_{#1}$}
 \newcommand{\TT}{\emph{Thermus thermophilus}}
@@ -43,7 +41,6 @@
 \makeatletter
 \patchcmd{\l@chapter}{\bfseries}{}{}{}
 \makeatother
-
 
 \title{BUILDING REPRESENTATIVE SETS OF RNA 3D STRUCTURES AND SELECTING HIGH
 QUALITY LOOPS}
