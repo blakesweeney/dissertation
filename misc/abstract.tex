@@ -1,24 +1,25 @@
-This disssertation contians two types of work. The first, as described in
-Chapter 2 is the creation and maintaince of our data pipeline. This chapter
-focuses on the techinqual work behind the extension of our pipeline. In general,
-this work extends our previous pipeline to import more data as well as
-standarizing several parts of the pipeline. As a result, my work has provided a
-framework for future modifications of the pipeline. This work was driven both by
-the move from RNA 3D structures being provieded in mmCIF instead of the outdated
-PDB format, as well as, the need to cleanup the previous version of the
-pipeline.
+This dissertation contains two types of work. The first is the creation and
+maintenance of our data pipeline. This chapter focuses on the technical work
+behind the extension of our pipeline. In general, this work extends our
+previous pipeline to import more data as well as standardizing several parts of
+the pipeline. As a result, this work provides a framework for future
+modifications of the pipeline. This work was driven both by the move from RNA
+3D structures being provided in mmCIF format instead of the more limited PDB
+format, as well as the need to clean up the previous version of the pipeline.
 
-The second type of work is scientific. In Chapters 3-5 I discuss my work on
-creating equivelance sets for all RNA 3D structures (Chapter 3), then discuss
-using these sets to build representative sets (Chapter 4) and then how to use
-these representative sets along with new quality data to select a set of high
-quality loops for future analysis (Chapter 5). The work in Chapters 3 and 4 was
-driven by the move from PDB to mmCIF formats. This move forced the redesign of
-the previous method, as it would only use the largest chain in file. This change
-allowed me reconsider the approach and allowed several improvements. 
+The second type of work is scientific including my work on creating equivalence
+classes for all RNA 3D structures, using these sets to build representative
+sets and then how to use these representative sets along with new quality data
+to select a set of high quality loops for future analysis. The new work on
+equivalence classes and representative sets was driven by the move from PDB to
+mmCIF formats. This move forced the redesign of the previous method, as it
+would only use the largest chain in each PDB file. This change allowed me
+to reconsider the approach and allowed several improvements. 
 
-The work in Chapter 5 was prompted by the release of new structure quality data,
-Real Space R Z-Score (RSRZ). This data allows the examination of how well a
-proposed structure fits the data it is built from. By using this we can limit
-our studies of RNA loops to only those that are from high quality well modeled
+The work on loop quality was prompted by the release of new structure quality
+data, Real Space R Z-Score (RSRZ). This data allows the examination of how well
+a proposed structure fits the data it is built from. By using this we can limit
+our studies of RNA loops to only those that are from high quality, well modeled
 structures. 
+
+% vim ft=markdown
