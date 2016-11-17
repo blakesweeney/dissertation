@@ -7,63 +7,70 @@ that calculates Equivalence Classes of RNA entities of RNA 3D structures for the
 Nucleic Acids Database (NDB) and for RNA.BGSU.EDU. The 3D structures are
 provided by the Protein DataBank (PDB).
 
-The PDB is an archival resource that serves as  the accumulated scientific
-investigation of the 3D structures of macromolecular entities of biological
-significance. The earliest entries date back to the late 1960s and early 1970s
-and new entries are accumulating at an ever-increasing rate. The earliest RNA
-entries were structures of dinucleotides and the latest entries include entire
-ribosome structures bound to a variety of tRNA and mRNA substrates and
-translation factors. But structures containing smaller RNA molecules bound to
-enzymes that modify them or use them as guide RNAs  to recognize other
-substrates continue to accumulate. Thus there is a huge variation in the size of
-the RNA entities and of the scientific purposes for which the investigation was
-conducted.
+The PDB serves as the archival resource for the accumulated scientific
+investigations of the 3D structures of macromolecular entities of biological
+significance carried out by scientists all over the world. The earliest entries
+date back to the late 1960s and early 1970s and new entries are accumulating at
+an ever-increasing rate. The earliest RNA entries were structures of
+dinucleotides and the latest entries include entire ribosome and splicesome
+structures bound to a variety of tRNA and mRNA substrates and translation
+factors. But structures containing smaller RNA molecules bound to enzymes that
+modify them or use them as guide RNAs  to recognize other substrates continue to
+accumulate. For example structures of CRISPR complexes recently started to
+appear \cite{Wang2015, Nunez2015}. Thus there is a huge variation in the size of
+the RNA entities and of the scientific purposes for which the investigations
+were conducted.
 
 \section{Previous work}
 
 We have previously implemented a method to group RNA molecules into equivalence
-sets. The method is described in Nonredundant 3D Structure Datasets for RNA
-Knowledge Extraction and Benchmarking \cite{Leontis2012b}. The current work is
-an extension of these methods so, we begin by briefly describing the previous
-methodology which was developed when 3D structures were still distributed in PDB
-files, so that like large structures like 70S ribosomes had to be split over two
-or more files. At that time it was convenient to simply select the largest chain
-in a file and use to represent the RNA in the file for grouping. In cases where
-the file also had one or more smaller chains the smaller ones were ignored and
-no groups built for them. For example, structures of a large ribosomal subunit
-contain both the 23S and 5S in the same file, the 5S was simply ignored and not
-extracted and clustered separately. Each chain was compared on the basis of
-sequence alignment, species and geometric discrepancy to all other chains. The
-previous method did not compute all possible sequence alignments or
-discrepancies due to runtime issues. The alignments and discrepancies were not
-stored for future studies.
+sets. The method is described in a book chapter entitled ``Nonredundant 3D
+Structure Datasets for RNA Knowledge Extraction and Benchmarking''
+\cite{Leontis2012b}. The current work is an extension of these methods so, we
+begin by briefly describing the previous methodology which was developed when 3D
+structures were still distributed in PDB files, so that large structures like
+70S ribosomes had to be split over two or more PDB files. At that time it was
+convenient to simply select the largest RNA chain in each file to represent the
+RNA in the file for grouping. In cases where the file also had one or more
+smaller RNA chains the smaller ones were simply ignored and no groups built for
+them. For example, structures of large ribosomal subunits contain both the 23S
+and the much smaller 5S rRNAs in the same file, but the 5S was simply ignored
+and not extracted and clustered at all. Each extracted chain was compared on the
+basis of sequence alignment, species and geometric discrepancy to all other
+chains. The previous method did not compute all possible sequence alignments or
+discrepancies, due to limitations imposed by runtime. The alignments and
+geometric discrepancies of chains in the same group were not stored for future
+studies.
 
 \section{Motivation for current work}
 
-We have one main motivation for updating our RNA chain grouping method. The
-first is to take advantage of technical changes data and secondly are to enhance
-the scientific utility of our resources by providing a more complete set of data
-that includes all chains found in RNA structures.
+We have two main motivations for updating our RNA chain grouping method. The
+first is to take advantage of technical changes data and the second is to
+enhance the scientific utility of our resources by providing a more complete set
+of data that includes all chains found in RNA structures.
 
-Recently,  PDB has migrated from “PDB” formatted structure files to the new
-macromolecular Chemical Information File format (mmCIF), which made it possible
+Recently, the PDB resource management team has migrated from using outdated,
+80-column wide ``PDB'' formatted structure files to the new modern-style
+macromolecular Chemical Information File format (mmCIF), which makes it possible
 to store structural information for macromolecular complexes of any size in just
 one computer file. By contrast, the out-dated PDB format was limited to no more
 than 99,999 numbered atom data records per file. This change has made possible
-the storage of all ribosomal subunits, large subunit, small subunit, tRNA, mRNA
-fragments, 5S and 5.8S (for eukaryotes) into a single file. In some files such
-as 4V4Q \cite{Schuwirth2005} more than one entire ribosome is present. Because
-our old method only considered the largest chain in each file we would ignore
-all chains except a single LSU. This would lead to ignoring many important
-groups.
+the storage for example, of entire ribosomes in a single file, including both
+the large and small subunits, tRNA, mRNA fragments, 5S and 5.8S rRNA (for
+eukaryotes). In some files such as 4V4Q \cite{Schuwirth2005} more than one
+entire ribosome is present. Because our old method only considered the largest
+chain in each file the old method would ignore all chains except a single LSU
+rRNA when processing mmCIF files. This would lead to ignoring many important
+groups of RNA structures. The new method extracts and classifies all RNA chains
+from all mmCIF files.
 
 There are a number of scientific use cases for which our RNA structure classes
 and derived data will be  3D structures in the PDB/NDB and these are worth
 enumerating and discussing.
 
 \begin{enumerate}
-  \item Determining the breadth and depth of solved structures, ie the number of
-    distinct types of RNA and the number of each type.
+  \item Determining the breadth and depth of solved structures, i.e. the number of
+    distinct types of RNA and the number of instances of each type.
 
   \item Statistical studies of recurrent elements of RNA structure, RNA-RNA and
     RNA-protein interactions
@@ -79,8 +86,8 @@ enumerating and discussing.
   \item Compilation of modular RNA parts for synthetic biology and RNA
     nanotechnology
 
-  \item Analysis of  of RNA sequence variation to improve RNA structure
-    prediction and understanding of RNA evolution
+  \item Analysis of RNA sequence variation to improve RNA structure prediction
+    and understanding of RNA evolution
 \end{enumerate}
 
 Thus, the change to mmCIF format required a complete rethinking of the
@@ -91,46 +98,46 @@ users.
 
 \section{Types of molecules and requirements}
 
-In this section we will highlight specific groups that pose special challenges
-for clustering to motivate the following sections were the methods developed are
-explained and their success in correctly clustering these special cases is
-assessed.
+In this section we will highlight specific groups of RNA molecules that pose
+special challenges for clustering to motivate the following sections, where the
+methods developed are explained and their success in clustering appropriately,
+these special cases is assessed.
 
 \subsection{Ribosomal RNA subunits}
 
-The largest entities are ribosomal RNAs (rRNA), which comprises the large (LSU)
-and small (SSU) ribosomal subunits, the 5S rRNA, and the 5.8S rRNA in
-eukaryotes. LSU and SSU from a number of species representing all three major
-phylogenetic domains and mitochondria are presently available.
+Among the largest entities are ribosomal RNAs (rRNA), which include the rRNA of
+the large (LSU) and small (SSU) ribosomal subunits, the 5S rRNA, and the 5.8S
+rRNA in eukaryotes. LSU and SSU rRNA from a number of species representing all three
+major phylogenetic domains and mitochondria are presently available in PDB/NDB.
 
 The rRNAs should be divided into separate Equivalence Classes (EC) as follows:
 First, each of the SSU rRNAs (mitochondrial 12S, bacterial 16S and eukaryal 18S
-rRNAs) should be placed into their own EC by organism. Each of the 23S rRNAs
-from archaeal or eubacterial ribosomes should be placed in distinct EC. The 5S
-rRNAs, which are found in the LSU of all ribosomes except some mitochondrial
-ones, should also be in a separate group. While bacterial 5S rRNA does interact
-directly with 23S rRNA in the LSU, it does so through non-Watson-Crick pairing
-and backbone interactions involving its loop E internal loop (IL) motif and a
-similar structured IL of helix 38 of 23S rRNA. The loop E of 5S rRNA has been
-shown to assume the same 3D conformation in the absence of 23S rRNA and so is
-not dependent on 23S to form its native state. The same holds for eukaryal 5S
-rRNAs, each of which are placed in their own EC.
+rRNAs) should be placed into their own EC by organism. Further, each of the 23S
+rRNAs from archaeal or eubacterial ribosomes should be placed in distinct EC.
+The 5S rRNAs, which are found in the LSU of all ribosomes except some
+mitochondrial ones, should also be in separate groups. While bacterial 5S rRNA
+does interact directly with 23S rRNA in the LSU, it does so through
+non-Watson-Crick pairing and backbone interactions involving its ``loop E''
+internal loop (IL) motif and a similar structured IL in helix 38 of 23S rRNA.
+The loop E of 5S rRNA has been shown to assume the same 3D conformation in the
+absence of 23S rRNA and so is not dependent on 23S to form its native state. The
+same holds for eukaryal 5S rRNAs, each of which are placed in their own EC.
 
 By contrast 5.8S rRNA of eukaryal LSU, constitutes an integral part of the large
 ribosomal RNAs (26S or 28S, depending on the species), as they are homologous to
-the 5’-ends of bacterial 23S rRNAs. As such they form extensive Watson-Crick
+the 5'-ends of bacterial 23S rRNAs. As such they form extensive Watson-Crick
 interactions with the larger rRNA of the LSU in which they occur and so,
-according to the criteria defined above, belong together in the same RNA entity
-, for the purposes of grouping.
+according to the criteria defined above, belong together in the same RNA entity,
+for the purposes of grouping.
 
 In addition, the ribosome has long been an molecule of study. Early structures
 \cite{Mueller2000} often were resolved at very low resolution. These structures,
 while informative, are not as useful for current work as more recent high
 resolution structures. While we want to group all structures it is very useful
 to create groups of structures with similar resolution. In the past we have
-found using resolution cutoffs of 1.5{\AA}, 2.0{\AA}, 2.5{\AA}, 3.0{\AA}, 3.5{\AA}, 4.0{\AA}, 20.0{\AA}, and
-‘all’ a group of all structures regardless of resolution create useful groups.
-Here we continue this practice.
+found using resolution cutoffs of 1.5{\AA}, 2.0{\AA}, 2.5{\AA}, 3.0{\AA},
+3.5{\AA}, 4.0{\AA}, 20.0{\AA}, and ``all'' a group of all structures regardless
+of resolution create useful groups. Here we continue this practice.
 
 From these examples we can see that the members of groups should be one or more
 chains which interact extensively through watson crick base pairing should be
@@ -143,16 +150,16 @@ In addition, all members of a group should fall within a resolution cutoff.
 
 tRNA molecules are commonly solved in the context of their binding to a
 ribosome. In these cases they are often also bound to an mRNA fragment. These
-mRNA fragments can span the A and P sites of the rRNA and have two tRNA’s bound.
+mRNA fragments can span the A and P sites of the rRNA and have two tRNA's bound.
 The mRNA fragments (6 bases) are very small and are extensively bound to the
 tRNA as all bases are paired with the tRNA. Despite this we do not want to place
-the tRNA’s and mRNA into a single entity for grouping. In this case we believe
+the tRNA's and mRNA into a single entity for grouping. In this case we believe
 the most scientifically meaningful unit is the tRNA. The small mRNA fragment is
 not interesting alone. It is small and contains no internal structure. Thus
 while we do want to place two chains which extensively pair into a single unit
 we do not want small unstructured chains connecting two larger structured
 chains. For the purposes of grouping all chains we will allow the small
-unstructured chain to ‘accompany’ the larger chains. But it should not be used
+unstructured chain to ‘accompany' the larger chains. But it should not be used
 to connect the two structured chains.
 
 The tRNA case also provides another case to consider. It is well known that some
@@ -160,7 +167,7 @@ initiator tRNA's from different species have the same sequence. This implies we
 cannot use sequence alignments alone to separate molecules from different
 organisms. However, there authors provide a source organism annotation.
 Investigations into this annotation have showed that while many are precise some
-annotations include the terms ‘synthetic compound’ or are not provided. These
+annotations include the terms ‘synthetic compound' or are not provided. These
 chains often have identical sequence to another annotate chain. In other cases
 the synthetic chain aligns very well to a correctly annotated chain. Thus we can
 treat synthetic or no annotation as being similar to any other annotated
@@ -213,22 +220,22 @@ files as precisely as possible and in a manner that is biologically relevant for
 the purposes of most users of the resource. Guided by giving priority to
 biological relevance, we settled on the following definition of the relevant
 RNA-containing entities: The entities to be identified and extracted from
-PDB/NDB structure files are “groups of one or more RNA chains that form
-identifiable integrated structural and functional units.” Internally we refer to
-these entities as “RNA integrated functional elements” or “RNA IFEs.” We will
-use the term “IFE” as a short-hand for this definition.  Most RNA IFEs consist
-of a single chain, but some do not. The simplest examples comprise two chain
-Watson-Crick paired chains forming a duplex structure: strictly, this comprises
-two molecules, but effectively it is a single entity or RNA IFE.
+PDB/NDB structure files are ``groups of one or more RNA chains that form
+identifiable integrated structural and functional units.'' Internally we refer
+to these entities as ``RNA integrated functional elements'' or ``RNA IFE's.'' We
+will use the term ``IFE'' as a short-hand for this definition.  Most RNA IFE's
+consist of a single chain, but some do not. The simplest examples comprise two
+chain Watson-Crick paired chains forming a duplex structure: strictly, this
+comprises two molecules, but effectively it is a single entity or RNA IFE.
 
 From these examples we can see there are 3 requirements for each EC.
 \begin{enumerate}
-  \item Two IFE’s included in the same Equivalence Class should come from the
+  \item Two IFE's included in the same Equivalence Class should come from the
     same biological source. The intention of this criterion is to separate
-    homologous RNA molecules, for example SSU rRNAs from different organisms,
+    homologous RNA molecules, for example SSU rRNA's from different organisms,
     into distinct Equivalence Classes.
 
-  \item Two IFE’s included in the same IFE should have very similar, though not
+  \item Two IFE's included in the same IFE should have very similar, though not
     necessarily identical sequences. This criterion may seem redundant with the
     first criterion. The intention is to include sequence variants (for example
     16S rRNAs coded by different genes of the same micro-organism that differ in
@@ -237,16 +244,17 @@ From these examples we can see there are 3 requirements for each EC.
     species. We note that not all RNA chains in PDB are labeled with a
     biological source, which complicates clustering.
 
-  \item Two IFE’s included in the same Equivalence Class should have the similar
+  \item Two IFE's included in the same Equivalence Class should have the similar
     conformations and geometries. The intention of this criterion is to separate
     instances in which there is a significant conformational change, even when
     the RNA sequence(s)and biological source  are the same. For example, poly-A
-    bound to poly-A binding protein (PAB) (PDB 1CVJ) has a different
-    conformation from poly A forming a parallel strand duplex (PDB 4JRD). These
-    IFE’s are structurally dissimilar and should not be in the same equivalence
-    set, even though the sequence may be identical.
+    bound to poly-A binding protein (PAB) (PDB 1CVJ \cite{Deo1999}) has a
+    different conformation from poly A forming a parallel strand duplex (PDB
+    4JRD \cite{Safaee2013}). These IFE's are structurally dissimilar and should
+    not be in the same equivalence set, even though the sequence may be
+    identical.
 
-  \item Two IFE’s included in the same EC should have similar resolution.
+  \item Two IFE's included in the same EC should have similar resolution.
 \end{enumerate}
 
 However, we decided to group structures together even though their sizes differ
@@ -269,11 +277,11 @@ when:
     the larger complex.
 \end{enumerate}
 
-In addition, there are several other cases where we assign IFE’s to the same
+In addition, there are several other cases where we assign IFE's to the same
 equivalence set:
 
 \begin{enumerate}
-  \item We group IFE’s together EVEN WHEN their geometries differ significantly
+  \item We group IFE's together EVEN WHEN their geometries differ significantly
     when the structures are too low resolution as the data are not adequate to
     quantify the structural differences.
 
@@ -285,7 +293,7 @@ equivalence set:
 \end{enumerate}
 
 There are several important implications of these requirements. First it is
-possible that the homologous RNA molecules (for example iso-accepting tRNAs)
+possible that the homologous RNA molecules (for example iso-accepting tRNA's)
 from different species have nearly identical sequences and structures.
 Nonetheless they will be placed in different groups In addition, it is possible
 that two groups will have similar sequence and species but differ only in
@@ -324,7 +332,7 @@ interact with, but they will not indirectly join two structured chains together.
 
 Our algorithm operates as follows. We first mark all chains in a structure as
 ``structured'' or ``unstructured''. A ``structured' chain is defined by having at
-least 5 internal (within the same chain) cis Watson Crick/Watson Crick (cWW)
+least 5 internal (within the same chain) \emph{cis} Watson Crick/Watson Crick (cWW)
 basepairs. We then join chains based upon a few rules. A representation of these
 rules is shown in Figure~\ref{fig:build-ife}.
 
@@ -339,7 +347,7 @@ rules is shown in Figure~\ref{fig:build-ife}.
     1 and 2 we always join the two chains into one IFE, while in case 3 it
     depends upon the number of interactions. Case 4 shows that for two
     structured chains selected by an unstructured chain the two structured
-    chains are placed in separate IFE’s while the unstructured chain is placed
+    chains are placed in separate IFE's while the unstructured chain is placed
   in both IFE's.}
   \label{fig:build-ife}
 \end{figure}
@@ -348,8 +356,8 @@ In this figure we can see the four basic cases. First when determining if we
 unstructured chains should be connected, we always connect them if they have any
 cWW interactions between them. This allows for joining of separate stands of
 duplexes. In the second case we always connect unstructured chains to structured
-chains. This serves to connect unstructured fragments such as mRNA’s to the
-structure tRNA’s they are interacting with. For connecting two structured chains
+chains. This serves to connect unstructured fragments such as mRNA's to the
+structure tRNA's they are interacting with. For connecting two structured chains
 we require that the maximal ratio of external cWW to internal basepairs is at
 least 0.6. This is an experimental determined cutoff. It may be adjusted in the
 future. To examine if this cutoff is reasonable we produced the figures shown in
@@ -365,7 +373,7 @@ Figure~\ref{fig:ext-vs-int}.
 
 \subsection{Connecting pairs of IFE's to from equivalence sets}
 
-To build equivalence sets we compare all pairs of IFE’s based upon their species
+To build equivalence sets we compare all pairs of IFE's based upon their species
 assignments, their alignment, their discrepancy. Pairs of chains which have a
 valid alignment, are from similar species and have a discrepancy of less than
 0.4{\AA}, if computed, are joined. We then build the EQ sets by placing all chains
@@ -382,7 +390,7 @@ The first step requires looking up the assigned phylogeny for chain. Many chains
 are assigned to a particular species making the lookup trivial, however some are
 assigned to a subspecies. For these cases we use the parent species of the
 chain. However, not all chains are assigned to an organism, many are marked as
-‘synthetic construct’ or not assigned any organism. In both of these cases we
+‘synthetic construct' or not assigned any organism. In both of these cases we
 treat the organism as synthetic. In addition, a few chains (3) are assigned to a
 genus rather than a species or sub-species, in these cases we treat the chain as
 being synthetic as well.
@@ -390,7 +398,7 @@ being synthetic as well.
 In order to compute the alignments between all pairs of chains correctly and in
 a reasonable time frame we align experimental sequences. Experimental sequences
 are the sequences used in the experiment and may differ from what is observed in
-the experiment. Often the solved structure will have ‘gaps’ indicating where
+the experiment. Often the solved structure will have ‘gaps' indicating where
 bases were not resolved. For example EXAMPLE. In order to build alignments
 correctly we use the experimental sequence. If we did not we would have to
 ensure that the resulting alignments respected gaps in the both chains. The
@@ -401,7 +409,7 @@ where this is not a concern.
 In addition, by using experimental sequences we reduce the number of required
 alignments. It is very common to use the same molecule in many experiments. For
 example, there are many structures of the same E. coli ribosome with different
-tRNA’s or antibiotics. All of these structures can be represented by a few
+tRNA's or antibiotics. All of these structures can be represented by a few
 experimental sequences. There is no need to realign sequences simply because
 they came from different experiments, the alignments will be the same.
 
@@ -416,7 +424,7 @@ Finally, we require that the experimental sequences have either been assigned to
 the same species or one of them has been assigned to synthetic. We refer to this
 as the chains having a similar species. This ensures that we are only comparing
 sequences which could be from the same source. We have observed that some
-experimental sequences are assigned ‘synthetic’ in one experiment are assigned a
+experimental sequences are assigned ‘synthetic' in one experiment are assigned a
 species such as E. coli in another experiment. Thus we allow the comparison of
 synthetic chains to any other chain, so long as it has similar size. The last
 step is to compute the discrepancy. Discrepancy is a measure of geometric
@@ -454,13 +462,13 @@ With these rules we are able to efficiently compute all required discrepancies.
 By doing this as part of our pipeline we are able to store these values. This
 allows for comparison of grouping methodologies and constraints.
 
-We then connect all pairs of IFE’s which satisfy the alignment, species and
+We then connect all pairs of IFE's which satisfy the alignment, species and
 discrepancy requirements. These connections are treated as a graph and used to
 build equivalence classes through transitivity.
 
-\subsection{Building equivalence classes from pairs of IFE’s}
+\subsection{Building equivalence classes from pairs of IFE's}
 
-We build EC through transitivity. This means that all connected IFE’s, even if
+We build EC through transitivity. This means that all connected IFE's, even if
 the connections are indirect, are placed into a single group. An example of such
 a clustering is shown in Figure~\ref{fig:transitivity}.
 
@@ -476,11 +484,11 @@ the class.}
   \label{fig:transitivity}
 \end{figure}
 
-Using transitivity minimizes the number of singleton outlier groups. Most IFE’s
+Using transitivity minimizes the number of singleton outlier groups. Most IFE's
 will compare well to at least one other, placing them in the same group. The use
 case of studying structural variation in molecules. Without a transitive
 grouping, structures which differ only in structure would be split from all
-other instances. The groups are created using all possible structures, the ‘all’
+other instances. The groups are created using all possible structures, the ‘all'
 resolution cutoff. From there the groups are filtered to only contain structures
 which satisfy each resolution threshold. With the groups created, the only
 remaining step is to name them
@@ -501,7 +509,7 @@ randomly generated number that serves to make all ids unique.
 
 We have changed the naming scheme so that the unique handle is identical across
 all resolution cutoffs of the same set of structures. For example, an EQ set
-built of tRNA’s at the ``all'' resolution cutoff may have the name:
+built of tRNA's at the ``all'' resolution cutoff may have the name:
 ``NR\_all\_00001.1''. At the 4.0{\AA} resolution cutoff this now would have the
 name ``NR\_4.0\_00001.1''. This differs from the previous method where as
 different randomly generated handle was assigned to each resolution cutoffs of
@@ -520,7 +528,7 @@ finally I examine the groupings of outliers.
 \subsection{General properties}
 
 I built a grouping using all PDB available from July 28, 2016. The grouping used
-3213 PDB’s which contained 7015 IFE’s. These were grouped into 2168 EC’s. These
+3213 PDB's which contained 7015 IFE's. These were grouped into 2168 EC's. These
 groups varied in size from 1 (singleton groups) to 377 instances. A summary of
 the member count distribution is shown in in Table~\ref{tab:eq-size-dist}.
 
@@ -586,7 +594,7 @@ previously separate files were merged}
 \end{table}
 
 I next moved to examine results of groups of particular interest. I begin with
-the ribosomes, then tRNA’s, and then protein/RNA complexes.
+the ribosomes, then tRNA's, and then protein/RNA complexes.
 
 \subsection{Ribosomal subunits}
 
@@ -595,13 +603,13 @@ classes containing the Thermus thermophilus small ribosomal subunit (SSU). We
 constructed heatmaps of both the sequence similarity and the discrepancy between
 all chains as shown in Figure~\ref{fig:tt-ssu-align} and
 Figure~\ref{fig:tt-ssu-disc}. The alignment heatmap indicates the high sequence
-similarity among all IFE’s. The geometric discrepancy heatmap shows that there
+similarity among all IFE's. The geometric discrepancy heatmap shows that there
 may be two main structurally groups in the equivalence class. Currently we are
 exploring these groups to see if they correlate to biological states.
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{chapter-3/figs/tt-ssu-align}
-  \caption{A figure summarizing the sequences similarity for all IFE’s in the
+  \caption{A figure summarizing the sequences similarity for all IFE's in the
     Thermus thermophilus small subunit. Color scale indicates discrepancy
   values, lighter colors being worse.}
   \label{fig:tt-ssu-align}
@@ -609,7 +617,7 @@ exploring these groups to see if they correlate to biological states.
 
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{chapter-3/figs/tt-ssu-disc}
-  \caption{Summary of the discrepancy for all pairs of IFE’s in the Thermus
+  \caption{Summary of the discrepancy for all pairs of IFE's in the Thermus
     thermophilus small subunit. Grey squares indicate no data computed, because
     that structure has too low a resolution. Color scale indicates discrepancy
   values, lighter colors being worse.}
@@ -629,9 +637,9 @@ being placed in the same group.
 \begin{figure}[h]
   \includegraphics[width=\textwidth]{chapter-3/figs/trna-alone}
   \caption{Example of a tRNA/mRNA complex forming an equivalence class. On the
-    left is a heat map of the discrepancies for all IFE’s in the group. The
+    left is a heat map of the discrepancies for all IFE's in the group. The
     right shows the heat map of sequence similarity for the group. Color scales
-    indicate the value, with lighter colors meaning ‘worse’ values. Along the
+    indicate the value, with lighter colors meaning ‘worse' values. Along the
   diagonal of each plot is the mean value for each row.}
   \label{fig:trna-alone}
 \end{figure}
@@ -682,7 +690,7 @@ that some groups contain pairs of IFE's that are highly dissimilar. We call
 these pairs outliers. For the purpose of this analysis we will define groups
 with outliers as groups that contain pairs of IFE's with discrepancies greater
 than 0.8{\AA}/nt or any group that contains a pair of IFE's that do not have a
-‘good’ alignment. As discussed earlier, our criteria for chains to align well
+‘good' alignment. As discussed earlier, our criteria for chains to align well
 depends on the size of the chains. For this reason we cannot use a simple
 sequence similarity cutoff as with discrepancy.
 
@@ -723,7 +731,7 @@ nucleotides corresponds to 2 tRNA groups.
   \includegraphics[width=\textwidth]{chapter-3/figs/outlier-details}
   \caption{This figure shows 4 different metrics for outliers within each group.
     Each point in all graphs represents a group that contains at least one pair
-    of IFE’s that is an outlier (discrepancy greater than 0.8 or sequence
+    of IFE's that is an outlier (discrepancy greater than 0.8 or sequence
     similarity less than 0.9). In all graphs the horizontal coordinate is the
     number of nucleotides in the representative (discussed in the next chapter)
     of the group. The vertical is the number of members. The points are colored
@@ -788,7 +796,7 @@ not have discrepancy computed. An example of this is show in
 Figure~\ref{fig:NR-all-18070-1-disc}. In this figure we can see a yellow line in
 the upper right which covers the entire heatmap. This indicates that this IFE
 has high discrepancy to all other members of the group. This IFE is connected to
-all other members through the IFE’s that have no discrepancy shown (grey bars).
+all other members through the IFE's that have no discrepancy shown (grey bars).
 
 We examined the two groups, NR\_all\_18070.1 and NR\_all\_75770.1 manually and found
 that they are tRNA groups. We will look at NR\_all\_18070.1 first, which is a tRNA
@@ -796,18 +804,18 @@ group with 233 members and is the highest point on the summary graphs. Shown in
 Figure~\ref{fig:nr-all-18070.1-disc}. The outliers are due to a single IFE which is a
 truncated tRNA. While it is somewhat structurally different from all other
 members it is very similar in sequence. Because these molecules are uncommon and
-it is still similar enough to rest of the group to ‘belong’. It is connected to
-the rest of the chains through IFE’s which have no computed discrepancy.
+it is still similar enough to rest of the group to ‘belong'. It is connected to
+the rest of the chains through IFE's which have no computed discrepancy.
 
 \begin{figure}[h]
         \includegraphics[width=\textwidth]{chapter-3/figs/nr-all-18070-1-disc}
-  \caption{Figure summarizing the discrepancy heatmap for all IFE’s in
+  \caption{Figure summarizing the discrepancy heatmap for all IFE's in
   NR\_all\_18070.1, a tRNA group with 233 members. }
   \label{fig:nr-all-18070.1-disc}
 \end{figure}
 
 The second NR\_all\_75770.1 is the second highest point on these plots. It is an
-E. coli tRNA group with 170 members. There are a few IFE’s which are outliers
+E. coli tRNA group with 170 members. There are a few IFE's which are outliers
 relative to the rest of the group. These chains appear to be fragments of the
 larger tRNA. For example 1VY7 is a 5 nt fragment of the 76 nt tRNA.
 
