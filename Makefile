@@ -7,6 +7,7 @@ all : pdf
 
 clean:
 	latexmk -C
+	rm dissertation.bbl
 
 pdf : $(TEXSRCS) $(MAIN) $(BIBTEXSRCS) $(MISC)
 	latexmk -pdf -pdflatex="pdflatex --shell-escape %O %S"
