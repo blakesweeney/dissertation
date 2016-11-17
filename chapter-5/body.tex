@@ -690,15 +690,17 @@ Cutoff 2 set to 1, on the other hand, only 19 loops are rejected with Cutoff 1
 set to 1.
 
 \begin{figure}
-  For all loops \\
-    \indent If all NT in loop have RSRZ \textgreater Cutoff 1 \\
-      \indent \indent Reject Loop \\
-    \indent Else If any NT with interactions in loop has RSRZ \textgreater Cutoff 2 \\
-      \indent \indent Reject Loop \\
-    \indent Else \\
-      \indent \indent Accept Loop \\
-    \indent End \\
+  \begin{tabbing}
+  Fore\=ach l\=oop \\
+    \>If all NT in loop have RSRZ \textgreater{} Cutoff 1 \\
+      \>\>Reject Loop \\
+    \>Else If any NT with interactions in loop has RSRZ \textgreater{} Cutoff 2 \\
+      \>\>Reject Loop \\
+    \>Else \\
+      \>\>Accept Loop \\
+    \>End \\
   End \\
+  \end{tabbing}
   \caption{Pseudocode of the logic for excluding loops based upon RSR-Z
   criteria. This logic shows the overall logic of how RSR-Z is used to exclude
   loops from clustering.}
@@ -931,8 +933,9 @@ Figure~\ref{fig:num-nt-by-class} is this information. This figure shows that
 singleton motifs tend to be larger, with a mean size of 9.5 nucleotides as
 opposed to the mean of 8.5 nucleotides for recurrent motifs.
 
+
 \begin{figure}
-  \includegraphics[width=0.5\linewidth]{chapter-5/figs/motifs/nucleotides-by-class}
+  \includegraphics[width=0.5\linewidth]{chapter-5/figs/motifs/nucleotides-by-type}
   \caption{Histogram of the number of nucleotides in for singleton as compared
   to recurrent motifs. This figure shows the counts of nucleotides in all
   Internal Loops in the Motif release built in this chapter. The blue lines
