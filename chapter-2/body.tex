@@ -22,7 +22,7 @@ and extracts and clusters RNA 3D motifs and stores all these derived data in a
 locally maintained MySQL database.
 
 We have developed these tools to achieve the aims of NIH founded work carried
-out in collaboration with with Dr. John Westbrook and Dr. Helen Berman at the
+out in collaboration with with Dr.\ John Westbrook and Dr.\ Helen Berman at the
 Nucleic Acids Database (NDB). This is the sixth year of the collaboration, which
 began in 2010. The aims of the grant are:
 
@@ -32,7 +32,7 @@ began in 2010. The aims of the grant are:
 
         \item Improve our understanding of the structure variation of RNA
                 molecules and RNA complexes by examining and comparing 3D
-                structures assigned to the same sequence/structure "equivalence"
+                structures assigned to the same sequence/structure ``equivalence''
                 class.
 
         \item Accelerate the study of the correspondence between RNA 3D
@@ -52,7 +52,7 @@ will add RNA-protein interactions.
 
 The data computed in our pipeline are used to support research resources. We
 provide the RNA community with the BGSU RNA site, the RNA 3D motif library,
-JAR3D, WebFR3D, R3DAlign, and R3D-2-MSA. As these resources require access to
+JAR3D, WebFR3D, R3DAlign, and R3D-2-MSA\@. As these resources require access to
 up-to-date RNA structures, it is essential that the database and pipeline always
 produce all the required data.
 
@@ -61,7 +61,7 @@ improve by successive groups of graduate students and research associates. After
 the departure of Anton Petrov and during most of my Ph.D. work it has been my
 responsibility to maintain and update the pipeline and database. During the time
 I was charged with these responsibilities major improvements were made to take
-advantage of new mmCIF formats from PDB. The following projects are underway
+advantage of new mmCIF formats from PDB\@. The following projects are underway
 that will extend the pipeline's capabilities: 
 \begin{enumerate*}
         \item Poorna Roy is writing code to annotate nucleotide-amino acid
@@ -100,7 +100,7 @@ format to a new mmCIF format for all 3D structure data.
 
 Second, the previous version of the database and pipeline did not work to ensure
 the validity of data. Consequently, I discoverd that our database contained
-"orphan data". Orphan data is data that is missing related information. For
+``orphan data''. Orphan data is data that is missing related information. For
 example, there were structures which had been placed into an NR group, but we
 had no information on the resolution. In addition, a careful reading of the code
 showed it was possible for the pipeline to write incomplete data. Incomplete
@@ -166,7 +166,7 @@ The second property of a valid database is that it is consistent. Consistency is
 best explained through an example. Keeping the database consistent means
 preventing situations from arising where we annotate a base pair involving RNA
 nucleotide residues that we have not yet created and stored in the database. In
-database terms, this requirement is referred to as preventing "orphan data".
+database terms, this requirement is referred to as preventing ``orphan data''.
 Whenever data are inconsistent any analysis or display of the stored data will
 fail, for lack of referenent.
 
@@ -209,7 +209,7 @@ complete a web request. These and other issues that I have encountered during
 the years I was responsible for pipeline operation, convinced me of the high
 priority of making the pipeline as robust as possible.
 
-The final consideration is ease of adding new "stages" to provide new
+The final consideration is ease of adding new ``stages'' to provide new
 functionality as this will carried out on an ongoing basis by current and new
 students involved in the project. They should be able to make changes without
 having to know all the details of how the pipeline works, confident that they do
@@ -236,7 +236,7 @@ because the database was not configured to allow them.
 A uniqueness constraint ensures that no two rows in the same table may have the
 same data values in any column. Uniqueness constraints may span more than one
 column. For example, I have added a uniqueness constraint on the ``pdb\_id'' and
-``chain\_name'' column in the ``chain\_info" table. This table stores information
+``chain\_name'' column in the ``chain\_info'' table. This table stores information
 about all chains and by placing the uniqueness constraint on these two columns I
 ensure that there can be no two chains in the same structure with the same
 combination of PDB id and chain name. This constraint reflects the logical
@@ -251,7 +251,7 @@ foreign keys allows the expression of the requirement of ``interactions must be
 built from known residues'. To describe a specific example, we have a table
 called ``unit\_info'' which contains data for all residues, RNA, DNA, protein,
 ligands, etc, known in the database. In the unit\_info table there is a
-``unit\_id'' column that provides a unique identifier for all units (i.e.
+``unit\_id'' column that provides a unique identifier for all units (i.e.\ 
 residues, whether RNA, DNA or protein). The ``unit\_pairs\_interactions'' table
 contains all pairwise interactions between RNA residues, such as base pair and
 base stacking interactions. It contains a ``unit\_id\_1'' and ``unit\_id\_2'' column
@@ -456,9 +456,9 @@ it will be flagged.
 The pipeline must be easy to extend. In order to make this possible I have
 centralized all the essential logic of the pipeline into a few core classes that
 can be inherited when creating a new stage. A class according to wikipedia is
-"an extensible program-code-template for creating objects, providing initial
+``an extensible program-code-template for creating objects, providing initial
 values for state (member variables) and implementations of behavior (member
-functions or methods" \cite{Wiki2016}. Python, which the pipeline is mostly
+functions or methods''~\cite{Wiki2016}. Python, which the pipeline is mostly
 written in, is an object-oriented language and users interested in working with
 it are strongly recommended to study the language. The majority of the pipeline
 is written using an intermediate or beginner level of python. None of the
@@ -486,15 +486,17 @@ allowing automatic deletion may cause issues. Thus if we want to be safe the
 class that implements the logic of importing loops overrides the deleting
 behavior to do nothing except log an error.
 
-Because classes inherit the essential functionality of the pipeline, new users will only have to
-implement 1) the logic for querying the database to see if this structure has already been
-processed and 2) the logic to create the data to store.
-Operation of the pipeline
-In this section, I discuss the RNA.BGSU.EDU pipeline at a high level, to familiarize readers with
-its functionality, organization, operation and documentation. Salient details will be provided,and
-complete references will be provided to direct readers to the relevant sections of the detailed
-documentation. We begin with an overview of the structure of the code and of the application,
-followed by configuration options, and end with directions for running the pipeline.
+Because classes inherit the essential functionality of the pipeline, new users
+will only have to implement the logic for querying the database to see if this
+structure has already been processed and the logic to create the data to store. 
+
+Operation of the pipeline In this section, I discuss the RNA.BGSU.EDU pipeline
+at a high level, to familiarize readers with its functionality, organization,
+operation and documentation. Salient details will be provided,and complete
+references will be provided to direct readers to the relevant sections of the
+detailed documentation. We begin with an overview of the structure of the code
+and of the application, followed by configuration options, and end with
+directions for running the pipeline.
 
 \section{Execution of the pipeline}
 
@@ -594,9 +596,9 @@ about that command. Users should use this functionality extensively when
 becoming familiar with the pipeline. In general a command to run the pipeline
 looks like:
 
-\begin{alltt}
+\begin{quote}
 pipeline.py [options] <subcommand> [options] [arguments]
-\end{alltt}
+\end{quote}
 
 Where $<>$ indicates a required value and $[]$ indicates an optional
 value.
@@ -634,29 +636,29 @@ some specific tasks.
 
 
 \begin{figure}
-\begin{alltt}
-Usage: pipeline.py run [OPTIONS] NAME [IDS]...
+\begin{quote}
+Usage: pipeline.py run [OPTIONS] NAME [IDS]... \\
 
-  Run specific stages of the pipeline.
+  Run specific stages of the pipeline. \\
 
-  'run' accepts as input the stage to run and a list of PDB ids to import
-  and process. It determines the order of dependences and executes them in
-  the correct order.
+  'run' accepts as input the stage to run and a list of PDB ids to import \\
+  and process. It determines the order of dependences and executes them in \\
+  the correct order. \\
 
-Options:
-  --dry-run            Alter nothing while running
-  --skip-dependencies  Skip stage(s)
-  --skip-stage TEXT    Stage to skip
-  --seed INTEGER       Set the random seed
-  --recalculate STAGE  Recalculate data for the given stage(s)
-  --all                Use all RNA containing PDBS
-  --known              Use only downloaded files
-  --after-date DATE    Get files posted after DATE (YYYY-MM-DD)
-  --before-date DATE   Get files posted before DATE (YYYY-MM-DD)
-  --exclude PDB        Excluded PDB(s)
-  --ignore-time        Ignore time for rerunning
-  -h, --help           Show this message and exit.
-\end{alltt}
+Options: \\
+  --dry-run            Alter nothing while running \\
+  --skip-dependencies  Skip stage(s) \\
+  --skip-stage TEXT    Stage to skip \\
+  --seed INTEGER       Set the random seed \\
+  --recalculate STAGE  Recalculate data for the given stage(s) \\
+  --all                Use all RNA containing PDBS \\
+  --known              Use only downloaded files \\
+  --after-date DATE    Get files posted after DATE (YYYY-MM-DD) \\
+  --before-date DATE   Get files posted before DATE (YYYY-MM-DD) \\
+  --exclude PDB        Excluded PDB(s) \\
+  --ignore-time        Ignore time for rerunning \\
+  -h, --help           Show this message and exit. \\
+\end{quote}
 \caption{A summary of the options and arguments for the ``run'' subcommand.}
 \label{fig:running-options}
 \end{figure}
@@ -675,69 +677,68 @@ stage to run as input to the pipeline. This provides the user precise control
 over what is run. By default the pipeline will run all dependencies of the stage
 as well the stage itself. This ensures that the required data are available for
 the requested stage. When the user is sure that no dependencies need to be run,
-I have added options to skip all dependencies ({\tt --skip-dependencies} ) or skip
-specific stages ({\tt --skip-stage stage}).
+I have added options to skip all dependencies (``--skip-dependencies'') or skip
+specific stages (``--skip-stage stage'').
 
 Another goal is to avoid recomputing data already computed.where it is necessary
-to over this default setting, the {\tt --recalculate stage} option can be used.
+to over this default setting, the ``--recalculate stage'' option can be used.
 This option will force the pipeline to recompute all data for the given stage.
-The {\tt .} stage name refers to the stage given so: {\tt pipeline.py run
---recalculate ``.'' --all units.info} will force a recompute for the units.info
+The '.' stage name refers to the stage given so: ``pipeline.py run
+--recalculate '.' --all units.info'' will force a recompute for the units.info
 stage, but not it's dependencies. To force all stages that are run to recompute,
-the user can use the {\tt *} argument. For example {\tt pipeline.py run --all
---recalculate ``*'' units.info} will recompute all stages that are run for all
+the user can use the ``*'' argument. For example ``pipeline.py run --all
+--recalculate '*' units.info'' will recompute all stages that are run for all
 structures.
 
 Examples that show how to use the described options and arguments will clarify
 the usage. Below we list a series of tasks and the corresponding command
-(displayed as {\tt monospaced font}).
+(displayed as ``quoted text'').
 
 \begin{description}
-        \item [Run an update on all structures]
-                {\tt pipeline.py run --all update}
+  \item [Run an update on all structures]
+          ``pipeline.py run --all update''
 
-        \item [Import pairwise interactions for 1FJG]
-                {\tt pipeline.py run interactions.pairwise 1FJG}
+  \item [Import pairwise interactions for 1FJG]
+          ``pipeline.py run interactions.pairwise 1FJG''
 
-        \item [Import all unit annotations for all structures]
-                {\tt pipeline.py run --all units.loader}
+  \item [Import all unit annotations for all structures]
+          ``pipeline.py run --all units.loader''
 
-        \item [Import all unit annotations for all structures skipping structure 2AW7]
-                {\tt pipeline.py run --all --skip-pdb 2AW7 units.loader}
+  \item [Import all unit annotations for all structures skipping structure 2AW7]
+          ``pipeline.py run --all --skip-pdb 2AW7 units.loader''
 
-        \item [Create an NR group for 1FJG, 1J5E, 1S72]
-                {\tt pipeline.py run nr.loader 1FJG 1J5E 1S72}
+  \item [Create an NR group for 1FJG, 1J5E, 1S72]
+          ``pipeline.py run nr.loader 1FJG 1J5E 1S72''
 
-        \item [Compute all interaction annotations for all structures while skipping all dependencies]
-                {\tt pipeline.py run --skip-dependencies --all interactions.loader}
+  \item [Compute all interaction annotations for all structures while skipping all dependencies]
+          ``pipeline.py run --skip-dependencies --all interactions.loader''
 
-        \item [Import loops in all structures]
-                {\tt pipeline.py run --skip-stage loops.quality --all loops.loader}
+  \item [Import loops in all structures]
+          ``pipeline.py run --skip-stage loops.quality --all loops.loader''
 
-                This command runs all loop level annotations, while skipping the loop quality stage,
-                which is generally only needed before doing a motif atlas import, and simply is not
-                needed importing loops, thus the reason it is skipped.
+          This command runs all loop level annotations, while skipping the loop quality stage,
+          which is generally only needed before doing a motif atlas import, and simply is not
+          needed importing loops, thus the reason it is skipped.
 
-        \item [Recalculate all pairwise interactions]
-                {\tt pipeline.py run --recalculate . --recalculate mat\_files interactions.pairwise}
+  \item [Recalculate all pairwise interactions]
+          ``pipeline.py run --recalculate . --recalculate mat\_files interactions.pairwise''
 
-                Note that for this command we have to recalculate all
-                {\tt mat\_file}'' as well as the interaction import. This is
-                because the {\tt mat\_files} stage controls the creation of the
-                precomputed data that the matlab programs use. If we do not
-                specify recomputing the mat files the process will simply
-                reimport the already existing annotations.
+          Note that for this command we have to recalculate all
+          ``mat\_file'' as well as the interaction import. This is
+          because the ``mat\_files'' stage controls the creation of the
+          precomputed data that the matlab programs use. If we do not
+          specify recomputing the mat files the process will simply
+          reimport the already existing annotations.
 
+  \item [Build a motif atlas using structures in the ``structures'' file]
+          ``cat structures | xargs pipeline.py run motifs.loader''
 
-        \item [Build a motif atlas using structures in the ``structures'' file]
-                {\tt cat structures | xargs pipeline.py run motifs.loader}
-
-                The structures file should contain only the ids to use, with one
-                per line. The ``xargs'' command is required because the pipeline
-                does not read from standard input and so xargs transforms the
-                call to include the ids as part of the call. Note that there is
-                a system dependent limit for the number of arguments allowed to
-                a command. The limit is generally in the thousands.
+          The structures file should contain only the ids to use, with one
+          per line. The ``xargs'' command is required because the pipeline
+          does not read from standard input and so xargs transforms the
+          call to include the ids as part of the call. Note that there is
+          a system dependent limit for the number of arguments allowed to
+          a command. The limit is generally in the thousands.
 \end{description}
 
 \subsection{Testing the pipeline}
@@ -750,7 +751,7 @@ chosen because they have caused crashes or errors in the past. In the future as
 more problematic structures are found they should be added to the set of
 structures used in testing.
 
-The bootstrap script can be run using the command {\tt bin/pipeline.py bootstrap}.
+The bootstrap script can be run using the command ``bin/pipeline.py bootstrap''.
 Bootstrapping requires a special configuration file in conf/bootstrap.json. It
 does not use the standard configuration file because it is important to have a
 separate testing and development database. Otherwise it is possible to
@@ -797,7 +798,7 @@ the organization advantages it provides. For test classes, if there is a ``setUp
 method that takes no arguments it is run prior to any tests. This method is used
 to setup any data or objects that are needed for testing. As discussed below
 this is used to setup stages for testing correctly. Each test method must start
-with the string ``test\_'. Within them there should be an assertion about the
+with the string ``test\_''. Within them there should be an assertion about the
 computed and expected value. Ideally tests are as simple as possible and contain
 only 1 statement to compute the value to test, 1 statement to define the answer
 and 1 statement to assert the computed value equals the expected value. This is
@@ -823,7 +824,7 @@ testing using a service like \href{https://travis-ci.org/}{Travis CI}. This
 service reruns all tests whenever someone pushes code to the github repository.
 Such testing has been implemented for the fr3d-python repository and can be seen
 at
-\url{http://www.travis-ci.org/BGSU-RNA/fr3d-python}{http://www.travis-ci.org/BGSU-RNA/fr3d-python}.
+\URL{http://www.travis-ci.org/BGSU-RNA/fr3d-python}.
 Travis CI and related tools are now standard in software development. This
 approach has not been used with the pipeline for two reasons. First, setting up
 the database is a long and complex procedure. The bootstrap script takes nearly

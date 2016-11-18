@@ -158,7 +158,7 @@ loops will have the same classifications, but a small percent do change.
     \toprule
     Loop Type &
       Previous Accepted Loops (1.85) &
-      Currently Accepted Loops (2.86) &
+      Currently Accepted Loops (2.85) &
       Missing Nucleotides &
       Modified with Nucleotides &
       Incomplete Nucleotides \\
@@ -194,7 +194,7 @@ structures.
 
 Rejecting loops from \cyem{} structures has a large effect on the number of
 loops available for clustering. As a test of this I extracted all loops from the
-representative set (release 2.86) described in the previous chapter, and then
+representative set (release 2.85) described in the previous chapter, and then
 counted the number of valid loops from each source.  Shown in
 Table~\ref{tab:source-counts} is a summary of counts of valid internal loops
 obtained both ways.
@@ -244,18 +244,44 @@ quality criteria and their consequences on the numbers of structures retained.
 Real Space Refinement (RSR) is a measure of how well the atomic resolution 3D
 model present in a PDB file fits the observed, underlying electron density
 obtained by X-ray diffraction. This was originally described by Jones \etal{} in
-the development of Uppsala validation server \cite{Kleywegt2004a}. RSR is
-calculated using equation:
+the development of Uppsala validation server \cite{Kleywegt2004a}. This is
+calculated from the observed and calculated electron densities ($\rho_{obs}$ and
+$\rho_{calc}$) as given by Equation~\ref{eqn:rsr}:
+
 \begin{equation}
   RSR = \frac{\sum \mid \rho_{obs} - \rho_{calc} \mid}
              {\sum \mid \rho_{obs} + \rho_{calc} \mid}
+  \label{eqn:rsr}
 \end{equation}
-where $\rho$ is electron density. 
 
 In words this equation computes the normalized difference between the observed
-electron density and modeled electron density. I explored the distribution of
-the RSR values for all nucleotides in loops. This is shown in
-Figure~\ref{fig:rsr-nt-distribution}.
+electron density and modeled electron density. 
+
+The ``observed electron density'' is calculated by 3D Fourier transformation of
+the Observed X-ray scattering amplitudes (``structure factors''), supplemented
+by estimates of the phases of each diffracted ray, independently determined. The
+observed electron density is fitted in the model-building stage using knowledge
+of the experimental RNA sequence and precise bond distances and bond anbles of
+the nucleotide subunits, obtained from very high resolution studies and
+calculations. The 3D structural model of the RNA can in turn be used to
+calculate the X-ray scattering phases and amplitudes using inverse Fourier
+Transformation. These calculated scattering data can then be used to calculate
+the electron density, by yet another 3D Fourier Transformation, to yield the
+``calculated electron density'', $\rho_{calc}$. The electron densities are
+scalar functions of 3D space that are greater than 0 at all points. They can be
+compared by addition or subtraction, point by point. The sum in
+Equation~\ref{eqn:rsr} is over all points in space. If the 3D model is
+``perfect'' $\rho_{obs} = \rho_{calc}$ at every point in space and the sum is
+exactly equal to 0. Thus $RSR = 0$ indicates perfect agreement of the 3D model
+to the underlying experimental data. In extreme cases the $\rho_{calc}$ and
+$\rho_{obs}$ do not overlap at all, the numerator will approach or equal the
+denominator and RSR will approach 1.0. So RSR usually varies from 0 (best case)
+to 1.0 (worst case), and can be calculated atom by atom or nucleotide by
+nucleotide to identify which parts on a 3D model are acceptable and which are
+not.
+
+I explored the distribution of the RSR values for all nucleotides in loops. This
+is shown in Figure~\ref{fig:rsr-nt-distribution}.
 
 \begin{figure}[ht]
   \begin{subfigure}[b]{0.49\textwidth}
@@ -608,29 +634,29 @@ their modeling, standard deviation of 1.68 vs 0.74.
 
 \begin{figure}
   \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{chapter-5/figs/loops/a}
+    \includegraphics[width=\textwidth]{chapter-5/figs/loops/rsrz-violin}
     \caption{Violin plot of the RSR-Z distribution.}
     \label{fig:rsrz-dist}
   \end{subfigure}
   ~
   \begin{subfigure}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{chapter-5/figs/loops/b}
+    \includegraphics[width=\textwidth]{chapter-5/figs/loops/rsrz-violin-truncated}
     \caption{Truncated violin plot}
     \label{fig:truncated-rsrz-dist}
   \end{subfigure}
   \caption{Distribution of RSR-Z values for nucleotides in loops clustered by
     the total number of annotated interactions they form with other nucleotides
     in the loop. The nucleotides come from loops which pass the fictional loop
-    cutoff of 1. The nucleotides are grouped by the total number of annotated interactions
-    formed, including basepairs, base backbone, and base-stacking interactions.
-    The distributions of the RSR-Z values are represented as violin plots. The
-    blue dots and inner bars within each ``bubble'' represent the mean and
-    standard deviation of the data respectively. In the left plot the data is
-    plotted vertically to better display the trend of decreasing mean RSR-Z as
-    the number of interactions for each nucleotide increases. The right plot is
-    the same data, however truncated at a value of 3. All RSR-Z values greater than 3
-    are set to three and the data is replotted. The means and standard deviations
-  are computed using the original data.}
+    cutoff of 1. The nucleotides are grouped by the total number of annotated
+    interactions formed, including basepairs, base backbone, and base-stacking
+    interactions. The distributions of the RSR-Z values are represented as
+    violin plots. The blue dots and inner bars within each ``bubble'' represent
+    the mean and standard deviation of the data respectively. In the left plot
+    the data is plotted vertically to better display the trend of decreasing
+    mean RSR-Z as the number of interactions for each nucleotide increases. The
+    right plot is the same data, however truncated at a value of 3. All RSR-Z
+    values greater than 3 are set to three and the data is replotted. The means
+    and standard deviations are computed using the original data.}
 \end{figure}
 
 \begin{table}
@@ -789,7 +815,7 @@ set.
 
 To explore the effect of the new quality metrics on clustering, I built a Motif
 Atlas release of internal loops using the representative release built in the
-previous chapter (v2.86). This clustering was used to test the effects of the
+previous chapter (v2.85). This clustering was used to test the effects of the
 new quality criteria on motif clustering. The quality criteria did not include
 the RSR-Z cutoffs developed above. This Motif Atlas version was used to examine
 the effects of imposing the RSR-Z criteria on the number of internal loop Motif
