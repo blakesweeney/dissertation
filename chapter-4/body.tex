@@ -3,13 +3,14 @@ RNA CONTAINING 3D STRUCTURES}
 
 \section{Introduction and motivation}
 
-The previous chapter discussed a method for organizing all RNA-containing 3D
-structures in PDB into sets of equivalence classes. This procedure structures
-the 3D dataset. However, for many use cases, simply organizing the data is
-insufficient. In particular studies exploring the statistical properties of the
-structural data set will be biased toward 3D structures that are highly
-represented, as is currently the case with tRNA and ribosome structures. A
-summary of is shown in Table~\ref{tab:mol-dist}.
+The previous chapter discussed a method for organizing all RNA IFE's extracted
+from mmCIFs from PDB into sets of Equivalence Classes (EC). This procedure
+organizes the 3D RNA structural dataset. However, for many use cases, simply
+organizing the data is just the first step. In particular, studies exploring the
+statistical properties of the structural data set will be biased toward 3D
+structures that are highly represented in PDB, as is currently the case with
+tRNA and ribosome structures. The number of highly populated EC's are compared in
+Table~\ref{tab:mol-dist}.
 
 \begin{table}
   \begin{tabulary}{\linewidth}{LRR}
@@ -46,129 +47,167 @@ summary of is shown in Table~\ref{tab:mol-dist}.
   \label{tab:mol-dist}
 \end{table}
 
-As seen in the table, \EC{} and \TT{} ribosomes alone make up 20\% of
-the entire dataset and all ribosomal total NNN. For many statistical analyses of
-RNA structure, it is desirable to identify one high quality representative
-structure \cite{Leontis2012b}. For example, such a reduced redundancy dataset
-set is desirable for constructing the RNA 3D Motif Atlas \cite{Petrov2013}. In
-previous work a method to identify representative structures  from PDB format
-files, called the non-redundant (NR) set was developed. We have updated the
-method to take advantage of the new mmCIF data and fix limitations of the
-previous method. These were posted on a weekly basis from February 5, 2011 to
-December 5, 2014 on the BGSU RNA site and made available for searching on NDB
+As seen in the table, \EC{} and \TT{} rRNA make up 20\% of the entire dataset,
+in terms of number of structures not nucleotides, and all rRNA from all species
+total 24.5\%. For many statistical analyses of RNA structure, it is desirable to
+identify one high quality representative IFE for each EC \cite{Leontis2012b}.
+For example, such a reduced redundancy dataset set is desirable for constructing
+the RNA 3D Motif Atlas \cite{Petrov2013}. In previous work, a method was
+developed to identify representative structures from PDB format files; this set
+was called the non-redundant (NR) set of RNA structures \cite{Leontis2012b}. We
+have updated the method to take advantage of the new mmCIF data format and to
+overcome limitations of the previous method. The NR sets were posted
+continously, on a weekly basis from February 5, 2011 to December 5, 2014 on the
+BGSU RNA site and made available for searching on the NDB site
 (\URL{http://ndbserver.rutgers.edu/}).
 
 \section{Requirements for representative set}
 
 The set of representative structures has a variety of uses in structural
-bioinformatics applications. Most notably it supports population and regular
-updating of the RNA 3D Motif Atlas \URL{http://rna.bgsu.edu/rna3dhub/motifs}.
-The RNA 3D Motif Atlas is a clustering of all high quality loops extracted from
-all structures in the current Representative Set of structures. For this reason
-it is desirable to avoid frequent changes in the representative structure due to
-insignificant increments in the selection criteria. If we allow frequent
-insignificant changes in the representative in structures selected for the
-Representative set, these changes cause large changes in the RNA 3D Motif Atlas.
-This makes the resource appear more unstable than it actually is and so we aim
-to avoid changes due to minor improvements in structures. Thus the goals are of
-the improvements described in this chapter are:
+bioinformatics applications. Most notably it supports the population and regular
+updating of the RNA 3D Motif Atlas at \URL{http://rna.bgsu.edu/rna3dhub/motifs}.
+The current version of the RNA 3D Motif Atlas is a clustering of all high
+quality loops extracted from all structures in a recent Representative Set of
+structures. For this reason it is desirable to avoid frequent changes in the
+representative structure from release to release due to insignificant increments
+in the selection criteria. If we allow frequent insignificant changes in the
+representative structures selected for the Representative Set these changes
+cause large changes in the RNA 3D Motif Atlas. This makes the resource appear
+more unstable than it actually is and so we aim to avoid changes due to minor
+improvements in structures. Thus the goals of the improvements described in
+this chapter are:
 
 \begin{enumerate}
-  \item The representative set should reflect observed variation in sequence,
-    structure, and biological variation in the set of solved 3D structures
-
-  \item The representative set should contain highest quality representative
-    X-Ray structures from each Equivalence Class. NMR or Cyro-EM structures are
-    chosen as representatives only when no X-ray structure is available.
+  \item The Representative Set of structures should contain the highest quality
+    representative X-Ray structures from each Equivalence Class. NMR or Cyro-EM
+    structures are chosen as representatives only when no X-ray structure is
+    available.
 
   \item The representative set should only change upon the appearance of new,
     significantly better structures, using criteria explained in this chapter.
+
+  \item The representative set should reflect observed variation in sequence,
+    structure, and biological variation in the set of EC's.
 \end{enumerate}
 
-The representative set is intended to display the observed structural, sequence,
-and biological variation present in the current RNA-containing structural
-dataset, avoiding duplication as much as possible. Each unique structural class
-should be represented by one high quality structure, as the classes already take
-into account the possibility of large structural variation, as explained in the
-previous chapter. It is desirable to pick the highest quality structure
-available from each equivalence class. A high quality structure is one that
-models the experimental data as well or better than other available structures
-and is as complete as possible.
+The Representative Set (RS) is intended to display the observed structural,
+sequence, and biological variation present in the current RNA-containing
+structural dataset, avoiding duplication as much as possible. Each unique
+structural class should be represented in the RS by one high quality structure,
+as the EC already take into account the possibility of large structural
+variation, as explained in the Chapter 3. It is desirable to pick the highest
+quality IFE available from each EC. A high quality IFE is one that models the
+experimental data as well or better than other available IFEs and is as complete
+as possible.
 
 \section{Methodology for selecting representative RNA 3D structures from
 Equivalence classes}
 
 This dissertation describes new methodology that represents significant
-improvements over the previously developed methodologies of the BGSU RNA
-resource. In the previous method, the Representative Structure from each
-Equivalence Class was selected based solely upon the number of annotated base
-pairs per nucleotide, discussed in detail in \cite{Leontis2012b}.
+improvements over the previously developed methodologies for populating the RS
+the BGSU RNA resource. In the previous method, the Representative Structure from
+each Equivalence Class was selected based solely upon the number of annotated
+base pairs per nucleotide caculated for each IFE, discussed in detail in
+\cite{Leontis2012b}.
 
-As the goal is to use only high quality structures the procedure uses X-ray
+As the goal is to use only high quality structures, the procedure uses X-ray
 structures as the representative, if possible. Some structures, such as that of
-the the mouse ribosome (3J7Q) \cite{Voorhees2014}, have only been solved using
+the mouse ribosome (3J7Q) \cite{Voorhees2014}, have only been solved using
 cryo-electron microscopy (``cryo-EM'') and in these cases, and only these cases,
-representative selected for the equivalence set is necessarily a cryo-EM
-structure. Only X-Ray structures are used when available because methods for
-assessing the modeling quality of cryo-EM structures, comparable to RSR-Z scores
-for X-ray crystallography are still under development and are not yet available
-available (Berman, personal communication). Having object assessment data, like
-RSR-Z scores available is essential for downstream applications such as
-selecting reliable loops for inclusion in the Motif Atlas. As soon as
-reliability data comparable to RSRZ scores are available for cryo-EM structures,
-these structures will be treated on an equivalent footing as X-ray.
+the RS representative selected from that EC the equivalence set is necessarily a
+cryo-EM structure. X-Ray structures are preferentially selected when available,
+because methods for assessing the modeling quality of cryo-EM structures,
+comparable to RSR-Z scores for X-ray crystallography are still under development
+and are not yet available available (Helen Berman, personal communication).
+Having objective assessment data, like RSR-Z scores available is essential for
+downstream applications such as selecting reliable loops for inclusion in the
+Motif Atlas. As soon as reliability data comparable to RSRZ scores are available
+for cryo-EM structures, these structures will be treated on an equivalent
+footing as X-ray structures.
 
-The procedure for each possible structure in:
+The procedure for selecting RS from each EC containing more than one IFEs,
+comprises theses steps:
 
 \begin{enumerate}
-  \item Select the structure with the most number of annotated basepairs per
+  \item Select the structure with the highest number of annotated basepairs per
     nucleotide.
 
-  \item Find a structures with at least 1\% more bases and base pairs and select
+  \item search for all structures with at least 1\% more bases and base pairs and select
     it as the current representative
 
   \item Repeat step 2 until there no structure has more base pairs and bases.
 \end{enumerate}
 
 This procedure has a few features that are worth discussing in detail. First, we
-use the number of FR3D annotated cis Watson Crick/Watson Crick base pairs per
-nucleotide (BP/NT) as the measure of structural quality because in our
-experience a high quality model of the same RNA molecule contains more annotated
-cWW base pairs than a poor model. This is a useful proxy and not a direct
-measure of the modeling quality such as that provided by Real Space Refinement
-(RSR) which is provided by PDB for all structures. RSR is measures how well a
-structural model fits the underlying experimental data and is discussed in more
-detail in the next chapter.
+use the number of FR3D annotated base pairs per nucleotide (BP/NT) as the
+measure of structural quality, because in our experience a high quality model of
+the same RNA molecule contains more annotated base pairs of all types than a
+poor model. This is a useful proxy and not a direct measure of the modeling
+quality such as that provided by Real Space Refinement (RSR) statistics which is
+provided now by PDB for all structures. RSR measures how well a structural model
+fits the underlying experimental electron density and is discussed in more
+detail in the next chapter, where I use it to filter 3D loops.
 
-Secondly, this method is designed to select a structure based both on BP/NT but
-also the number of nucleotides. Structures in the same class vary in the number
-of resolved nucleotides. If we use only BP/NT then we may select a  smaller
-structure that omits parts of the 3D structure that are less well modeled. We
-prefer more complete representative structures over smaller structures and thus
-include this second criterion.
+Secondly, this method is designed to select a structure based both on the value
+of BP/NT but also the total number of nucleotides in the IFE. Structures in the
+same EC vary in the number of resolved nucleotides as discussed in Chapter 3. If
+we use only BP/NT then we may select a  smaller structure that omits parts of
+the 3D structure that are less well modeled. We prefer more complete
+representative structures over smaller structures and thus include this second
+criterion.
 
 Finally, the new method requires new representatives to show a significant
-increase in both the number of nucleotides and the BP/NT. By doing so, we avoid
-changing representatives upon insignificant changes in overall quality. Thus
-stabilizing the Representative Set overtime. This 1\% increase is an empirically
-determined cutoff that may be adjusted in the future. The new method of
-representative selection described in this dissertation will be referred to
-henceforth as the ``dual 1\% method''.
+increase in both the number of nucleotides and the BP/NT to become the
+representative. By doing so, we avoid changing representatives upon
+insignificant changes in overall quality, thus stabilizing the RS over time.
+This 1\% increase is an empirically determined threshold that may be adjusted in
+the future. The new method of representative selection described in this
+dissertation will be referred to henceforth as the ``dual 1\% increase'' method.
+I have also created a method called the ``any increase'' method which does not
+have require a 1\% increase in basepairs and nucleotides for switching
+representative. This method is created for comparison to examine the effect of
+the 1\% threshold.
 
-To describe the overall logic of the logic I have added a figure of the
-pseudocode in Figure~\ref{fig:pseudocode-representatives}. This figure shows the
-overall logic of this procedure, but does not correspond exactly to the
-implementation.
+To describe the overall logic of the method I have added a figure of the
+pseudocode in Figure~\ref{fig:pseudocode-cur-representatives}. This figure shows
+the overall logic of this procedure, but does not correspond exactly to the
+implementation, as the implementation contains much more error handling logic.
+It is important to note that while this logic does not directly consider the
+previous representative it does appear to be stable, as discussed below.
+However, a small modification to the procedure as shown in
+Figure~\ref{fig:pseudocode-new-representatives} would.
 
 \begin{figure}
-  \texttt{
-    procedure selecting a representative
-    select candidate representative with best BP/NT
-    for all members of the group
-      if representative has 1\% more BP and 1\% NT
-        set as representative
-    repeat loop until representative does not change
-  }
+  \begin{subfigure}[b]{0.5\textwidth}
+    \begin{tabbing}
+      proc\=edur\=e sel\=ecting a representative \\
+      \>select candidate representative with best BP/NT \\
+      \>for all members of the group \\
+        \>\>If representative has 1\% more BP and 1\% NT \\
+          \>\>\>set as representative \\
+          \>\>End \\
+        \>End \\
+      \>repeat loop until representative does not change \\
+      End
+    \end{tabbing}
+    \caption{Current representative selection}
+    \label{fig:pseudocode-cur-representatives}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \begin{tabbing}
+      proc\=edur\=e sel\=ecting a representative \\
+      \>select candidate representative which is previous representative \\
+      \>for all members of the group \\
+        \>\>If representative has 1\% more BP and 1\% NT \\
+          \>\>\>set as representative \\
+          \>\>End \\
+        \>End \\
+      \>repeat loop until representative does not change \\
+      End
+    \end{tabbing}
+    \caption{Possible new representative selection}
+    \label{fig:pseudocode-new-representatives}
+  \end{subfigure}
   \caption{Pseudocode showing the overall logic of the selection for
   representative sets.}
   \label{fig:pseudocode-representatives}
@@ -176,7 +215,7 @@ implementation.
 
 \section{Results of building the representative set}
 
-I evaluated the Representative Set selected as described above by using the new
+I evaluated the RS selected as described above by using the new
 dual 1\% increase method, and compared results with the previous method and a
 modification of the current method that changes the representative structure
 based upon improvement of just one criterion. These classes used all available
@@ -205,14 +244,14 @@ two. This selection is our desired result.
   \includegraphics[width=0.5\textwidth]{chapter-4/figs/hm-lsu-rep}
   \caption{Scatter plot of representative selection across three possible
     methodologies for the \HM{} Large Ribosomal Subunit. Shown here is a summary
-    of which IFE’s are selected as the representative for the 3 method discussed
+    of which IFE’s are selected as the representative for the three method discussed
     here. Each panel indicates a different method, in order from top to bottom,
-    the previous method, the Dual 1\% increase method and the any increase
-    method. The representative IFE is colored in blue, while the other members
-    of the set are colored red. The upper panel shows the previous method. It is
-    difficult to see but the IFE selected as the representative is the IFE at
-    the top of the stack of IFE’s
-  in the upper right.}
+    the previous method based only on BP/NT criterion, the Dual 1\% increase
+    method and the any increase method. The representative IFE is colored in
+    blue, while the other members of the set are colored red. The upper panel
+    shows the previous method. It is difficult to see but the IFE selected as
+    the representative is the IFE at the top of the stack of IFE’s in the upper
+    right.}
   \label{fig:hm-lsu-rep}
 \end{figure}
 
@@ -242,11 +281,11 @@ the \EC{} LSU \TT{} SSU differ in selection of representatives.
 \begin{figure}
   \includegraphics[width=0.5\linewidth]{chapter-4/figs/ec-lsu-rep}
   \caption{Scatter plot of the number of base pairs vs the number of nucleotides
-    for selected \EC{} Large Subunits using the three methods discussed here.
+    for selected \EC{} LSU rRNAs using the three methods discussed here.
     The representative selected is shown as a large blue dot, while all other
     members are shown as small red dots. The plot has been truncated to show
     only the structures with at least 2840 nucleotides and 500 basepairs for
-  clarity.}
+  relevance.}
   \label{fig:ec-lsu-rep}
 \end{figure}
 
