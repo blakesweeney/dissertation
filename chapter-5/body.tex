@@ -3,19 +3,18 @@ REPRESENTATIVE SET OF STRUCTURES}
 
 In this chapter I will discuss the changes I have made to the way the BGSU RNA
 pipeline selects loops for building the RNA 3D Motif Atlas
-(\href{http://rna.bgsu.edu/rna3dhub/motifs}{http://rna.bgsu.edu/rna3dhub/motifs}).
-The goal of our Motif Atlas is to maintain a high quality, up-to-date clustering
-of representative RNA 3D Motifs (hairpin, internal, and multi helix junction
-loops) from the 3D structure database, on an ongoing basis. An important step in
-building the Motif Atlas is the selection of loops. The original process of
-selecting loops was implemented by Dr. Anton Petrov in previous work
-\cite{Petrov2012}. Overall, the procedure worked as follows: First, all loops
-from all representative structures from all 4.0{\AA} equivalence classes are
-extracted. This representative structure was always the longest chain in a given PDB
-file. Shorter RNA molecules were ignored, for example the 5S in from the LSU
-rRNA. Then each loop was examined for the presence of possible structural flaws,
-which serve as criteria for removal. The loop exclusion criteria criteria
-included:
+(\URL{http://rna.bgsu.edu/rna3dhub/motifs}). The goal of our Motif Atlas is to
+maintain a high quality, up-to-date clustering of representative RNA 3D Motifs
+(hairpin, internal, and multi helix junction loops) from the 3D structure
+database, on an ongoing basis. An important step in building the Motif Atlas is
+the selection of loops. The original process of selecting loops was implemented
+by Dr. Anton Petrov in previous work \cite{Petrov2012}. Overall, the procedure
+worked as follows: First, all loops from all representative structures from all
+4.0{\AA} equivalence classes are extracted. This representative structure was
+always the longest chain in a given PDB file. Shorter RNA molecules were
+ignored, for example the 5S in from the LSU rRNA. Then each loop was examined
+for the presence of possible structural flaws, which serve as criteria for
+removal. The loop exclusion criteria criteria included:
 
 \begin{enumerate}
   \item Presence of chain breaks in the loop. Chain breaks occur when the
