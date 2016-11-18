@@ -5,6 +5,7 @@
 \usepackage{times}
 \usepackage{amstext}
 \usepackage{caption}
+\usepackage{tocloft}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -26,7 +27,7 @@
 \newcommand{\rot}{\rotatebox{90}}
 \newcommand{\cyem}{cryo-EM}
 \newcommand{\etal}{\emph{et al}}
-\newcommand{\rsrz}[1]{RSRZ \textgreater #1}
+\newcommand{\rsrz}[1]{RSR-Z \textgreater #1}
 \newcommand{\URL}[1]{\href{#1}{#1}}
 
 \newcommand{\I}[1]{$I_{#1}$}
@@ -52,6 +53,28 @@ QUALITY LOOPS}
 \committee{Raymond Anthony Larsen \\ \\ 
   George Bullerjahn \\ \\ 
   Hans Wildschutte}
+
+\renewcommand\contentsname{Table of Contents}
+\renewcommand\cfttoctitlefont{\hfil\mdseries}
+\renewcommand{\cftaftertoctitle}{\hfil}
+\renewcommand{\cftchapfont}{\mdseries}
+\renewcommand{\cftchappagefont}{\mdseries}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+\renewcommand{\figurename}{Figure}
+\renewcommand\listfigurename{List of Figures}
+\renewcommand\cftloftitlefont{\hfil\mdseries}
+\renewcommand{\cftafterloftitle}{\hfil}
+\renewcommand{\cftfigfont}{\mdseries}
+\renewcommand{\cftfigpagefont}{\mdseries}
+\renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
+
+\renewcommand\listtablename{List of Tables}
+\renewcommand\cftlottitlefont{\hfil\mdseries}
+\renewcommand{\cftafterlottitle}{\hfil}
+\renewcommand{\cfttabfont}{\mdseries}
+\renewcommand{\cfttabpagefont}{\mdseries}
+\renewcommand{\cfttableader}{\cftdotfill{\cftdotsep}}
 
 % The first level headings need to be centered, unbolded and 12 point size
 \titleformat{\chapter}[hang]% NEW
@@ -84,10 +107,12 @@ QUALITY LOOPS}
 \tableofcontents
 
 \listoffigures
+\clearpage
 
 \listoftables
+\clearpage
 
-\mainmatter % starts over page counter and gives regular page numbers
+\mainmatter{} % starts over page counter and gives regular page numbers
 
 \include{chapter-1/body}
 \include{chapter-2/body}
@@ -95,7 +120,7 @@ QUALITY LOOPS}
 \include{chapter-4/body}
 \include{chapter-5/body}
 
-\backmatter
+\backmatter{}
 
 \bibliographystyle{plain}
 \bibliography{all} 
