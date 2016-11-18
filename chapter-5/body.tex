@@ -331,7 +331,7 @@ However, there is a long tail in the RSR-Z distribution corresponding to
 nucleotides with very high RSR-Z values. Loops containing poorly modeled
 nucleotides should be excluded from clustering and inclusion in the 3D Motif
 Atlas. When the distributions are examined on the basis of nucleotide, as shown
-in Figure~/ref{fig:rsrz-nt-distribution}, the means are all slightly above zero,
+in Figure~\ref{fig:rsrz-nt-distribution}, the means are all slightly above zero,
 near 0.13. This shows that while loops as a whole are modeled better, the
 individual nucleotides are 
 
@@ -699,7 +699,7 @@ set to 1.
     \>Else \\
       \>\>Accept Loop \\
     \>End \\
-  End \\
+  End
   \end{tabbing}
   \caption{Pseudocode of the logic for excluding loops based upon RSR-Z
   criteria. This logic shows the overall logic of how RSR-Z is used to exclude
@@ -714,23 +714,7 @@ Step 2: if any interacting nucleotide has an RSR-Z above Cutoff 2 (the
 Interacting Nt criterion), the loop is rejected. Note that Cutoff 1 is less than
 or equal to Cutoff 2. This logic is summarized in the pseudocode shown in
 Figure~\ref{fig:pseudo-rsrz-logic}. I use a range of cutoffs, 1, 1.5, 2, and 2.5
-to explore the effect on number of loops excluded. For the study summarized in
-Table~\ref{tab:rsrz-reject-summary} here I used the same RSR-Z value for both
-cutoffs. The total number of loops rejected by this method are summarized in
-Table~\ref{tab:rsrz-reject-summary}. 
-
-% \begin{table}
-%   \begin{tabular}{llrrrrrrrr}
-%     Type of Motif &
-%       Number of Motifs &
-%       Number of Loops
-%       Number of Loops
-%   \end{tabular}
-%   \caption{Counts and percent of all loops extracted that are rejected by the
-%     RSR-Z tested here. The percentages are the percent of all loops that are
-%   rejected by the cutoff.}
-%   \label{tab:rsrz-reject-summary}
-% \end{table}
+to explore the effect on number of loops excluded. 
 
 I then tested the effects of simultaneously varying Cutoff 1 and Cutoff 2 over
 the range 1 to 2.5 by steps of 0.5 on the number of internal and hairpin loops
