@@ -396,10 +396,29 @@ The logic for joining chains into IFE's is as follows:
     cutoff is reasonable we produced the figures shown in
     Figure~\ref{fig:ext-vs-int}.
 
-  \item[Rule 4] If wo structured chains are connected indirectly b
+  \item[Rule 4] If two structured chains are connected indirectly by an
+    unstructured chain, place the unstructured chain with both structured chains
+    as an ``accompanying'' chain but do not join the two structured chains.
 \end{description}
 
 \begin{figure}
+  \begin{tabbing}
+    Fore\=ach p\=air of chains \\
+      \>If the chains do not interact \\
+      \>\>Skip \\
+      \>End \\
+      \>If one chain is unstructured \\
+      \>\>Join chains \\
+      \>Else If both are structured and internal/external > 0.6 \\
+      \>\>Join chains \\
+      \>End \\
+    End \\
+    Foreach grouped chain \\
+    \>If two structured chains do not interact \\
+    \>\>Split the structured chains \\
+    \>End \\
+    End
+  \end{tabbing}
   \caption{Pseudocode for the logic of joining chains into IFEs. This is a more
   structured representative of the logic shown in the Figure~\ref{fig:build-ife}.
   }
@@ -475,18 +494,20 @@ unnecessary alignments while ensuring that we perform all needed alignments. For
 example, attempting an alignment between a large and small rRNA subunit is
 unnecessary and should be avoided. In addition, aligning a three nucleotide mRNA
 fragment to an LSU may produce a match, but the match is meaningless. By imposing
-size rules we also eliminate meaningless alignments.
+size rules we also eliminate meaningless alignments. We have a hard limit 
 
 \begin{table}
-  \begin{tabular}{LR}
+  \begin{tabular}{lr}
     \toprule
     Sequence Size & Size Rule \\
     \midrule
-    $l  \lt 19$ & Same Size \\
-    $19 \le l \lt 80$ &  \\
+    $s < lt 19$          & Same Size                         \\
+    $19 \leq s < 2000$ & Within 50\% and less than 2000    \\
+    $2000 \leq s$        & Within 50\% and greater than 2000 \\
     \bottomrule
   \end{tabular}
-  \caption{List of rules}
+  \caption{List of rules used when selecting the pairs of sequences to align. In
+  the columns $s$ is the length of the shortest experimental sequence}
   \label{tab:size-rules}
 \end{table}
 
@@ -885,7 +906,7 @@ indicating it is connected through a transitive chain of low similarity.
 
 The other possibility is that the chains are connected through an IFE for which
 geometric discrepancy was not computed. An example of this is show in
-Figure~\ref{fig:NR-all-18070.1-disc}. In this figure we can see a yellow line in
+Figure~\ref{fig:nr-all-18070.1-disc}. In this figure we can see a yellow line in
 the upper right which covers the entire heatmap. This indicates that this IFE
 has high geometric discrepancy to all other members of the group. This IFE is connected to
 all other members through the IFE's that have no geometric discrepancy shown (grey bars).
