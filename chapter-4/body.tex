@@ -38,23 +38,23 @@ Table~\ref{tab:mol-dist}.
   \end{tabulary}
   \caption{Proportion of solved structures that are from bacterial and yeast
     ribosomes. This table shows data from the 2.92 release of NR set at the
-    'all' resolution, availabe at:
+    ``all'' resolution, availabe at:
     \URL{http://rna.bgsu.edu/rna3dhub/nrlist/release/2.92/all}. This dataset contains
     all structures available as of Sept 09, 2016. This table presents the
     fraction of the total structural database that comprises structures from all
     sources ribosomes. In total they make up 20\% of the solved crystal
   structures. LSU: Large Ribosomal Subunit, SSU: Small Ribosomal Subunit.}
-  \label{tab:mol-dist}
+\label{tab:mol-dist}
 \end{table}
 
 As seen in the table, \EC{} and \TT{} rRNA make up 20\% of the entire dataset,
 in terms of number of structures not nucleotides, and all rRNA from all species
 total 24.5\%. For many statistical analyses of RNA structure, it is desirable to
-identify one high quality representative IFE for each EC \cite{Leontis2012b}.
+identify one high quality representative IFE for each EC~\cite{Leontis2012b}.
 For example, such a reduced redundancy dataset set is desirable for constructing
-the RNA 3D Motif Atlas \cite{Petrov2013}. In previous work, a method was
+the RNA 3D Motif Atlas~\cite{Petrov2013}. In previous work, a method was
 developed to identify representative structures from PDB format files; this set
-was called the non-redundant (NR) set of RNA structures \cite{Leontis2012b}. We
+was called the non-redundant (NR) set of RNA structures~\cite{Leontis2012b}. We
 have updated the method to take advantage of the new mmCIF data format and to
 overcome limitations of the previous method. The NR sets were posted
 continously, on a weekly basis from February 5, 2011 to December 5, 2014 on the
@@ -96,7 +96,7 @@ structural dataset, avoiding duplication as much as possible. Each unique
 structural class should be represented in the RS by one high quality structure,
 as the EC already take into account the possibility of large structural
 variation, as explained in the Chapter 3. It is desirable to pick the highest
-quality IFE available from each EC. A high quality IFE is one that models the
+quality IFE available from each EC\@. A high quality IFE is one that models the
 experimental data as well or better than other available IFEs and is as complete
 as possible.
 
@@ -112,7 +112,7 @@ base pairs per nucleotide caculated for each IFE, discussed in detail in
 
 As the goal is to use only high quality structures, the procedure uses X-ray
 structures as the representative, if possible. Some structures, such as that of
-the mouse ribosome (3J7Q) \cite{Voorhees2014}, have only been solved using
+the mouse ribosome (3J7Q)~\cite{Voorhees2014}, have only been solved using
 cryo-electron microscopy (``cryo-EM'') and in these cases, and only these cases,
 the RS representative selected from that EC the equivalence set is necessarily a
 cryo-EM structure. X-Ray structures are preferentially selected when available,
@@ -149,7 +149,7 @@ fits the underlying experimental electron density and is discussed in more
 detail in the next chapter, where I use it to filter 3D loops.
 
 Secondly, this method is designed to select a structure based both on the value
-of BP/NT but also the total number of nucleotides in the IFE. Structures in the
+of BP/NT but also the total number of nucleotides in the IFE\@. Structures in the
 same EC vary in the number of resolved nucleotides as discussed in Chapter 3. If
 we use only BP/NT then we may select a  smaller structure that omits parts of
 the 3D structure that are less well modeled. We prefer more complete
@@ -191,7 +191,7 @@ Figure~\ref{fig:pseudocode-new-representatives} would.
       End
     \end{tabbing}
     \caption{Current representative selection}
-    \label{fig:pseudocode-cur-representatives}
+\label{fig:pseudocode-cur-representatives}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \begin{tabbing}
@@ -206,11 +206,11 @@ Figure~\ref{fig:pseudocode-new-representatives} would.
       End
     \end{tabbing}
     \caption{Possible new representative selection}
-    \label{fig:pseudocode-new-representatives}
+\label{fig:pseudocode-new-representatives}
   \end{subfigure}
   \caption{Pseudocode showing the overall logic of the selection for
   representative sets.}
-  \label{fig:pseudocode-representatives}
+\label{fig:pseudocode-representatives}
 \end{figure}
 
 \section{Results of building the representative set}
@@ -252,7 +252,7 @@ two. This selection is our desired result.
     shows the previous method. It is difficult to see but the IFE selected as
     the representative is the IFE at the top of the stack of IFE’s in the upper
     right.}
-  \label{fig:hm-lsu-rep}
+\label{fig:hm-lsu-rep}
 \end{figure}
 
 We then evaluated the selection of representative in context of the resolution
@@ -268,7 +268,7 @@ consistent with our goals for the methods.
     This histogram shows the resolution distribution of all IFE’s in the
     class. The red line indicates the resolution of the representative chosen by
   all 3 methods.}
-  \label{fig:hm-rep-res-dist}
+\label{fig:hm-rep-res-dist}
 \end{figure}
 
 We further evaluated the method described here by examining the selection of
@@ -286,7 +286,7 @@ the \EC{} LSU \TT{} SSU differ in selection of representatives.
     members are shown as small red dots. The plot has been truncated to show
     only the structures with at least 2840 nucleotides and 500 basepairs for
   relevance.}
-  \label{fig:ec-lsu-rep}
+\label{fig:ec-lsu-rep}
 \end{figure}
 
 \begin{figure}
@@ -297,7 +297,7 @@ the \EC{} LSU \TT{} SSU differ in selection of representatives.
     members are shown as small red dots. The plot has been truncated to show
     only the structures with at least 1400 nucleotides and 300 basepairs for
   clarity.}
-  \label{fig:ec-ssu-rep}
+\label{fig:ec-ssu-rep}
 \end{figure}
 
 \begin{figure}
@@ -308,7 +308,7 @@ the \EC{} LSU \TT{} SSU differ in selection of representatives.
     while all other members are shown as small red dots. The plot has been
     truncated to show only the structures with at least 2725 nucleotides and 500
   basepairs for clarity.}
-  \label{fig:tt-lsu-rep}
+\label{fig:tt-lsu-rep}
 \end{figure}
 
 \begin{figure}
@@ -319,7 +319,7 @@ the \EC{} LSU \TT{} SSU differ in selection of representatives.
     while all other members are shown as small red dots. The plot has been
     truncated to show only the structures with at least 1490 nucleotides and 200
   basepairs for clarity.}
-  \label{fig:tt-ssu-rep}
+\label{fig:tt-ssu-rep}
 \end{figure}
 
 \subsubsection{Evaluating representative selection on the basis of resolution}
@@ -335,7 +335,7 @@ summary of this data is shown in Table~\ref{tab:res-diff-summary}.
   \begin{tabulary}{\linewidth}{LRRR}
     \toprule
     Method &  Representatives with lowest resolution &  Representatives with
-    resolution within 1{\AA}  & Representatives with resolution \textgreater 1{\AA} \\
+    resolution within 1{\AA{}}  & Representatives with resolution \textgreater 1{\AA} \\
     \midrule
     Previous          & 1506 (93\%) & 86 (5.3\%) & 14 (0.8\%) \\
     Dual Increase     & 1494 (93\%) & 97 (6.0\%) & 15 (0.9\%) \\
@@ -345,7 +345,7 @@ summary of this data is shown in Table~\ref{tab:res-diff-summary}.
   \caption{A summary of the differences between the resolution of the
   representatives as compared to the member of the group with the lowest
   resolution.}
-  \label{tab:res-diff-summary}
+\label{tab:res-diff-summary}
 \end{table}
 
 From this we can see that nearly all groups use a structure with the lowest
@@ -366,7 +366,7 @@ is greater than 0{\AA}.
     the total number of groups with resolution difference less than 1{\AA}, while
     the number to the right indicates the number of groups with resolution
   difference greater than 1{\AA}.}
-  \label{fig:res-diff-histogram}
+\label{fig:res-diff-histogram}
 \end{figure}
 
 From this figure we can see two things. First, all methods are very similar in
@@ -451,7 +451,7 @@ resolution for one method. The ``|'' indicates that the method selects a
 structure with the given resolution. The minimum resolution for the group is
 shown along with the group id. For each method column the IFE selected is shown
 and the resolution for the IFE is shown in parenthesis. }
-  \label{tab:rep-res-diff-details}
+\label{tab:rep-res-diff-details}
   \end{table}
 \end{landscape}
 
@@ -475,7 +475,7 @@ Figure~\ref{fig:xray-only-diff} is this figure.
     than 1{\AA}, while the number to the right indicates the number of groups
     with resolution
   difference greater than 1{\AA}.}
-  \label{fig:xray-only-diff}
+\label{fig:xray-only-diff}
 \end{figure}
 
 In this figure we can see that there are very few groups have resolution
@@ -541,7 +541,7 @@ at least one of the methods selects a representative that does not have the
 highest resolution among the available structures. This table only contains
 groups that contain only X-ray only. The ``|'' indicates that the method does
 pick a structure with the minimum resolution.}
-  \label{tab:xray-only-outliers}
+\label{tab:xray-only-outliers}
 \end{table}
 \end{landscape}
 
@@ -562,9 +562,9 @@ structure.
 
 \subsubsection{Independent measures of representative selection}
 
-PDB provides quality reports for all structures \cite{Gore2012}. These quality
+PDB provides quality reports for all structures~\cite{Gore2012}. These quality
 reports use a variety of metrics that were suggested by the X-ray validation
-task force \cite{Gore2012}. Here I evaluate our selection on the basis of data
+task force~\cite{Gore2012}. Here I evaluate our selection on the basis of data
 from these quality reports. Shown in Figure~\ref{fig:ec-lsu-report} is the
 quality report for the representative selected by the dual 1\% increase method
 as compared to that of the previous method. From this figure we can see that the
@@ -575,18 +575,18 @@ RNA backbone scores, however, all other metrics are worse.
   \begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/4V54}
     \caption{4V54}
-    \label{fig:4V54-quality}
+\label{fig:4V54-quality}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5J91}
     \caption{5J91}
-    \label{fig:5J91-quality}
+\label{fig:5J91-quality}
   \end{subfigure}
   \caption{Screenshots of the summaries of quality reports for 4V54 (left), the
     representative selected by the Dual 1\% increase method as compared to the
     report for 5J91 (right), the representative selected by the previous
   method.}
-  \label{fig:ec-lsu-report}
+\label{fig:ec-lsu-report}
 \end{figure}
 
 The same data is shown for the \TT{} large subunit group in
@@ -598,18 +598,18 @@ with fewer RSRZ outliers.
   \begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5FDU}
     \caption{5FDU}
-    \label{fig:5FDU-quality}
+\label{fig:5FDU-quality}
   \end{subfigure}
   \begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=\linewidth]{chapter-4/figs/quality-reports/5HCQ}
     \caption{5HCQ}
-    \label{fig:5HCQ-quality}
+\label{fig:5HCQ-quality}
   \end{subfigure}
   \caption{Screenshots of the summaries of quality reports for 5FDU (left), the
           representative selected by the dual 1\% increase method as compared to
           the report for 5HCQ (right), the representative selected by the previous
           method.}
-  \label{fig:tt-lsu-report}
+\label{fig:tt-lsu-report}
 \end{figure}
 
 These figures indicates that while the dual 1\% increase method does not use the
@@ -638,7 +638,7 @@ stable.
     three methods. This plot is a cumulative sum of the total number changes for
     all classes at the ``all'' resolution cutoff which exist in all of the 90
   releases used in the analysis.}
-  \label{fig:rep-changes}
+\label{fig:rep-changes}
 \end{figure}
 
 We examined the number of total number of changes for each class in the dataset.
@@ -661,14 +661,14 @@ time.
   \caption{Number of changes for classes that exist from 2.0 to 2.90. This table
     summarize the number of classes that show 0, 1, 2, 3, or 4 changes amongst
   the classes that exist in all releases. }
-  \label{tab:rep-changes-count}
+\label{tab:rep-changes-count}
 \end{table}
 
 To see how often classes with more than 1 change alters the representative we
 plotted all classes that show more than one change across these releases as seen
 in Figure~\ref{fig:multi-change}. We see that there are only 3 classes that show
 this behavior: 80570, a 2 nucleotide synthetic RNA, 83717 the \EC{} LSU, and
-97519 the T. t LSU. From this we can see that all methods are generally stable
+97519 the T\@. t LSU\@. From this we can see that all methods are generally stable
 for many releases followed by a few very quick changes. This is more
 desirable over a method which changes very frequently. One class, 80570
 shown in red, the representative is changed every time a new structure is
@@ -682,7 +682,7 @@ selected representative.
     more than once between 2.0 and 2.90. Each colored line represents a class,
     and each mark indicates when members are added to the class. The three sets
   panels indicate the three different methods tested here.}
-  \label{fig:multi-change}
+\label{fig:multi-change}
 \end{figure}
 
 \section{Conclusions and future work}

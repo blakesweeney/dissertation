@@ -108,7 +108,7 @@ these special cases is assessed.
 Among the largest entities are ribosomal RNAs (rRNA), which include the rRNA of
 the large (LSU) and small (SSU) ribosomal subunits, the 5S rRNA, and the 5.8S
 rRNA in eukaryotes. LSU and SSU rRNA from a number of species representing all three
-major phylogenetic domains and mitochondria are presently available in PDB/NDB.
+major phylogenetic domains and mitochondria are presently available in PDB/NDB\@.
 
 The rRNAs should be divided into separate Equivalence Classes (EC) as follows:
 First, each of the SSU rRNAs (mitochondrial 12S, bacterial 16S and eukaryal 18S
@@ -377,7 +377,7 @@ is shown in Figure~\ref{fig:pseudo-ife-building}.
     interactions. Case 4 shows that for two structured chains selected by an
     unstructured chain the two structured chains are placed in separate IFE's
     while the unstructured chain is included in both IFE's.}
-  \label{fig:build-ife}
+\label{fig:build-ife}
 \end{figure}
 
 The logic for joining chains into IFE's is as follows:
@@ -423,7 +423,7 @@ The logic for joining chains into IFE's is as follows:
   \caption{Pseudocode for the logic of joining chains into IFEs. This is a more
   structured representative of the logic shown in the Figure~\ref{fig:build-ife}.
   }
-  \label{fig:pseudo-ife-building}
+\label{fig:pseudo-ife-building}
 \end{figure}
 
 \begin{figure}
@@ -431,7 +431,7 @@ The logic for joining chains into IFE's is as follows:
   \caption{Summary of the ratio of external to internal base pairs. The leftmost
     panel shows a histogram of the maximal ratio of external to internal pairs
   for all pairs of chains which have an interaction between them. }
-  \label{fig:ext-vs-int}
+\label{fig:ext-vs-int}
 \end{figure}
 
 \subsection{Connecting pairs of IFE's to from equivalence sets}
@@ -509,7 +509,7 @@ size rules we also eliminate meaningless alignments. We have a hard limit
   \end{tabular}
   \caption{List of rules used when selecting the pairs of sequences to align. In
   the columns $s$ is the length of the shortest experimental sequence}
-  \label{tab:size-rules}
+\label{tab:size-rules}
 \end{table}
 
 Finally, we require that two experimental sequences either be assigned to the
@@ -583,7 +583,7 @@ Figure~\ref{fig:transitivity}.
   Class is represented by the grey background around a set of circles. To in
 included in a class an instance need only be connected to one other member of
 the class.}
-  \label{fig:transitivity}
+\label{fig:transitivity}
 \end{figure}
 
 Using transitivity to include IFE's that are not maximally connected minimizes
@@ -656,7 +656,7 @@ member count distribution is shown in in Table~\ref{tab:eq-size-dist}.
   \caption{Counts of the number of classes for a range of sizes. This table
     shows the number of classes for a range of sizes for the new grouping method
   for all 3213 structures available as of July 28, 2016}
-  \label{tab:eq-size-dist}
+\label{tab:eq-size-dist}
 \end{table}
 
 The table shows a surprisingly high percentage, 62\%, of singleton groups. I
@@ -684,10 +684,10 @@ method.
     Number of Equivalence Classes in 1.89 \\
     \midrule
     1               & 1081 (61.0\%)  & 1112 (78\%) \\
-    2-5             & 527 (30.0\%)   & 234 (16\%)\\
-    5-10            & 88 (5.0\%)     & 31 (2\%)  \\
-    10-20           & 38 (2.0\%)     & 19 (1\%)  \\
-    20-50           & 20 (1.0\%)     & 8 (0.5\%) \\
+    2--5             & 527 (30.0\%)   & 234 (16\%)\\
+    5--10            & 88 (5.0\%)     & 31 (2\%)  \\
+    10--20           & 38 (2.0\%)     & 19 (1\%)  \\
+    20--50           & 20 (1.0\%)     & 8 (0.5\%) \\
     \textgreater 50 & 11 (0.6\%)     & 5 (0.3\%) \\
     Total           & 1765 (100\%)   & 1409 (100\%) \\
     \bottomrule
@@ -702,7 +702,7 @@ method.
   December 5, 2014. The transition from 1.89 to 2.0 corresponds to the
   move from PDB to mmCIF formats, which decreased the total number of
   files, because many previously separate files were merged}
-  \label{tab:compare-size-dist}
+\label{tab:compare-size-dist}
 \end{table}
 
 I next moved to examine results of EC's of particular interest. I begin with
@@ -724,7 +724,7 @@ determine whether if they correlate to functionally distinct states.
   \caption{A figure summarizing the sequences similarity for all IFE's in the
     \TT{} small subunit. Color scale indicates geometric discrepancy
   values, lighter colors being worse.}
-  \label{fig:tt-ssu-align}
+\label{fig:tt-ssu-align}
 \end{figure}
 
 \begin{figure}[h]
@@ -733,7 +733,7 @@ determine whether if they correlate to functionally distinct states.
     small subunit. Grey squares indicate no data computed, because
     that structure has too low a resolution. Color scale indicates geometric discrepancy
   values, lighter colors being worse.}
-  \label{fig:tt-ssu-disc}
+\label{fig:tt-ssu-disc}
 \end{figure}
 
 \subsection{tRNA and mRNA complexes}
@@ -752,7 +752,7 @@ are below our cutoff of 0.4 {\AA}/nt, so they are placed the same EC\@.
     right shows the heat map of sequence similarity for the group. Color scales
     indicate the value, with lighter colors meaning ``worse'' values. Along the
   diagonal of each plot is the mean value for each row.}
-  \label{fig:trna-alone}
+\label{fig:trna-alone}
 \end{figure}
 
 \subsection{Protein and RNA complexes}
@@ -778,7 +778,7 @@ together single and double stranded molecules.
     geometric discrepancy: This shows the effect of clustering a model compound without
     using geometric discrepancy. We are showing only the geometric discrepancy heatmap here. We can
   see that there are several subgroups with very different geometries.}
-  \label{fig:small-aa-no-disc}
+\label{fig:small-aa-no-disc}
 \end{figure}
 
 \begin{figure}[h]
@@ -786,7 +786,7 @@ together single and double stranded molecules.
   \caption{geometric discrepancy heatmap for a small 11-nt poly-A compound built using
     geometric discrepancy. Mean values for each row are shown on the diagonal, and the
   color scale indicates geometric discrepancy with lighter colors being worse}
-  \label{fig:small-aa-disc}
+\label{fig:small-aa-disc}
 \end{figure}
 
 \subsection{Outliers}
@@ -810,7 +810,7 @@ reason we cannot use a simple sequence similarity cutoff as with GD.
     Similarity for all pairs of IFE's in all equivalence classes. The black
     lines indicate the 0.8 geometric discrepancy cutoff (left) used a criterion for
   detecting groups with outlier pairs.}
-  \label{fig:eq-summary}
+\label{fig:eq-summary}
 \end{figure}
 
 I then investigated the distribution of GD and sequence similarities for all
@@ -826,7 +826,7 @@ indicating they differ geometrically.
   outliers. This figure shows the same data as Figure~\ref{fig:eq-summary} but
 only for groups that have a pair of IFE's with geometric discrepancy at least 0.8 or
 sequence similarity less than or equal to 0.9.}
-  \label{fig:eq-outlier-summary}
+\label{fig:eq-outlier-summary}
 \end{figure}
 
 We next examined the distribution of the number of outliers, fraction of
@@ -853,7 +853,7 @@ nucleotides corresponds to two tRNA groups.
     lower (worse) score. Finally, the lower left colors the points using the
     fraction of total pairs that are outliers, with lighter being higher
   fraction and thus worse.}
-  \label{fig:outlier-detail}
+\label{fig:outlier-detail}
 \end{figure}
 
 All EC with outliers can be classified according to the type of outliers they
@@ -878,7 +878,7 @@ built.
   \end{tabular}
   \caption{This table shows the counts, and percents, of each type of outlier
   in an equivalence class.}
-  \label{tab:outlier-types}
+\label{tab:outlier-types}
 \end{table}
 
 From the definition of our methodology, I know that all EC that contain pairs
@@ -902,7 +902,7 @@ indicating it is connected through a transitive chain of low similarity.
   \caption{Histogram of the of the discrepancies for EC NR\_all\_75770.1, an E.
     coli tRNA group. This group contains a few IFE's which are outliers in our
   analysis.}
-  \label{fig:nr-all-75770.1-disc}
+\label{fig:nr-all-75770.1-disc}
 \end{figure}
 
 The other possibility is that the chains are connected through an IFE for which
@@ -922,10 +922,10 @@ it is very similar in experimental sequence. It is connected to the rest of the
 chains through IFE's which have no computed geometric discrepancy.
 
 \begin{figure}[h]
-        \includegraphics[width=\textwidth]{chapter-3/figs/nr-all-18070-1-disc}
+  \includegraphics[width=\textwidth]{chapter-3/figs/nr-all-18070-1-disc}
   \caption{Figure summarizing the geometric discrepancy heatmap for all IFE's in
   NR\_all\_18070.1, a tRNA group with 233 members. }
-  \label{fig:nr-all-18070.1-disc}
+\label{fig:nr-all-18070.1-disc}
 \end{figure}
 
 NR\_all\_75770.1, the second highest point on Figure~\ref{fig:outlier-detail}.

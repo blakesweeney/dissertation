@@ -9,8 +9,8 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{listings}
-\usepackage{etoolbox}
+% \usepackage{listings}
+% \usepackage{etoolbox}
 \usepackage{multirow}
 \usepackage{tabulary}
 \usepackage{titlesec}
@@ -19,7 +19,6 @@
 \usepackage{subcaption}
 \usepackage[inline]{enumitem}
 \usepackage[version=4]{mhchem}
-\usepackage[nottoc]{tocbibind}
 \usepackage[longnamesfirst]{natbib}
 
 \newcommand{\angstrom}{\textup{\AA}}
@@ -39,9 +38,9 @@
 \newcommand{\ife}[3]{#1$\vert$#2$\vert$#3}
 \newcommand{\ifePair}[6]{\ife{#1}{#2}{#3}+\ife{#4}{#5}{#6}}
 
-\makeatletter
-\patchcmd{\l@chapter}{\bfseries}{}{}{}
-\makeatother
+% \makeatletter
+% \patchcmd{\l@chapter}{\bfseries}{}{}{}
+% \makeatother
 
 \title{BUILDING REPRESENTATIVE SETS OF RNA 3D STRUCTURES AND SELECTING HIGH
 QUALITY LOOPS}
@@ -54,7 +53,6 @@ QUALITY LOOPS}
   George Bullerjahn \\ \\ 
   Hans Wildschutte}
 
-\renewcommand\contentsname{Table of Contents}
 \renewcommand\cfttoctitlefont{\hfil\mdseries}
 \renewcommand{\cftaftertoctitle}{\hfil}
 \renewcommand{\cftchapfont}{\mdseries}
@@ -62,14 +60,12 @@ QUALITY LOOPS}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
 \renewcommand{\figurename}{Figure}
-\renewcommand\listfigurename{List of Figures}
 \renewcommand\cftloftitlefont{\hfil\mdseries}
 \renewcommand{\cftafterloftitle}{\hfil}
 \renewcommand{\cftfigfont}{\mdseries}
 \renewcommand{\cftfigpagefont}{\mdseries}
 \renewcommand{\cftfigleader}{\cftdotfill{\cftdotsep}}
 
-\renewcommand\listtablename{List of Tables}
 \renewcommand\cftlottitlefont{\hfil\mdseries}
 \renewcommand{\cftafterlottitle}{\hfil}
 \renewcommand{\cfttabfont}{\mdseries}
@@ -105,6 +101,7 @@ QUALITY LOOPS}
 \end{acknowledgments}
 
 \tableofcontents
+\clearpage
 
 \listoffigures
 \clearpage
